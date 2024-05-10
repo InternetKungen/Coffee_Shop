@@ -28,3 +28,8 @@ Uppgifter tills avstämningen den 15 Maj kl 9:30
 Figma/Figjam: https://www.figma.com/files/team/1369987377469737993
 
 Firebase: https://console.firebase.google.com/u/0/project/test-5b76d/overview
+
+
+## VSCode Tips
+För att manuellt genomföra en formatering av det aktiva dokumentet. Tryck Shift+Alt+F.
+Om man vill att den automatiskt ska formatera koden så kan man ändra inställningarna i kategorin "Formatting" som "Format on paste", "Format on type", etcetera.
