@@ -8,7 +8,6 @@ import SignIn from '../../views/auth/SignIn';
 const Main: React.FC = () => {
     return (
         <main>
-            <h1>Main</h1>
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
