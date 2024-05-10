@@ -1,19 +1,18 @@
-import './App.css'
-import AddItem from './components/AddItem'
+import './App.css';
+import AddItem from './components/AddItem';
 // import Input from './components/Input'
 // import PersonsList from './components/PersonsList'
-import SignIn from './components/SignIn'
+import SignIn from './components/SignIn';
 
 function App() {
-
-  return (
-    <>
-     {/* <Input />
+    return (
+        <>
+            {/* <Input />
      <PersonsList /> */}
-     <SignIn />
-     <AddItem />
-    </>
-  )
+            <SignIn />
+            <AddItem />
+        </>
+    );
 }
 
-export default App
+export default App;
