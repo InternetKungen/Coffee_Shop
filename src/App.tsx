@@ -1,18 +1,27 @@
 import './App.css';
-import AddItem from './components/AddItem';
-// import Input from './components/Input'
-// import PersonsList from './components/PersonsList'
-import SignIn from './components/SignIn';
+import React from 'react';
+import AddItem from './components/AddItem/AddItem';
+import SignIn from './views/auth/SignIn';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header/Header';
+import Main from './components/Main/Main';
+import About from './views/pages/About';
 
-function App() {
+const App: React.FC = () => {
     return (
         <>
-            {/* <Input />
-     <PersonsList /> */}
-            <SignIn />
-            <AddItem />
+            <Router>
+                <div>
+                    <Header />
+                    <Routes>
+                        <Route path="/" element={<Main />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/login" element={<SignIn />} />
+                    </Routes>
+                </div>
+            </Router>
         </>
     );
-}
+};
 
 export default App;
