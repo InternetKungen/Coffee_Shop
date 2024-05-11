@@ -17,14 +17,11 @@
     cursor: pointer;
     background: purple;
     border-radius: 3px;
+    border: 2px solid black;
     position: fixed;
-    left: var(--menu-width);
+    left: 0;
     top: 0;
-    transition: all 0.2s ease;
-}
-
-.hamburger-menu.open {
-    left: 0px; /*knappen måste placeras om för att ha position: fixed, så den animeras just nu till att vara på plats som gör att den buggar ibland*/
+    z-index: 2;
 }
 
 nav {
@@ -56,17 +53,17 @@ ul {
     background: yellow;
 }
 
-.nav-menu-header>p {
+.nav-menu-header > p {
     color: green;
     margin-left: 80px;
 }
 
 .line {
-width: 93%;
-height: 3px;
-padding-left: 2px;
-background-color: #000;
-transition: all 0.2s ease;
+    width: 93%;
+    height: 3px;
+    padding-left: 2px;
+    background-color: #000;
+    transition: all 0.2s ease;
 }
 
 .hamburger-menu.open .line:nth-child(1) {
