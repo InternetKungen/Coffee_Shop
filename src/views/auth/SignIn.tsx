@@ -4,7 +4,7 @@ import {
     signOut,
 } from 'firebase/auth';
 import { useState } from 'react';
-import { auth } from '../main';
+import { auth } from '../../main';
 
 const SignIn = () => {
     const [email, setEmail] = useState('');
