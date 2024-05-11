@@ -8,7 +8,7 @@ const Header: React.FC = () => {
   return (
     <header>
       <NavMenu />
-      <h1>Header</h1>
+      <h2>Header</h2>
       <Login />
     </header>
   );

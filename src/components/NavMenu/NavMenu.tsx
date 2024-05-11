@@ -1,6 +1,7 @@
+//NavMenu.tsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './NavMenu.module.css';
+import styles from './NavMenu.module.css';
 
 const NavMenu: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -10,8 +11,16 @@ const NavMenu: React.FC = () => {
     };
 
     return (
-        <nav>
-            <button onClick={toggleMenu}>Toggle Menu</button>
+        <nav className={isOpen ? styles.open : ''}>
+            <div className={isOpen ? styles['hamburger-menu'] + ' ' + styles.open : styles['hamburger-menu']} onClick={toggleMenu}>
+                <div className={styles.line}></div>
+                <div className={styles.line}></div>
+                <div className={styles.line}></div>
+            </div>
+            <div className={styles['nav-menu-header']}>
+                <p>Coffe Palace</p>
+                <button>🔍</button>
+            </div>
             {isOpen && (
                 <ul>
                     <li>
