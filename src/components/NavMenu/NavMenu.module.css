@@ -1,6 +1,4 @@
-:root {
-    --menu-width: 300px;
-}
+@import url("../../assets/css/shared-variables.css");
 
 .hamburger-menu {
     margin-top: 20px;
@@ -29,7 +27,7 @@ nav {
     position: fixed;
     left: 0;
     top: 0;
-    width: var(--menu-width);
+    width: var(--nav-menu-width);
     height: 100%;
     transition: transform 0.2s ease, opacity 0.2s ease;
     transform: translateX(-100%);
@@ -49,7 +47,7 @@ nav > ul {
     padding-inline-start: 0;
     list-style-type: none;
     justify-content: center;
-    /* margin-left: -60px; */
+    margin-left: -60px;
     width: 100%;
     background: violet;
 }
@@ -77,6 +75,11 @@ nav > ul {
     right: 20px;
 }
 
+.nav-menu-menu__sub-menu {
+    list-style-type: none;
+    padding-left: calc((var(--nav-menu-width) / 2));
+    text-align: left;
+}
 .line {
     width: 93%;
     height: 3px;

@@ -86,7 +86,11 @@ const NavMenu: React.FC = () => {
                                 </div>
                             </div>
                             {isSubMenuOpen && (
-                                <ul>
+                                <ul
+                                    className={
+                                        styles['nav-menu-menu__sub-menu']
+                                    }
+                                >
                                     <li>Hela sortimentet</li>
                                     <li>Kaffe</li>
                                     <li>Mat</li>
