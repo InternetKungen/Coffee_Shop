@@ -1,6 +1,6 @@
 import { addDoc, collection } from 'firebase/firestore';
 import { useState } from 'react';
-import { auth, db } from '../main';
+import { auth, db } from '../../main';
 
 interface ShoppingItem {
     name: string;
@@ -37,11 +37,12 @@ const AddItem = () => {
 
     return (
         <>
-            <label>Item:</label>
+            <label htmlFor="itemName">Item:</label>
             <input
                 type="text"
                 value={itemName}
                 onChange={(e) => setItemName(e.target.value)}
+                id="itemName"
             ></input>
 
             <button onClick={handleSave}>Save</button>

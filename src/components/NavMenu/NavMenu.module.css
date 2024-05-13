@@ -1,6 +1,4 @@
-:root {
-    --menu-width: 300px;
-}
+@import url("../../assets/css/shared-variables.css");
 
 .hamburger-menu {
     margin-top: 20px;
@@ -29,21 +27,29 @@ nav {
     position: fixed;
     left: 0;
     top: 0;
-    width: var(--menu-width);
+    width: var(--nav-menu-width);
     height: 100%;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, opacity 0.2s ease;
     transform: translateX(-100%);
     z-index: 1;
+    opacity: 0;
 }
 
 nav.open {
     transform: translateX(0);
+    opacity: 1;
 }
 
-ul {
+nav > ul {
+    display: flex;
+    flex-direction: column;
+    margin-block-start: 0;
+    padding-inline-start: 0;
     list-style-type: none;
     justify-content: center;
     margin-left: -60px;
+    width: 100%;
+    background: violet;
 }
 
 .nav-menu-header {
@@ -58,6 +64,22 @@ ul {
     margin-left: 80px;
 }
 
+.nav-menu-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.nav-menu-menu__button {
+    position: absolute;
+    right: 20px;
+}
+
+.nav-menu-menu__sub-menu {
+    list-style-type: none;
+    padding-left: calc((var(--nav-menu-width) / 2));
+    text-align: left;
+}
 .line {
     width: 93%;
     height: 3px;
