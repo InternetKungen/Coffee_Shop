@@ -14,12 +14,7 @@ const App: React.FC = () => {
             <Router>
                 <div>
                     <Header />
-                    <Routes>
-                        <Route path="/" element={<Main />} />
-                        <Route path="/about" element={<About />} />
-                        <Route path="/login" element={<SignIn />} />
-                        <Route path="/menu" element={<Menu />} />
-                    </Routes>
+                    <Main />
                 </div>
             </Router>
         </>
