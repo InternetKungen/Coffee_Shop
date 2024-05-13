@@ -1,15 +1,19 @@
-//NavMenu.tsx
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './NavMenu.module.css';
 
 const NavMenu: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
     const navRef = useRef<HTMLDivElement>(null);
     const menuRef = useRef<HTMLDivElement>(null);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
+    };
+
+    const toggleSubMenu = () => {
+        setIsSubMenuOpen(!isSubMenuOpen);
     };
 
     const handleClickOutside = (event: any) => {
@@ -18,11 +22,13 @@ const NavMenu: React.FC = () => {
         }
         if (navRef.current && !navRef.current.contains(event.target)) {
             setIsOpen(false);
+            setIsSubMenuOpen(false);
         }
     };
 
     const handleScroll = () => {
         setIsOpen(false);
+        setIsSubMenuOpen(false);
     };
 
     useEffect(() => {
@@ -66,6 +72,30 @@ const NavMenu: React.FC = () => {
                             <Link to="/about" onClick={toggleMenu}>
                                 About
                             </Link>
+                        </li>
+                        <li>
+                            <div className={styles['nav-menu-menu']}>
+                                <Link to="/menu" onClick={toggleMenu}>
+                                    Menu
+                                </Link>
+                                <div
+                                    className={styles['nav-menu-menu__button']}
+                                    onClick={toggleSubMenu}
+                                >
+                                    {isSubMenuOpen ? '-' : '+'}
+                                </div>
+                            </div>
+                            {isSubMenuOpen && (
+                                <ul>
+                                    <li>Hela sortimentet</li>
+                                    <li>Kaffe</li>
+                                    <li>Mat</li>
+                                    <li>Fika</li>
+                                    <li>Te</li>
+                                    <li>Varma drycker</li>
+                                    <li>Kalla drycker</li>
+                                </ul>
+                            )}
                         </li>
                     </ul>
                 )}
