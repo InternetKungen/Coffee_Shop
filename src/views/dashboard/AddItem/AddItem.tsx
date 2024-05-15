@@ -1,6 +1,6 @@
 import { addDoc, collection } from 'firebase/firestore';
 import { useState } from 'react';
-import { auth, db } from '../../main';
+import { auth, db } from '../../../main';
 
 interface ShoppingItem {
     name: string;

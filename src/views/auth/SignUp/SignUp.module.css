@@ -1,0 +1,16 @@
+.sign-up-container {
+    width: 80%;
+    background: lightgray;
+    padding: 20px;
+}
+
+.sign-up-container__input-fields {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.sign-up-container__input-fields > label {
+    text-align: left;
+}
