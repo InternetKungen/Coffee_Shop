@@ -3,7 +3,8 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from '../../views/pages/Home';
 import About from '../../views/pages/About';
-import SignIn from '../../views/auth/SignIn';
+import SignIn from '../../views/auth/SignIn/SignIn';
+import SignUp from '../../views/auth/SignUp/SignUp';
 import Menu from '../../views/pages/Menu';
 
 const Main: React.FC = () => {
@@ -13,7 +14,8 @@ const Main: React.FC = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/menu" element={<Menu />} />
-                <Route path="/login" element={<SignIn />} />
+                <Route path="/sign-in" element={<SignIn />} />
+                <Route path="/sign-up" element={<SignUp />} />
             </Routes>
         </main>
     );

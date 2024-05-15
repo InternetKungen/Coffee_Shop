@@ -1,0 +1,16 @@
+.sign-in-container {
+    max-width: 800px;
+    width: 80%;
+    background: lightgray;
+}
+
+.sign-in-container__input-fields {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.sign-in-container__input-fields > label {
+    text-align: left;
+}

@@ -16,3 +16,8 @@ header {
 header > h2 {
     margin: 0 auto;
 }
+
+.header__button-container {
+    display: flex;
+    flex-direction: row;
+}
