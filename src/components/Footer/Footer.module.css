@@ -1,23 +1,77 @@
 footer {
     background-color: #1b0d0d;
     color: rgb(235, 225, 225);
-    display: flex;
     bottom: 0;
     left: 0;
     width: 100%;
     position: absolute;
-    text-align: left;
+    /* text-align: left; */
     font-weight: 300;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-container-top,
+.footer-container-bottom {
+    display: flex;
+    flex-direction: row;
+}
+
+.footer-container-top {
+    /* text-align: left; */
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-container-top,
+.footer-container-bottom {
+    display: flex;
+    flex-direction: row;
+}
+
+.footer-container-top {
+    text-align: left;
+    justify-content: space-around;
+}
+
+.footer-container-bottom {
+    justify-content: center;
+}
+
+.footer-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-text > p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    justify-content: space-around;
+}
+
+.footer-container-bottom {
+    justify-content: center;
+}
+
+.footer-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-text > p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 footer img {
-    width: 4rem; 
+    width: 4rem;
     padding: 1rem;
-    margin: 3rem 0 0 2rem;
-}
-
-p{
-    
+    /* margin: 3rem 0 0 2rem; */
 }
 
 @media screen and (max-width: 550px) {
