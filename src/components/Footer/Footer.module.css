@@ -10,7 +10,7 @@ footer {
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 130px;
+    height: fit-content;
     z-index: -1;
 }
 
@@ -51,21 +51,27 @@ footer {
     padding-bottom: 3px;
     padding-left: 10px;
     padding-right: 10px;
+    font-size: 14px;
 }
 
 footer img {
-    width: 4rem;
+    width: 3rem;
     padding: 1rem;
     /* margin: 3rem 0 0 2rem; */
 }
 
 @media screen and (max-width: 550px) {
     footer {
-        flex-direction: column;
+        flex-direction: row;
         text-align: center;
     }
 
+    .footer-text > p {
+        font-size: 12px;
+    }
+
     footer img {
-        width: 3rem;
+        width: 2rem;
+        padding: 0.2rem;
     }
 }
