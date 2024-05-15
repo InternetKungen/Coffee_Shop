@@ -1,7 +1,7 @@
 .sign-in-container {
-    max-width: 800px;
     width: 80%;
     background: lightgray;
+    padding: 20px;
 }
 
 .sign-in-container__input-fields {

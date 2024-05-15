@@ -6,6 +6,7 @@ import About from '../../views/pages/About';
 import SignIn from '../../views/auth/SignIn/SignIn';
 import SignUp from '../../views/auth/SignUp/SignUp';
 import Menu from '../../views/pages/Menu';
+import './Main.module.css';
 
 const Main: React.FC = () => {
     return (
