@@ -1,0 +1,32 @@
+footer {
+    background-color: #1b0d0d;
+    color: rgb(235, 225, 225);
+    display: flex;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    text-align: left;
+    font-weight: 300;
+}
+
+footer img {
+    width: 4rem; 
+    padding: 1rem;
+    margin: 3rem 0 0 2rem;
+}
+
+p{
+    
+}
+
+@media screen and (max-width: 550px) {
+    footer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    footer img {
+        width: 3rem;
+    }
+}

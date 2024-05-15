@@ -7,6 +7,7 @@ import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import About from './views/pages/About';
 import Menu from './views/pages/Menu';
+import Footer from './components/Footer/Footer';
 
 const App: React.FC = () => {
     return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
                 <div>
                     <Header />
                     <Main />
+                    <Footer />
                 </div>
             </Router>
         </>
