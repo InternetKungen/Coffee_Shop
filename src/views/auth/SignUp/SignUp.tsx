@@ -1,18 +1,57 @@
 // SignUp.tsx
 import { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../../main';
+import { auth, db } from '../../../main';
 import styles from './SignUp.module.css';
+import { setDoc, doc } from 'firebase/firestore';
+import { UserProfile } from '../../dashboard/UserProfile/UserProfile';
 
 export const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [checkPassword, setCheckPassword] = useState('');
 
     const createUser = async () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
+                // Skapa en referens till platsen i databasen
+                const docRef = doc(
+                    db,
+                    'users',
+                    userCredential.user.uid,
+                    'profile',
+                    'profile'
+                );
+
+                // Skapa ett objekt med användarinformation
+                const userProfile: UserProfile = {
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    profilePicture: '',
+                    phoneNumber: '',
+                    address: {
+                        street: '',
+                        city: '',
+                        country: '',
+                        postalCode: '',
+                    },
+                };
+
+                // Skriv in användarinformation till databasen
+                setDoc(docRef, userProfile)
+                    .then(() => {
+                        console.log('Användarinformation sparad');
+                    })
+                    .catch((error) => {
+                        console.error(
+                            'Fel vid sparande av användarinformation:',
+                            error
+                        );
+                    });
+
                 console.log('inloggad');
             })
             .catch((error) => {
@@ -60,8 +99,8 @@ export const SignUp = () => {
                     <input
                         id="checkPassword"
                         type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        value={checkPassword}
+                        onChange={(e) => setCheckPassword(e.target.value)}
                     ></input>
                 </section>
                 <br></br>

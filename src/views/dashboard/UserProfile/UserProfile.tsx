@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { addDoc, collection } from 'firebase/firestore';
 import { auth, db } from '../../../main';
 
-interface UserProfile {
+export interface UserProfile {
     firstName: string;
     lastName: string;
     email: string;
@@ -15,7 +15,6 @@ interface UserProfile {
         country: string;
         postalCode: string;
     };
-    role: string;
 }
 
 export const UserProfile = () => {
@@ -31,7 +30,6 @@ export const UserProfile = () => {
             country: '',
             postalCode: '',
         },
-        role: 'customer',
     });
 
     const handleSave = async () => {
@@ -56,7 +54,6 @@ export const UserProfile = () => {
                     country: '',
                     postalCode: '',
                 },
-                role: 'customer',
             });
         } catch (error) {
             console.log(error);
