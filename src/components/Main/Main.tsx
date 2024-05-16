@@ -6,6 +6,10 @@ import About from '../../views/pages/About';
 import SignIn from '../../views/auth/SignIn/SignIn';
 import SignUp from '../../views/auth/SignUp/SignUp';
 import Menu from '../../views/pages/Menu';
+
+// Import ProductListPage
+import ProductListPage from '../../views/pages/ProductListPage';
+
 import './Main.module.css';
 
 const Main: React.FC = () => {
@@ -17,6 +21,7 @@ const Main: React.FC = () => {
                 <Route path="/menu" element={<Menu />} />
                 <Route path="/sign-in" element={<SignIn />} />
                 <Route path="/sign-up" element={<SignUp />} />
+                <Route path="/products" element={<ProductListPage />} />
             </Routes>
         </main>
     );

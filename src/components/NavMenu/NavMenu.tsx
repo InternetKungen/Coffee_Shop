@@ -73,6 +73,12 @@ const NavMenu: React.FC = () => {
                                 About
                             </Link>
                         </li>
+                        {/* Add meny link to Products page ProductListPage.tsx */}
+                        <li>
+                            <Link to="/products" onClick={toggleMenu}>
+                                Product List
+                            </Link>
+                        </li>
                         <li>
                             <div className={styles['nav-menu-menu']}>
                                 <Link to="/menu" onClick={toggleMenu}>
