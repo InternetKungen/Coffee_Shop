@@ -12,6 +12,8 @@ import SignOut from '../../views/auth/SignOut/SignOut';
 import ProductListPage from '../../views/pages/ProductListPage';
 
 import './Main.module.css';
+import Settings from '../Settings/Settings';
+import UserProfile from '../../views/dashboard/UserProfile/UserProfile';
 
 const Main: React.FC = () => {
     return (
@@ -24,6 +26,8 @@ const Main: React.FC = () => {
                 <Route path="/sign-up" element={<SignUp />} />
                 <Route path="/sign-out" element={<SignOut />} />
                 <Route path="/products" element={<ProductListPage />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/user-profile" element={<UserProfile />} />
             </Routes>
         </main>
     );
