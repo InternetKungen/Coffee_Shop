@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
 
                 <div className={styles['footer-text']}>
                     <p>Contact Us</p>
-                    <p>Email: lorem@ipsum.com</p>
+                    <p>Email: info@coffeepalace.com</p>
                     <p>Phone: 070 123 45 67</p>
                     <p>Andress: 12 Lorem Ipsum street, Stockholm</p>
                 </div>
