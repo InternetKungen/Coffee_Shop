@@ -1,11 +1,11 @@
-// Header.tsx
+//Header.tsx
 import React, { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../main';
 import NavMenu from '../NavMenu/NavMenu';
 import SignInButton from '../SignInButton/SignInButton';
 import SignUpButton from '../SignUpButton/SignUpButton';
-import SignOutButton from '../SignOutButton/SignOutButton';
+import ProfileButton from '../ProfileButton/ProfileButton';
 import styles from './Header.module.css';
 
 const Header: React.FC = () => {
@@ -26,7 +26,7 @@ const Header: React.FC = () => {
             <h2>Header</h2>
             <section className={styles['header__button-container']}>
                 {isUserLoggedIn ? (
-                    <SignOutButton />
+                    <ProfileButton />
                 ) : (
                     <>
                         <SignInButton />
