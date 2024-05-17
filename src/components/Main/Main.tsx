@@ -3,6 +3,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from '../../views/pages/Home';
 import About from '../../views/pages/About';
+import Contact from '../../views/pages/Contact';
 import SignIn from '../../views/auth/SignIn/SignIn';
 import SignUp from '../../views/auth/SignUp/SignUp';
 import Menu from '../../views/pages/Menu';
@@ -18,6 +19,7 @@ const Main: React.FC = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
                 <Route path="/menu" element={<Menu />} />
                 <Route path="/sign-in" element={<SignIn />} />
                 <Route path="/sign-up" element={<SignUp />} />

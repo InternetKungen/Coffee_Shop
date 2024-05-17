@@ -73,6 +73,11 @@ const NavMenu: React.FC = () => {
                                 About
                             </Link>
                         </li>
+                        <li>
+                            <Link to="/contact" onClick={toggleMenu}>
+                                Contact us
+                            </Link>
+                        </li>
                         {/* Add meny link to Products page ProductListPage.tsx */}
                         <li>
                             <Link to="/products" onClick={toggleMenu}>
