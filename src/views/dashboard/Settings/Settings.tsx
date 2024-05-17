@@ -9,6 +9,9 @@ const Settings: React.FC = () => {
             <Link to="/user-profile">
                 <button>Profile Settings</button>
             </Link>
+            <Link to="/change-password">
+                <button>Change Password</button>
+            </Link>
         </div>
     );
 };

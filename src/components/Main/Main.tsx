@@ -12,8 +12,9 @@ import SignOut from '../../views/auth/SignOut/SignOut';
 import ProductListPage from '../../views/pages/ProductListPage';
 
 import './Main.module.css';
-import Settings from '../Settings/Settings';
+import Settings from '../../views/dashboard/Settings/Settings';
 import UserProfile from '../../views/dashboard/UserProfile/UserProfile';
+import ChangePassword from '../../views/dashboard/ChangePassword/ChangePassword';
 
 const Main: React.FC = () => {
     return (
@@ -28,6 +29,7 @@ const Main: React.FC = () => {
                 <Route path="/products" element={<ProductListPage />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/user-profile" element={<UserProfile />} />
+                <Route path="/change-password" element={<ChangePassword />} />
             </Routes>
         </main>
     );
