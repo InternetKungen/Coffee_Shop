@@ -1,18 +1,38 @@
 // Header.tsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../main';
 import NavMenu from '../NavMenu/NavMenu';
 import SignInButton from '../SignInButton/SignInButton';
 import SignUpButton from '../SignUpButton/SignUpButton';
+import SignOutButton from '../SignOutButton/SignOutButton';
 import styles from './Header.module.css';
 
 const Header: React.FC = () => {
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            setIsUserLoggedIn(!!user);
+        });
+
+        // Rensa upp prenumerationen när komponenten avmonteras
+        return () => unsubscribe();
+    }, []);
+
     return (
         <header>
             <NavMenu />
             <h2>Header</h2>
             <section className={styles['header__button-container']}>
-                <SignInButton />
-                <SignUpButton />
+                {isUserLoggedIn ? (
+                    <SignOutButton />
+                ) : (
+                    <>
+                        <SignInButton />
+                        <SignUpButton />
+                    </>
+                )}
             </section>
         </header>
     );
