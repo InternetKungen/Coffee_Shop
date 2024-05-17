@@ -1,3 +1,4 @@
+//AddProduct.tsx
 import { addDoc, collection } from 'firebase/firestore';
 import { useState } from 'react';
 import { auth, db } from '../../../main';
@@ -11,7 +12,7 @@ interface ShoppingItem {
 
 // users/{uid}/items/{newItem}
 
-const AddItem = () => {
+const AddProduct = () => {
     const [itemName, setItemName] = useState('');
 
     const handleSave = async () => {
@@ -50,4 +51,4 @@ const AddItem = () => {
     );
 };
 
-export default AddItem;
+export default AddProduct;
