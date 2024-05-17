@@ -1,0 +1,38 @@
+.carousel {
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    font-size: 1.5rem;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    z-index: 1;
+    transition: background-color 0.3s;
+    border-radius: 15px;
+}
+
+.carousel-btn:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    scale: 1.05;
+    border: 2px solid rgb(30, 4, 71);
+}
+
+.carousel-btn-prev {
+    left: 0.7em;
+
+}
+
+.carousel-btn-next {
+    right: 0.7em;
+}
+
+.carousel-img {
+    display: block;
+}

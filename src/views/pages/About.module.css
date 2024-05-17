@@ -1,0 +1,19 @@
+.about-us {
+    display: flex;
+}
+
+.about-us-carousel img{
+    width: 35rem;
+}
+
+.about-us-text {
+    text-align: left;
+    width: 40rem;
+    margin-right: 10rem;
+   
+}
+
+.about-us-text p {
+    font-size: 1.1em;
+    line-height: 1.6em;
+}
