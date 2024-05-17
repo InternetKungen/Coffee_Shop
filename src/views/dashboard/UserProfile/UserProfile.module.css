@@ -1,0 +1,16 @@
+.user-profile-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-profile-form-container > form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.user-profile-form-container > form > label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
