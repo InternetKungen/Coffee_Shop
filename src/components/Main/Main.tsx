@@ -12,9 +12,11 @@ import SignOut from '../../views/auth/SignOut/SignOut';
 import ProductListPage from '../../views/pages/ProductListPage';
 
 import './Main.module.css';
-import Settings from '../../views/dashboard/Settings/Settings';
-import UserProfile from '../../views/dashboard/UserProfile/UserProfile';
-import ChangePassword from '../../views/dashboard/ChangePassword/ChangePassword';
+import Settings from '../../views/settings/Settings/Settings';
+import UserProfile from '../../views/settings/UserProfile/UserProfile';
+import ChangePassword from '../../views/settings/ChangePassword/ChangePassword';
+import AdminPanel from '../../views/admin/AdminPanel/AdminPanel';
+import ProtectedRoute from '../ProtectedRoutes/ProtectedRoutes';
 
 const Main: React.FC = () => {
     return (
@@ -30,6 +32,14 @@ const Main: React.FC = () => {
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/user-profile" element={<UserProfile />} />
                 <Route path="/change-password" element={<ChangePassword />} />
+                <Route
+                    path="/admin-panel"
+                    element={
+                        <ProtectedRoute>
+                            <AdminPanel />
+                        </ProtectedRoute>
+                    }
+                />
             </Routes>
         </main>
     );

@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../../../main';
 import styles from './SignUp.module.css';
 import { setDoc, doc } from 'firebase/firestore';
-import { UserProfile } from '../../dashboard/UserProfile/UserProfile';
+import { UserProfile } from '../../settings/UserProfile/UserProfile';
 
 export const SignUp = () => {
     const [email, setEmail] = useState('');
