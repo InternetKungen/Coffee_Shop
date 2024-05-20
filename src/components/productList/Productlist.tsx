@@ -10,6 +10,7 @@ interface Product {
     name: string;
     price: number;
     description: string;
+    img: string;
 }
 
 // ProductList function
@@ -31,6 +32,7 @@ const ProductList: React.FC = () => {
                     name: data.name, // Product name
                     price: Number(data.price), // Ensure price is a number
                     description: data.description, // Product description
+                    img: data.img, // Product image
                 } as Product;
             });
             // Update the state with the fetched product list
@@ -42,20 +44,27 @@ const ProductList: React.FC = () => {
     }, []); // Empty dependency array ensures this runs only once when the component mounts
 
     return (
-        <div>
+        <div className={styles['product-list-page']}>
             <h1>Product List</h1>
-            <section className={styles['product-list-div']}>
-            <ul>
+            <div className={styles['products-list-div']}>
                 {products.map((product) => (
-                    <li key={product.id}>
-                        <h3>{product.name}</h3>
+                    <section
+                        className={styles['product-list-item']}
+                        key={product.id}
+                    >
+                        <h2>{product.name}</h2>
+                        {/* Render the product image */}
+                        <img
+                            src={`src/assets/product-img/${product.img}`}
+                            alt={product.name}
+                            className={styles['product-image']}
+                        />
                         <p>Price: ${product.price.toFixed(2)}</p>{' '}
                         {/* Format price to 2 decimal places */}
                         <p>{product.description}</p>
-                    </li>
+                    </section>
                 ))}
-                </ul>
-            </section>
+            </div>
         </div>
     );
 };

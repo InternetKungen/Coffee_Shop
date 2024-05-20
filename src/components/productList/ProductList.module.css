@@ -1,9 +1,35 @@
 /* ProductList.module.css */
 
-.product-list-div {
-    
+.product-list-page {
+    margin-top: 100px;
+    display: inline;
 }
 
-.product-list-div ul {
+.products-list-div {
+    /* display: inline-flex; */
+    /* margin-top: 800px; */
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    grid-gap: 1rem;
+}
+
+.product-list-item {
+    /* width: auto;
+    height: auto;
+    max-width: 400px;
+    min-width:200px */
+}
+
+.products-list-div ul {
     list-style: none;
+}
+
+.product-image {
+    width: auto;
+    height: auto;
+    max-width: 320px;
+    min-width: 100px;
+    display: block;
+    margin-top: 10px;
 }
