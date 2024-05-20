@@ -1,14 +1,16 @@
 export interface Product {
     id: string;
-    name: string;
+    productName: string;
     price: number;
     description?: string;
-    imageUrl?: string;
+    img: string;
 }
 
 export interface CartItem {
     productId: string;
+    productName: string;
     quantity: number;
+    productPrice: number;
 }
 
 export interface User {

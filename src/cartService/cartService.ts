@@ -1,12 +1,5 @@
 import { db } from '../.././src/main';
-import {
-    doc,
-    getDoc,
-    setDoc,
-    updateDoc,
-    arrayUnion,
-    arrayRemove,
-} from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { Product, CartItem, User } from '../interface/interface';
 import { handleError } from '../utils/errorHandler';
 
@@ -21,7 +14,12 @@ export async function addItemToCart(
 
         if (userSnap.exists()) {
             const userData = userSnap.data() as User;
-            const cartItem: CartItem = { productId: product.id, quantity };
+            const cartItem: CartItem = {
+                productId: product.id,
+                productName: product.productName,
+                quantity,
+                productPrice: product.price,
+            };
 
             const existingItem = userData.cart.find(
                 (item) => item.productId === product.id
@@ -38,7 +36,14 @@ export async function addItemToCart(
         } else {
             const newUser: User = {
                 id: userId,
-                cart: [{ productId: product.id, quantity }],
+                cart: [
+                    {
+                        productId: product.id,
+                        productName: product.productName,
+                        quantity,
+                        productPrice: product.price,
+                    },
+                ],
             };
             await setDoc(userRef, newUser);
         }
