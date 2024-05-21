@@ -46,9 +46,7 @@ const NavMenu: React.FC = () => {
             <div
                 ref={menuRef}
                 className={
-                    isOpen
-                        ? styles['hamburger-menu'] + ' ' + styles.open
-                        : styles['hamburger-menu']
+                    isOpen ? styles['hamburger-menu'] + ' ' + styles.open : styles['hamburger-menu']
                 }
                 onClick={toggleMenu}
             >
@@ -57,12 +55,9 @@ const NavMenu: React.FC = () => {
                 <div className={styles.line}></div>
             </div>
             <nav className={isOpen ? styles.open : ''} ref={navRef}>
-                <div className={styles['nav-menu-header']}>
-                    <p>Coffe Palace</p>
-                    <button>🔍</button>
-                </div>
                 {isOpen && (
                     <ul>
+                        <button>🔍</button>
                         <li>
                             <Link to="/" onClick={toggleMenu}>
                                 Home
@@ -92,11 +87,7 @@ const NavMenu: React.FC = () => {
                                 </div>
                             </div>
                             {isSubMenuOpen && (
-                                <ul
-                                    className={
-                                        styles['nav-menu-menu__sub-menu']
-                                    }
-                                >
+                                <ul className={styles['nav-menu-menu__sub-menu']}>
                                     <li>Hela sortimentet</li>
                                     <li>Kaffe</li>
                                     <li>Mat</li>

@@ -23,7 +23,7 @@
 }
 
 nav {
-    background: blue;
+    background: #e0d48c;
     position: fixed;
     left: 0;
     top: 0;
@@ -47,21 +47,21 @@ nav > ul {
     padding-inline-start: 0;
     list-style-type: none;
     justify-content: center;
-    margin-left: -60px;
+    /* margin-left: -60px; */
     width: 100%;
-    background: violet;
+    height: 100vh;
+    /* background: violet; */
 }
 
-.nav-menu-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background: yellow;
+nav > ul > button {
+    background-color: initial;
+    border-radius: 0px;
+    border: initial;
+    padding: 1rem;
+    margin: 0;
 }
-
-.nav-menu-header > p {
-    color: green;
-    margin-left: 80px;
+nav > ul > li {
+    padding: 1rem;
 }
 
 .nav-menu-menu {
