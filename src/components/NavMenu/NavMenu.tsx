@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './NavMenu.module.css';
+import searchImg from '../../assets/img/search-01.png';
 
 const NavMenu: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -57,7 +58,9 @@ const NavMenu: React.FC = () => {
             <nav className={isOpen ? styles.open : ''} ref={navRef}>
                 {isOpen && (
                     <ul>
-                        <button>🔍</button>
+                        <button>
+                            <img src={searchImg} alt="Search Button" />
+                        </button>
                         <li>
                             <Link to="/" onClick={toggleMenu}>
                                 Home

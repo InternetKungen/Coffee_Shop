@@ -16,7 +16,6 @@
     top: 0;
     z-index: 2;
 }
-
 nav {
     background: #ddc19c;
     position: fixed;
@@ -29,13 +28,11 @@ nav {
     z-index: 1;
     opacity: 0;
 }
-
 nav.open {
     transform: translateX(0);
     opacity: 1;
 }
-
-nav > ul {
+nav ul {
     display: flex;
     flex-direction: column;
     margin-block-start: 0;
@@ -45,17 +42,22 @@ nav > ul {
     width: 100%;
     height: 100vh;
 }
-
-nav > ul > button {
+nav ul button {
     background-color: initial;
     border-radius: 0px;
     border: initial;
     padding: 1rem;
     margin: 0;
 }
-nav > ul > li {
+nav ul button img {
+    width: 24px;
+}
+nav ul li {
     padding: 1rem;
     font-size: 18px;
+}
+nav ul li a:hover {
+    border-bottom: 1px solid black;
 }
 
 .nav-menu-menu {
