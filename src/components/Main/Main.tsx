@@ -1,4 +1,4 @@
-// Main.tsx
+// components/Main/Main.tsx
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from '../../views/pages/Home';
@@ -7,10 +7,8 @@ import Menu from '../../views/pages/Menu';
 import SignIn from '../../views/auth/SignIn/SignIn';
 import SignUp from '../../views/auth/SignUp/SignUp';
 import SignOut from '../../views/auth/SignOut/SignOut';
-
-// Import ProductListPage
 import ProductListPage from '../../views/pages/ProductListPage';
-
+import ProductPage from '../../views/pages/ProductPage';
 import './Main.module.css';
 import Settings from '../../views/settings/Settings/Settings';
 import UserProfile from '../../views/settings/UserProfile/UserProfile';
@@ -29,6 +27,7 @@ const Main: React.FC = () => {
                 <Route path="/sign-up" element={<SignUp />} />
                 <Route path="/sign-out" element={<SignOut />} />
                 <Route path="/products" element={<ProductListPage />} />
+                <Route path="/products/:id" element={<ProductPage />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/user-profile" element={<UserProfile />} />
                 <Route path="/change-password" element={<ChangePassword />} />

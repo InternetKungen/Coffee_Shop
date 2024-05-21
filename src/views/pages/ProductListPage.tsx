@@ -1,6 +1,6 @@
 // ProductListPage.tsx
 import React from 'react';
-import ProductList from '../../components/ProductList/Productlist';
+import ProductList from '../../components/ProductList/ProductList';
 
 // Render-ProductList-function
 const ProductListPage: React.FC = () => {

@@ -1,5 +1,6 @@
 // ProductList.tsx
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { db } from '../../main';
 import { collection, getDocs } from 'firebase/firestore';
 import styles from './ProductList.module.css';
@@ -43,6 +44,11 @@ const ProductList: React.FC = () => {
         fetchProducts();
     }, []); // Empty dependency array ensures this runs only once when the component mounts
 
+    const addToCart = (productId: string) => {
+        // Placeholder function to simulate adding product to cart
+        console.log(`Added product with ID ${productId} to cart`);
+    };
+
     return (
         <div className={styles['product-list-page']}>
             <h1>Product List</h1>
@@ -62,6 +68,20 @@ const ProductList: React.FC = () => {
                         <p>Price: ${product.price.toFixed(2)}</p>{' '}
                         {/* Format price to 2 decimal places */}
                         <p>{product.description}</p>
+                        <Link to={`/products/${product.id}`}>
+                            <button>View Product</button>
+                        </Link>
+                        <div>
+                            <button onClick={() => addToCart(product.id)}>
+                                Add to Cart
+                            </button>
+                            {/* Add +/- buttons for quantity control */}
+                            <div>
+                                <button>-</button>
+                                <span>1</span>
+                                <button>+</button>
+                            </div>
+                        </div>
                     </section>
                 ))}
             </div>
