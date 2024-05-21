@@ -1,7 +1,7 @@
 @import url("../../assets/css/shared-variables.css");
 
 .hamburger-menu {
-    margin-top: 20px;
+    /* margin-top: 20px; */
     margin-left: 20px;
     display: flex;
     flex-direction: column;
@@ -13,10 +13,10 @@
     padding-left: 5px;
     padding-right: 5px;
     cursor: pointer;
-    background: rgb(150, 139, 150);
-    border-radius: 3px;
-    border: 2px solid black;
-    position: fixed;
+    /* background: rgb(150, 139, 150); */
+    /* border-radius: 3px; */
+    /* border: 2px solid black; */
+    /* position: fixed; */
     left: 0;
     top: 0;
     z-index: 2;
