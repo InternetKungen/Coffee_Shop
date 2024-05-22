@@ -10,7 +10,7 @@ interface Product {
     name: string;
     price: number;
     description: string;
-    img: string;
+    imageUrl: string;
 }
 
 const ProductDetail: React.FC = () => {
@@ -20,7 +20,7 @@ const ProductDetail: React.FC = () => {
     useEffect(() => {
         const fetchProduct = async () => {
             if (id) {
-                const productRef = doc(db, 'productsalt1', id);
+                const productRef = doc(db, 'products', id);
                 const productSnap = await getDoc(productRef);
                 if (productSnap.exists()) {
                     setProduct({
@@ -28,7 +28,7 @@ const ProductDetail: React.FC = () => {
                         name: productSnap.data().name,
                         price: Number(productSnap.data().price),
                         description: productSnap.data().description,
-                        img: productSnap.data().img,
+                        imageUrl: productSnap.data().imageUrl,
                     });
                 }
             }
@@ -48,7 +48,7 @@ const ProductDetail: React.FC = () => {
     return (
         <div className={styles['product-detail']}>
             <img
-                src={`src/assets/product-img/${product.img}`}
+                src={`src/assets/product-img/${product.imageUrl}`}
                 alt={product.name}
             />
             <div>
