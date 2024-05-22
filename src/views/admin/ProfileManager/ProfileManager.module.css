@@ -1,0 +1,48 @@
+.edit-profile-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    border: 2px solid red;
+    border-radius: 9px;
+}
+
+.edit-profile-form > label {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.edit-profile-form > h2 {
+    text-align: center;
+}
+
+.profile-list {
+    list-style-type: none;
+    border-radius: 9px;
+    border: 3px solid pink;
+    overflow: hidden;
+}
+
+.profile-list > li {
+    cursor: pointer;
+    text-align: left;
+    margin-left: -40px;
+    padding-left: 40px;
+}
+.profile-list > li:hover {
+    cursor: pointer;
+    text-align: left;
+    margin-left: -40px;
+    padding-left: 30px;
+    outline: 2px solid hotpink;
+}
+
+.profile-list > li:nth-child(even) {
+    background: linear-gradient(90deg, green, orange, transparent 95%);
+}
+
+.profile-list > li:nth-child(odd) {
+    background: linear-gradient(90deg, orange, green, transparent 95%);
+}
