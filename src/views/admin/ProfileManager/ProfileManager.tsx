@@ -1879,6 +1879,262 @@
 // export default ProfileManager;
 // # 9 -------------------------------------------
 
+// import React, { useEffect, useState } from 'react';
+// import { db } from '../../../main';
+// import { collection, getDocs, doc, getDoc, setDoc } from 'firebase/firestore';
+// import useAdminStatus from '../../../hooks/useAdminStatus';
+
+// interface UserProfile {
+//     uid: string;
+//     firstName: string;
+//     lastName: string;
+//     email: string;
+//     profilePicture: string;
+//     phoneNumber: string;
+//     address: {
+//         street: string;
+//         city: string;
+//         country: string;
+//         postalCode: string;
+//     };
+// }
+
+// const ProfileManager: React.FC = () => {
+//     const { isAdmin, isLoading } = useAdminStatus();
+//     const [users, setUsers] = useState<UserProfile[]>([]);
+//     const [selectedUser, setSelectedUser] = useState<UserProfile | null>(null);
+//     const [isLoadingUsers, setIsLoadingUsers] = useState(false);
+
+//     useEffect(() => {
+//         let isMounted = true; // Lägg till denna rad
+//         const fetchUsers = async () => {
+//             console.log('Fetching users...');
+//             setIsLoadingUsers(true);
+//             if (isAdmin) {
+//                 try {
+//                     const usersCollection = collection(db, 'users');
+//                     const usersSnapshot = await getDocs(usersCollection);
+//                     const usersList: UserProfile[] = [];
+
+//                     for (const userDoc of usersSnapshot.docs) {
+//                         console.log(`Fetching profile for user: ${userDoc.id}`);
+//                         const profileRef = doc(
+//                             db,
+//                             'users',
+//                             userDoc.id,
+//                             'profile',
+//                             'profile'
+//                         );
+//                         const profileSnap = await getDoc(profileRef);
+//                         if (profileSnap.exists()) {
+//                             const userData = profileSnap.data() as Omit<
+//                                 UserProfile,
+//                                 'uid'
+//                             >;
+//                             console.log('User data:', userData);
+//                             usersList.push({ uid: userDoc.id, ...userData });
+//                         } else {
+//                             console.log(
+//                                 `Profile not found for user: ${userDoc.id}`
+//                             );
+//                         }
+//                     }
+
+//                     if (isMounted) {
+//                         // Lägg till denna rad
+//                         setUsers(usersList);
+//                         console.log('Users fetched successfully:', usersList);
+//                     }
+//                 } catch (error) {
+//                     console.error('Error fetching users:', error);
+//                 }
+//             } else {
+//                 console.log('User is not an admin.');
+//             }
+//             if (isMounted) {
+//                 // Lägg till denna rad
+//                 setIsLoadingUsers(false);
+//             }
+//         };
+
+//         if (!isLoading) {
+//             fetchUsers();
+//         } else {
+//             console.log('Admin status is loading...');
+//         }
+
+//         return () => {
+//             isMounted = false;
+//         }; // Lägg till denna rad
+//     }, [isAdmin, isLoading]);
+
+//     const handleSaveProfile = async (user: UserProfile) => {
+//         const userRef = doc(db, 'users', user.uid, 'profile', 'profile');
+//         await setDoc(userRef, user);
+//         alert('Profile updated successfully');
+//     };
+
+//     if (isLoading || isLoadingUsers) {
+//         return <div>Loading...</div>;
+//     }
+
+//     if (!isAdmin) {
+//         return <div>Access denied.</div>;
+//     }
+
+//     return (
+//         <div>
+//             <h1>Profile Manager</h1>
+//             <ul>
+//                 {users.length > 0 ? (
+//                     users.map((user) => (
+//                         <li
+//                             key={user.uid}
+//                             onClick={() => setSelectedUser(user)}
+//                         >
+//                             {user.firstName} {user.lastName} - {user.email}
+//                         </li>
+//                     ))
+//                 ) : (
+//                     <li>No users found.</li>
+//                 )}
+//             </ul>
+
+//             {selectedUser && (
+//                 <form>
+//                     <h2>Edit Profile</h2>
+//                     <label>
+//                         First Name:
+//                         <input
+//                             type="text"
+//                             value={selectedUser.firstName}
+//                             onChange={(e) =>
+//                                 setSelectedUser({
+//                                     ...selectedUser,
+//                                     firstName: e.target.value,
+//                                 })
+//                             }
+//                         />
+//                     </label>
+//                     <label>
+//                         Last Name:
+//                         <input
+//                             type="text"
+//                             value={selectedUser.lastName}
+//                             onChange={(e) =>
+//                                 setSelectedUser({
+//                                     ...selectedUser,
+//                                     lastName: e.target.value,
+//                                 })
+//                             }
+//                         />
+//                     </label>
+//                     <label>
+//                         Email:
+//                         <input
+//                             type="text"
+//                             value={selectedUser.email}
+//                             onChange={(e) =>
+//                                 setSelectedUser({
+//                                     ...selectedUser,
+//                                     email: e.target.value,
+//                                 })
+//                             }
+//                         />
+//                     </label>
+//                     <label>
+//                         Phone Number:
+//                         <input
+//                             type="text"
+//                             value={selectedUser.phoneNumber}
+//                             onChange={(e) =>
+//                                 setSelectedUser({
+//                                     ...selectedUser,
+//                                     phoneNumber: e.target.value,
+//                                 })
+//                             }
+//                         />
+//                     </label>
+//                     <label>
+//                         Street:
+//                         <input
+//                             type="text"
+//                             value={selectedUser.address.street}
+//                             onChange={(e) =>
+//                                 setSelectedUser({
+//                                     ...selectedUser,
+//                                     address: {
+//                                         ...selectedUser.address,
+//                                         street: e.target.value,
+//                                     },
+//                                 })
+//                             }
+//                         />
+//                     </label>
+//                     <label>
+//                         City:
+//                         <input
+//                             type="text"
+//                             value={selectedUser.address.city}
+//                             onChange={(e) =>
+//                                 setSelectedUser({
+//                                     ...selectedUser,
+//                                     address: {
+//                                         ...selectedUser.address,
+//                                         city: e.target.value,
+//                                     },
+//                                 })
+//                             }
+//                         />
+//                     </label>
+//                     <label>
+//                         Country:
+//                         <input
+//                             type="text"
+//                             value={selectedUser.address.country}
+//                             onChange={(e) =>
+//                                 setSelectedUser({
+//                                     ...selectedUser,
+//                                     address: {
+//                                         ...selectedUser.address,
+//                                         country: e.target.value,
+//                                     },
+//                                 })
+//                             }
+//                         />
+//                     </label>
+//                     <label>
+//                         Postal Code:
+//                         <input
+//                             type="text"
+//                             value={selectedUser.address.postalCode}
+//                             onChange={(e) =>
+//                                 setSelectedUser({
+//                                     ...selectedUser,
+//                                     address: {
+//                                         ...selectedUser.address,
+//                                         postalCode: e.target.value,
+//                                     },
+//                                 })
+//                             }
+//                         />
+//                     </label>
+//                     <button
+//                         type="button"
+//                         onClick={() => handleSaveProfile(selectedUser)}
+//                     >
+//                         Save
+//                     </button>
+//                 </form>
+//             )}
+//         </div>
+//     );
+// };
+
+// export default ProfileManager;
+
+// # 10 ------------------------
+
 import React, { useEffect, useState } from 'react';
 import { db } from '../../../main';
 import { collection, getDocs, doc, getDoc, setDoc } from 'firebase/firestore';
@@ -1906,7 +2162,6 @@ const ProfileManager: React.FC = () => {
     const [isLoadingUsers, setIsLoadingUsers] = useState(false);
 
     useEffect(() => {
-        let isMounted = true; // Lägg till denna rad
         const fetchUsers = async () => {
             console.log('Fetching users...');
             setIsLoadingUsers(true);
@@ -1918,13 +2173,7 @@ const ProfileManager: React.FC = () => {
 
                     for (const userDoc of usersSnapshot.docs) {
                         console.log(`Fetching profile for user: ${userDoc.id}`);
-                        const profileRef = doc(
-                            db,
-                            'users',
-                            userDoc.id,
-                            'profile',
-                            'profile'
-                        );
+                        const profileRef = doc(db, 'users', userDoc.id);
                         const profileSnap = await getDoc(profileRef);
                         if (profileSnap.exists()) {
                             const userData = profileSnap.data() as Omit<
@@ -1940,21 +2189,15 @@ const ProfileManager: React.FC = () => {
                         }
                     }
 
-                    if (isMounted) {
-                        // Lägg till denna rad
-                        setUsers(usersList);
-                        console.log('Users fetched successfully:', usersList);
-                    }
+                    setUsers(usersList);
+                    console.log('Users fetched successfully:', usersList);
                 } catch (error) {
                     console.error('Error fetching users:', error);
                 }
             } else {
                 console.log('User is not an admin.');
             }
-            if (isMounted) {
-                // Lägg till denna rad
-                setIsLoadingUsers(false);
-            }
+            setIsLoadingUsers(false);
         };
 
         if (!isLoading) {
@@ -1962,14 +2205,10 @@ const ProfileManager: React.FC = () => {
         } else {
             console.log('Admin status is loading...');
         }
-
-        return () => {
-            isMounted = false;
-        }; // Lägg till denna rad
     }, [isAdmin, isLoading]);
 
     const handleSaveProfile = async (user: UserProfile) => {
-        const userRef = doc(db, 'users', user.uid, 'profile', 'profile');
+        const userRef = doc(db, 'users', user.uid);
         await setDoc(userRef, user);
         alert('Profile updated successfully');
     };

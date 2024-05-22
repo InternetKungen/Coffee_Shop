@@ -8,6 +8,14 @@ interface UserProfile {
     firstName: string;
     lastName: string;
     email: string;
+    profilePicture: string;
+    phoneNumber: string;
+    address: {
+        street: string;
+        city: string;
+        country: string;
+        postalCode: string;
+    };
 }
 
 const UserList: React.FC = () => {
