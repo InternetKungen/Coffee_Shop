@@ -11,7 +11,7 @@ interface Product {
     name: string;
     price: number;
     description: string;
-    img: string;
+    imageUrl: string;
 }
 
 // ProductList function
@@ -22,8 +22,8 @@ const ProductList: React.FC = () => {
     useEffect(() => {
         // Function to fetch product data from Firestore
         const fetchProducts = async () => {
-            // Get a reference to the 'productsalt1' collection in Firestore
-            const productCollection = collection(db, 'productsalt1');
+            // Get a reference to the 'products' collection in Firestore
+            const productCollection = collection(db, 'products');
             const productSnapshot = await getDocs(productCollection);
             // Map over the documents and transform them into Product objects
             const productList = productSnapshot.docs.map((doc) => {
@@ -33,7 +33,7 @@ const ProductList: React.FC = () => {
                     name: data.name, // Product name
                     price: Number(data.price), // Ensure price is a number
                     description: data.description, // Product description
-                    img: data.img, // Product image
+                    imageUrl: data.imageUrl, // Product image
                 } as Product;
             });
             // Update the state with the fetched product list
@@ -61,7 +61,7 @@ const ProductList: React.FC = () => {
                         <h2>{product.name}</h2>
                         {/* Render the product image */}
                         <img
-                            src={`src/assets/product-img/${product.img}`}
+                            src={`src/assets/product-img/${product.imageUrl}`}
                             alt={product.name}
                             className={styles['product-image']}
                         />
