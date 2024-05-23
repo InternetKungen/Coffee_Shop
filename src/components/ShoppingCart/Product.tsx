@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Product as ProductInterface } from '../../interface/interface';
-import { addItemToCart, getCartItems } from '../../cartService/cartService';
+import {
+    addItemToCart,
+    getCartItems,
+} from '../../services/cartService/cartService';
 import styles from './product.module.css';
 import { handleError } from '../../utils/errorHandler';
 

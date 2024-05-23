@@ -4,8 +4,8 @@ import { auth, db } from '../main';
 import { doc, getDoc } from 'firebase/firestore';
 
 const useAdminStatus = () => {
-    const [isAdmin, setIsAdmin] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isAdmin, setIsAdmin] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const checkAdminStatus = async () => {
