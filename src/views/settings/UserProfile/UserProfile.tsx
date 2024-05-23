@@ -281,6 +281,7 @@ export const UserProfile = () => {
     return (
         <>
             <section className={styles['user-profile-form-container']}>
+                <h2>Profile Settings</h2>
                 <form>
                     <label>
                         First Name:

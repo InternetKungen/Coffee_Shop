@@ -6,10 +6,10 @@ const Settings: React.FC = () => {
     return (
         <div className={styles.settings}>
             <h2>Settings</h2>
-            <Link to="/user-profile">
+            <Link to="/settings/user-profile">
                 <button>Profile Settings</button>
             </Link>
-            <Link to="/change-password">
+            <Link to="/settings/change-password">
                 <button>Change Password</button>
             </Link>
         </div>
