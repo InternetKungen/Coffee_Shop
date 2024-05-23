@@ -11,6 +11,7 @@ interface Product {
     price: number;
     description: string;
     imageUrl: string;
+    quantity: number;
 }
 
 const ProductDetail: React.FC = () => {
@@ -29,6 +30,7 @@ const ProductDetail: React.FC = () => {
                         price: Number(productSnap.data().price),
                         description: productSnap.data().description,
                         imageUrl: productSnap.data().imageUrl,
+                        quantity: Number(productSnap.data().quantity), // product quantity
                     });
                 }
             }
@@ -46,7 +48,7 @@ const ProductDetail: React.FC = () => {
     };
 
     return (
-        <div className={styles['product-detail']}>
+        <section className={styles['product-detail']}>
             <img
                 src={`src/assets/product-img/${product.imageUrl}`}
                 alt={product.name}
@@ -55,19 +57,23 @@ const ProductDetail: React.FC = () => {
                 <h1>{product.name}</h1>
                 <p>Price: ${product.price.toFixed(2)}</p>
                 <p>{product.description}</p>
-                <div>
-                    <button onClick={() => addToCart(product!.id)}>
-                        Add to Cart
-                    </button>
-                    {/* Add +/- buttons for quantity control */}
+                {product.quantity > 0 ? (
                     <div>
-                        <button>-</button>
-                        <span>1</span>
-                        <button>+</button>
+                        <button onClick={() => addToCart(product.id)}>
+                            Add to Cart
+                        </button>
+                        {/* Add +/- buttons for quantity control */}
+                        <div>
+                            <button>-</button>
+                            <span>1</span>
+                            <button>+</button>
+                        </div>
                     </div>
-                </div>
+                ) : (
+                    <p className={styles['out-of-stock']}>Out of Stock</p>
+                )}
             </div>
-        </div>
+        </section>
     );
 };
 
