@@ -15,7 +15,7 @@ import SliderImg02 from '../../assets/img/slide-img-02.jpg';
 import SliderImg03 from '../../assets/img/slide-img-03.jpg';
 import SliderImg04 from '../../assets/img/slide-img-04.jpg';
 
-function Slider() {
+const Slider: React.FC = () => {
     return (
         <>
             <Swiper
@@ -34,20 +34,20 @@ function Slider() {
                 className={styles['swiper']}
             >
                 <SwiperSlide className={styles['swiper-slide']}>
-                    <img src={SliderImg01} />
+                    <img src={SliderImg01} alt="Slide 1" />
                 </SwiperSlide>
                 <SwiperSlide className={styles['swiper-slide']}>
-                    <img src={SliderImg02} />
+                    <img src={SliderImg02} alt="Slide 2" />
                 </SwiperSlide>
                 <SwiperSlide className={styles['swiper-slide']}>
-                    <img src={SliderImg03} />
+                    <img src={SliderImg03} alt="Slide 3" />
                 </SwiperSlide>
                 <SwiperSlide className={styles['swiper-slide']}>
-                    <img src={SliderImg04} />
+                    <img src={SliderImg04} alt="Slide 4" />
                 </SwiperSlide>
             </Swiper>
         </>
     );
-}
+};
 
 export default Slider;
