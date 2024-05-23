@@ -1,12 +1,14 @@
 // AdminPanel.tsx
 import React from 'react';
-import ProfileManager from '../ProfileManager/ProfileManager';
+import { Link } from 'react-router-dom';
 
 const AdminPanel: React.FC = () => {
     return (
         <div>
             <h2>Admin Panel</h2>
-            <ProfileManager />
+            <Link to="/admin-panel/profile-manager">
+                <button>Profile Manager</button>
+            </Link>
         </div>
     );
 };

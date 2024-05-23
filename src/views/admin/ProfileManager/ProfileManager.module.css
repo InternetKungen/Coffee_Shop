@@ -1,3 +1,14 @@
+.profile-list-container {
+    text-align: left;
+}
+
+.profile-list-container > h3 {
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin-block-end: -18px;
+    padding-left: 10px;
+}
+
 .edit-profile-form {
     display: flex;
     flex-direction: column;
@@ -21,7 +32,7 @@
 .profile-list {
     list-style-type: none;
     border-radius: 9px;
-    border: 3px solid pink;
+    border: 2px solid grey;
     overflow: hidden;
 }
 

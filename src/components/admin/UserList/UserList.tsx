@@ -1,3 +1,5 @@
+// Komponent för att testa att lista användare
+//UserList.tsx
 import React, { useEffect, useState } from 'react';
 import { db } from '../../../main';
 import { collection, getDocs } from 'firebase/firestore';
