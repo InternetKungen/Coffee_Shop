@@ -15,6 +15,7 @@ import UserProfile from '../../views/settings/UserProfile/UserProfile';
 import ChangePassword from '../../views/settings/ChangePassword/ChangePassword';
 import AdminPanel from '../../views/admin/AdminPanel/AdminPanel';
 import ProtectedRoute from '../ProtectedRoutes/ProtectedRoutes';
+import ProfileManager from '../../views/admin/ProfileManager/ProfileManager';
 
 const Main: React.FC = () => {
     return (
@@ -36,6 +37,14 @@ const Main: React.FC = () => {
                     element={
                         <ProtectedRoute>
                             <AdminPanel />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/admin-panel/profile-manager"
+                    element={
+                        <ProtectedRoute>
+                            <ProfileManager />
                         </ProtectedRoute>
                     }
                 />

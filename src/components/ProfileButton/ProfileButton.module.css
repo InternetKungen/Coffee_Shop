@@ -1,5 +1,7 @@
 .profile-button {
     position: relative;
+    margin-right: 10px;
+    margin-top: 10px;
 }
 
 .profile-button button {
@@ -8,4 +10,20 @@
     cursor: pointer;
     font-size: 16px;
     color: #333;
+}
+
+.profile-button button:active {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    outline: none;
+}
+
+.profile-button button:focus,
+.profile-button button:focus-visible {
+    outline: none;
+    border: none;
+    color: white;
 }
