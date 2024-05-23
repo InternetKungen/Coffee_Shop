@@ -639,7 +639,7 @@ const ProfileManager: React.FC = () => {
 
     return (
         <div className={styles['profile-manager-wrapper']}>
-            <h1>Profile Manager</h1>
+            <h2>Profile Manager</h2>
             <section className={styles['profile-list-container']}>
                 <h3>Select User From List:</h3>
                 <ul className={styles['profile-list']}>
