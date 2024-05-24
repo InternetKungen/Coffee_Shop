@@ -1202,9 +1202,9 @@ const ProfileManager: React.FC = () => {
         alert('Profile updated successfully');
     };
 
-    const handleClearSelection = () => {
-        setSelectedUser(null);
-    };
+    // const handleClearSelection = () => {
+    //     setSelectedUser(null);
+    // };
 
     const isDefaultProfile = !selectedUser;
 

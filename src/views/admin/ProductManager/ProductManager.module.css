@@ -1,5 +1,6 @@
 :root {
     --product-item-width: calc((95vw - 300px) / 10);
+    --product-item-height: 40px;
 }
 
 .product-manager {
@@ -8,7 +9,7 @@
 
 .manager-container {
     display: flex;
-    background: mediumpurple;
+    background: #2d2828;
     width: 95vw;
 }
 
@@ -18,7 +19,7 @@
     gap: 10px;
     width: 300px;
     text-align: left;
-    background: burlywood;
+    background: linear-gradient(90deg, #534949, transparent 95%);
     padding: 10px;
 }
 
@@ -32,6 +33,12 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
+}
+
+.form-container > label {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
 }
 
 .product-list {
@@ -55,9 +62,21 @@
     height: 40px;
 }
 
+.product-item > img {
+    height: var(--product-item-height);
+}
+
+.product-item:nth-child(even) {
+    background: linear-gradient(90deg, darkgrey, transparent 95%);
+}
+
+.product-item:nth-child(odd) {
+    background: linear-gradient(90deg, grey, transparent 95%);
+}
+
 .product-item.selected {
-    background-color: #f0f0f0;
-    border-color: #007bff;
+    background-color: #a7a7a7;
+    border-color: pink;
 }
 
 .product-item button {
@@ -88,4 +107,7 @@
 .product-list-header > p {
     text-align: center;
     width: var(--product-item-width);
+    border-right: 1px solid #e3e3e3;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
 }

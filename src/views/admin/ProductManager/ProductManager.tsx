@@ -1,4 +1,4 @@
-//ProductManager
+//ProductManager.tsx
 import React, { useState, useEffect } from 'react';
 import { db } from '../../../main';
 import {
@@ -58,7 +58,7 @@ const ProductManager: React.FC = () => {
             const data = doc.data();
             return { id: doc.id, ...data } as Product;
         });
-        setProducts(productList.sort(sortProducts));
+        setProducts(productList);
     };
 
     useEffect(() => {
@@ -71,6 +71,10 @@ const ProductManager: React.FC = () => {
         );
         setCategories(uniqueCategories);
     }, [products]);
+
+    useEffect(() => {
+        setProducts((prevProducts) => [...prevProducts].sort(sortProducts));
+    }, [sortType, sortOrder]);
 
     const handleInputChange = (
         e: React.ChangeEvent<
@@ -134,39 +138,26 @@ const ProductManager: React.FC = () => {
         fetchProducts();
     };
 
-    // const sortProducts = (a: Product, b: Product) => {
-    //     const isReversed = sortOrder === 'asc' ? 1 : -1;
-    //     if (
-    //         typeof a[sortType] === 'string' &&
-    //         typeof b[sortType] === 'string'
-    //     ) {
-    //         return isReversed * a[sortType].localeCompare(b[sortType]);
-    //     } else if (
-    //         typeof a[sortType] === 'number' &&
-    //         typeof b[sortType] === 'number'
-    //     ) {
-    //         return (
-    //             isReversed *
-    //             a[sortType].toString().localeCompare(b[sortType].toString())
-    //         );
-    //     } else {
-    //         return 0;
-    //     }
-    // };
-    // const sortProducts = (a: Product, b: Product) => {
-    //     const isReversed = sortOrder === 'asc' ? 1 : -1;
-    //     const aValue = a[sortType].toString();
-    //     const bValue = b[sortType].toString();
-
-    //     return isReversed * aValue.localeCompare(bValue);
-    // };
-
     const sortProducts = (a: Product, b: Product) => {
         const isReversed = sortOrder === 'asc' ? 1 : -1;
-        const aValue = a[sortType].toString();
-        const bValue = b[sortType].toString();
 
-        return isReversed * aValue.localeCompare(bValue);
+        let aValue = a[sortType];
+        let bValue = b[sortType];
+
+        if (sortType === 'price') {
+            aValue = Number(aValue);
+            bValue = Number(bValue);
+            return isReversed * (aValue - bValue);
+        } else if (sortType === 'createdAt' || sortType === 'updatedAt') {
+            return (
+                isReversed *
+                (new Date(aValue).getTime() - new Date(bValue).getTime())
+            );
+        } else {
+            return (
+                isReversed * aValue.toString().localeCompare(bValue.toString())
+            );
+        }
     };
 
     if (isLoading) return <p>Loading...</p>;
@@ -289,7 +280,7 @@ const ProductManager: React.FC = () => {
                             setSelectedProductId(null);
                         }}
                     >
-                        Create New Product
+                        Clear Product Form
                     </button>
                     <label>
                         Sort Products:
@@ -300,8 +291,8 @@ const ProductManager: React.FC = () => {
                                 setSortType(e.target.value as SortKey)
                             }
                         >
-                            <option value="created">Created</option>
-                            <option value="updated">Updated</option>
+                            <option value="createdAt">Created</option>
+                            <option value="updatedAt">Updated</option>
                             <option value="price">Price</option>
                             <option value="name">Product Name</option>
                             <option value="category">Category</option>
@@ -352,13 +343,11 @@ const ProductManager: React.FC = () => {
                                 <p>{product.category}</p>
                                 <p>{product.productId}</p>
                                 <p>
-                                    {' '}
                                     {new Date(
                                         product.createdAt
                                     ).toLocaleString()}
                                 </p>
                                 <p>
-                                    {' '}
                                     {new Date(
                                         product.updatedAt
                                     ).toLocaleString()}
