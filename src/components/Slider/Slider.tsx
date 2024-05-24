@@ -22,15 +22,14 @@ const Slider: React.FC = () => {
                 spaceBetween={30}
                 effect={'fade'}
                 /* navigation={true} */
-                pagination={{
+                /* pagination={{
                     clickable: true,
-                }}
+                }} */
                 autoplay={{
                     delay: 5000,
                     disableOnInteraction: false,
                 }}
                 modules={[EffectFade, Navigation, Pagination, Autoplay]}
-                /* className="mySwiper" */
                 className={styles['swiper']}
             >
                 <SwiperSlide className={styles['swiper-slide']}>
