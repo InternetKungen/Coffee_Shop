@@ -1,58 +1,64 @@
-// ProductList.tsx
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { db } from '../../main';
 import { collection, getDocs } from 'firebase/firestore';
 import styles from './ProductList.module.css';
+import { addItemToCart, getCartItems } from '../../cartService/cartService';
+import Cart from '../KundVagn/Cart';
+import { Product, CartItem } from '../../interface/interface';
 
-// Define a TypeScript interface for the Product object
-interface Product {
-    id: string;
-    name: string;
-    price: number;
-    description: string;
-    imageUrl: string;
-    quantity: number;
-}
-
-// ProductList function
 const ProductList: React.FC = () => {
-    // State to store the list of products
     const [products, setProducts] = useState<Product[]>([]);
+    const [successMessage, setSuccessMessage] = useState<string | null>(null);
+    const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
     useEffect(() => {
-        // Function to fetch product data from Firestore
         const fetchProducts = async () => {
-            // Get a reference to the 'products' collection in Firestore
             const productCollection = collection(db, 'products');
             const productSnapshot = await getDocs(productCollection);
-            // Map over the documents and transform them into Product objects
             const productList = productSnapshot.docs.map((doc) => {
                 const data = doc.data();
                 return {
-                    id: doc.id, // Document ID
-                    name: data.name, // Product name
-                    price: Number(data.price), // Ensure price is a number
-                    description: data.description, // Product description
-                    imageUrl: data.imageUrl, // Product image
-                    quantity: Number(data.quantity), // product quantity
+                    id: doc.id,
+                    name: data.name,
+                    price: Number(data.price),
+                    description: data.description,
+                    imageUrl: data.imageUrl,
                 } as Product;
             });
-            // Update the state with the fetched product list
             setProducts(productList);
         };
 
-        // Call the fetchProducts function to fetch the data
-        fetchProducts();
-    }, []); // Empty dependency array ensures this runs only once when the component mounts
+        const fetchCartItems = async () => {
+            const items = await getCartItems();
+            setCartItems(items);
+        };
 
-    const addToCart = (productId: string) => {
-        // Placeholder function to simulate adding product to cart
-        console.log(`Added product with ID ${productId} to cart`);
+        fetchProducts();
+        fetchCartItems();
+    }, []);
+
+    const addToCart = async (productId: string) => {
+        try {
+            await addItemToCart(productId);
+            const items = await getCartItems();
+            updateCart(items);
+            setSuccessMessage('Item added to cart successfully!');
+            setTimeout(() => setSuccessMessage(null), 3000);
+        } catch (error) {
+            console.error('Error adding item to cart:', error);
+        }
+    };
+
+    const updateCart = (items: CartItem[]) => {
+        setCartItems(items);
     };
 
     return (
         <div className={styles['product-list-page']}>
+            {successMessage && (
+                <p className={styles['success-message']}>{successMessage}</p>
+            )}
             <h1>Product List</h1>
             <div className={styles['products-list-div']}>
                 {products.map((product) => (
@@ -61,39 +67,36 @@ const ProductList: React.FC = () => {
                         key={product.id}
                     >
                         <h2>{product.name}</h2>
-                        {/* Render the product image */}
                         <img
                             src={`src/assets/product-img/${product.imageUrl}`}
                             alt={product.name}
                             className={styles['product-image']}
                         />
-                        <p>Price: ${product.price.toFixed(2)}</p>{' '}
-                        {/* Format price to 2 decimal places */}
+                        <p>Price: ${product.price.toFixed(2)}</p>
                         <p>{product.description}</p>
                         <Link to={`/products/${product.id}`}>
                             <button>View Product</button>
                         </Link>
-                        {product.quantity > 0 ? (
-                            <div>
-                                <button onClick={() => addToCart(product.id)}>
-                                    Add to Cart
-                                </button>
-                                {/* Add +/- buttons for quantity control */}
-                                <div>
-                                    <button>-</button>
-                                    <span>1</span>
-                                    <button>+</button>
-                                </div>
-                            </div>
-                        ) : (
-                            <p className={styles['out-of-stock']}>
-                                Out of Stock
-                            </p>
-                        )}
+                        <div>
+                            <button onClick={() => addToCart(product.id)}>
+                                Add to Cart
+                            </button>
+                        </div>
                     </section>
+                ))}
+            </div>
+            <h1>Cart</h1>
+            <div className={styles['cart-items']}>
+                {cartItems.map((item) => (
+                    <Cart
+                        key={item.productId}
+                        item={item}
+                        updateCart={updateCart}
+                    />
                 ))}
             </div>
         </div>
     );
 };
+
 export default ProductList;
