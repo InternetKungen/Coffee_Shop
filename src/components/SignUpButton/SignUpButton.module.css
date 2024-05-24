@@ -3,7 +3,12 @@
     align-items: center;
     justify-content: center;
 }
-
 .sign-up-button-container:hover {
     border-bottom: 1px solid black;
+}
+
+@media screen and (max-width: 576px) {
+    .sign-up-button-container a {
+        font-size: 14px;
+    }
 }
