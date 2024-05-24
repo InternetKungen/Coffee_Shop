@@ -16,6 +16,7 @@ import ChangePassword from '../../views/settings/ChangePassword/ChangePassword';
 import AdminPanel from '../../views/admin/AdminPanel/AdminPanel';
 import ProtectedRoute from '../ProtectedRoutes/ProtectedRoutes';
 import ProfileManager from '../../views/admin/ProfileManager/ProfileManager';
+import ProductManager from '../../views/admin/ProductManager/ProductManager';
 
 const Main: React.FC = () => {
     return (
@@ -30,8 +31,14 @@ const Main: React.FC = () => {
                 <Route path="/products" element={<ProductListPage />} />
                 <Route path="/products/:id" element={<ProductPage />} />
                 <Route path="/settings" element={<Settings />} />
-                <Route path="/user-profile" element={<UserProfile />} />
-                <Route path="/change-password" element={<ChangePassword />} />
+                <Route
+                    path="/settings/user-profile"
+                    element={<UserProfile />}
+                />
+                <Route
+                    path="/settings/change-password"
+                    element={<ChangePassword />}
+                />
                 <Route
                     path="/admin-panel"
                     element={
@@ -45,6 +52,14 @@ const Main: React.FC = () => {
                     element={
                         <ProtectedRoute>
                             <ProfileManager />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/admin-panel/product-manager"
+                    element={
+                        <ProtectedRoute>
+                            <ProductManager />
                         </ProtectedRoute>
                     }
                 />
