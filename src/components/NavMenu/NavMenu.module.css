@@ -1,7 +1,6 @@
 @import url("../../assets/css/shared-variables.css");
 
 .hamburger-menu {
-    margin-top: 20px;
     margin-left: 20px;
     display: flex;
     flex-direction: column;
@@ -13,55 +12,52 @@
     padding-left: 5px;
     padding-right: 5px;
     cursor: pointer;
-    background: rgb(150, 139, 150);
-    border-radius: 3px;
-    border: 2px solid black;
-    position: fixed;
     left: 0;
     top: 0;
     z-index: 2;
 }
-
 nav {
-    background: blue;
+    background: #ddc19c;
     position: fixed;
     left: 0;
     top: 0;
-    width: var(--nav-menu-width);
+    width: 20%;
     height: 100%;
     transition: transform 0.2s ease, opacity 0.2s ease;
     transform: translateX(-100%);
     z-index: 1;
     opacity: 0;
 }
-
 nav.open {
     transform: translateX(0);
     opacity: 1;
 }
-
-nav > ul {
+nav ul {
     display: flex;
     flex-direction: column;
     margin-block-start: 0;
     padding-inline-start: 0;
     list-style-type: none;
     justify-content: center;
-    margin-left: -60px;
     width: 100%;
-    background: violet;
+    height: 100vh;
 }
-
-.nav-menu-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background: yellow;
+nav ul button {
+    background-color: initial;
+    border-radius: 0px;
+    border: initial;
+    padding: 1rem;
+    margin: 0;
 }
-
-.nav-menu-header > p {
-    color: green;
-    margin-left: 80px;
+nav ul button img {
+    width: 24px;
+}
+nav ul li {
+    padding: 1rem;
+    font-size: 18px;
+}
+nav ul li a:hover {
+    border-bottom: 1px solid black;
 }
 
 .nav-menu-menu {
@@ -101,4 +97,28 @@ nav > ul {
 
 .hamburger-menu.open .line:nth-child(3) {
     transform: rotate(-45deg) translate(5px, -5px);
+}
+
+@media screen and (max-width: 1200px) {
+    nav {
+        width: 30%;
+    }
+}
+@media screen and (max-width: 992px) {
+    nav {
+        width: 40%;
+    }
+}
+@media screen and (max-width: 576px) {
+    .hamburger-menu {
+        margin-left: 5px;
+        width: 20px;
+        height: 20px;
+    }
+    .line {
+        height: 2px;
+    }
+    nav {
+        width: 100%;
+    }
 }

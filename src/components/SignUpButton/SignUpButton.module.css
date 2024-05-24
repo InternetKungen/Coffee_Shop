@@ -1,10 +1,14 @@
 .sign-up-button-container {
-    width: 75px;
-    height: 35px;
-    background: violet;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 20px;
-    margin-right: 10px;
+}
+.sign-up-button-container:hover {
+    border-bottom: 1px solid black;
+}
+
+@media screen and (max-width: 576px) {
+    .sign-up-button-container a {
+        font-size: 14px;
+    }
 }

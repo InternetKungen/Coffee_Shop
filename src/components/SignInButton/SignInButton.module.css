@@ -1,10 +1,18 @@
 .sign-in-button-container {
-    width: 75px;
-    height: 35px;
-    background: violet;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 20px;
-    margin-right: 10px;
+    margin-right: 30px;
+}
+.sign-in-button-container:hover {
+    border-bottom: 1px solid black;
+}
+
+@media screen and (max-width: 576px) {
+    .sign-in-button-container {
+        margin-right: 15px;
+    }
+    .sign-in-button-container a {
+        font-size: 14px;
+    }
 }
