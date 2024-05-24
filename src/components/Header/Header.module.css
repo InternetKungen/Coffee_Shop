@@ -10,14 +10,25 @@ header {
     margin-left: 0;
     top: 0;
     left: 0;
-    background: rgb(61, 2, 2);
-}
-
-header > h2 {
-    margin: 0 auto;
+    /* background: #a58a72; */
+    background: #ffffff;
 }
 
 .header__button-container {
     display: flex;
     flex-direction: row;
+    margin-right: 25px;
+}
+
+@media screen and (max-width: 576px) {
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        height: 50px;
+    }
+    .header__button-container {
+        margin-right: 10px;
+    }
 }

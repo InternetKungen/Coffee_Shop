@@ -7,6 +7,7 @@ import SignInButton from '../SignInButton/SignInButton';
 import SignUpButton from '../SignUpButton/SignUpButton';
 import ProfileButton from '../ProfileButton/ProfileButton';
 import styles from './Header.module.css';
+import Logo from '../Logo/Logo';
 
 const Header: React.FC = () => {
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -23,7 +24,7 @@ const Header: React.FC = () => {
     return (
         <header>
             <NavMenu />
-            <h2>Header</h2>
+            <Logo />
             <section className={styles['header__button-container']}>
                 {isUserLoggedIn ? (
                     <ProfileButton />
