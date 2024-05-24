@@ -5,6 +5,7 @@
 .manager-container {
     display: flex;
     background: mediumpurple;
+    width: 95vw;
 }
 
 .form-container {
@@ -58,6 +59,12 @@
     margin-top: 10px;
 }
 
+.product-item > p {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 .product-image {
     width: 100px;
     height: 100px;

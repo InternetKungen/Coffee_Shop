@@ -270,7 +270,7 @@ const ProductManager: React.FC = () => {
                                 alt={product.name}
                                 className={styles['product-image']}
                             />
-                            <h2>{product.name}</h2>
+                            <p>{product.name}</p>
                             <p>{product.description}</p>
                             <p>Price: ${product.price.toFixed(2)}</p>
                             <p>Quantity: {product.quantity}</p>
