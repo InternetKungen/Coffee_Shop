@@ -640,152 +640,156 @@ const ProfileManager: React.FC = () => {
     return (
         <div className={styles['profile-manager-wrapper']}>
             <h2>Profile Manager</h2>
-            <section className={styles['profile-list-container']}>
-                <h3>Select User From List:</h3>
-                <ul className={styles['profile-list']}>
-                    {users.length > 0 ? (
-                        users.map((user) => (
-                            <li
-                                key={user.uid}
-                                onClick={() => setSelectedUser(user)}
-                            >
-                                {user.firstName} {user.lastName} - {user.email}
-                            </li>
-                        ))
-                    ) : (
-                        <li>No users found.</li>
-                    )}
-                </ul>
-            </section>
 
-            {selectedUser && (
-                <form className={styles['edit-profile-form']}>
-                    <h2>Edit Profile</h2>
-                    <label>
-                        First Name:
-                        <input
-                            type="text"
-                            value={selectedUser.firstName}
-                            onChange={(e) =>
-                                setSelectedUser({
-                                    ...selectedUser,
-                                    firstName: e.target.value,
-                                })
-                            }
-                        />
-                    </label>
-                    <label>
-                        Last Name:
-                        <input
-                            type="text"
-                            value={selectedUser.lastName}
-                            onChange={(e) =>
-                                setSelectedUser({
-                                    ...selectedUser,
-                                    lastName: e.target.value,
-                                })
-                            }
-                        />
-                    </label>
-                    <label>
-                        Email:
-                        <input
-                            type="text"
-                            value={selectedUser.email}
-                            onChange={(e) =>
-                                setSelectedUser({
-                                    ...selectedUser,
-                                    email: e.target.value,
-                                })
-                            }
-                        />
-                    </label>
-                    <label>
-                        Phone Number:
-                        <input
-                            type="text"
-                            value={selectedUser.phoneNumber}
-                            onChange={(e) =>
-                                setSelectedUser({
-                                    ...selectedUser,
-                                    phoneNumber: e.target.value,
-                                })
-                            }
-                        />
-                    </label>
-                    <label>
-                        Street:
-                        <input
-                            type="text"
-                            value={selectedUser.address.street}
-                            onChange={(e) =>
-                                setSelectedUser({
-                                    ...selectedUser,
-                                    address: {
-                                        ...selectedUser.address,
-                                        street: e.target.value,
-                                    },
-                                })
-                            }
-                        />
-                    </label>
-                    <label>
-                        City:
-                        <input
-                            type="text"
-                            value={selectedUser.address.city}
-                            onChange={(e) =>
-                                setSelectedUser({
-                                    ...selectedUser,
-                                    address: {
-                                        ...selectedUser.address,
-                                        city: e.target.value,
-                                    },
-                                })
-                            }
-                        />
-                    </label>
-                    <label>
-                        Country:
-                        <input
-                            type="text"
-                            value={selectedUser.address.country}
-                            onChange={(e) =>
-                                setSelectedUser({
-                                    ...selectedUser,
-                                    address: {
-                                        ...selectedUser.address,
-                                        country: e.target.value,
-                                    },
-                                })
-                            }
-                        />
-                    </label>
-                    <label>
-                        Postal Code:
-                        <input
-                            type="text"
-                            value={selectedUser.address.postalCode}
-                            onChange={(e) =>
-                                setSelectedUser({
-                                    ...selectedUser,
-                                    address: {
-                                        ...selectedUser.address,
-                                        postalCode: e.target.value,
-                                    },
-                                })
-                            }
-                        />
-                    </label>
-                    <AdminCheckbox user={selectedUser} />
-                    <button
-                        type="button"
-                        onClick={() => handleSaveProfile(selectedUser)}
-                    >
-                        Save
-                    </button>
-                </form>
-            )}
+            <div className={styles['profile-manager']}>
+                <section className={styles['profile-list-container']}>
+                    <h3>Select User From List:</h3>
+                    <ul className={styles['profile-list']}>
+                        {users.length > 0 ? (
+                            users.map((user) => (
+                                <li
+                                    key={user.uid}
+                                    onClick={() => setSelectedUser(user)}
+                                >
+                                    {user.firstName} {user.lastName} -{' '}
+                                    {user.email}
+                                </li>
+                            ))
+                        ) : (
+                            <li>No users found.</li>
+                        )}
+                    </ul>
+                </section>
+
+                {selectedUser && (
+                    <form className={styles['edit-profile-form']}>
+                        <h2>Edit Profile</h2>
+                        <label>
+                            First Name:
+                            <input
+                                type="text"
+                                value={selectedUser.firstName}
+                                onChange={(e) =>
+                                    setSelectedUser({
+                                        ...selectedUser,
+                                        firstName: e.target.value,
+                                    })
+                                }
+                            />
+                        </label>
+                        <label>
+                            Last Name:
+                            <input
+                                type="text"
+                                value={selectedUser.lastName}
+                                onChange={(e) =>
+                                    setSelectedUser({
+                                        ...selectedUser,
+                                        lastName: e.target.value,
+                                    })
+                                }
+                            />
+                        </label>
+                        <label>
+                            Email:
+                            <input
+                                type="text"
+                                value={selectedUser.email}
+                                onChange={(e) =>
+                                    setSelectedUser({
+                                        ...selectedUser,
+                                        email: e.target.value,
+                                    })
+                                }
+                            />
+                        </label>
+                        <label>
+                            Phone Number:
+                            <input
+                                type="text"
+                                value={selectedUser.phoneNumber}
+                                onChange={(e) =>
+                                    setSelectedUser({
+                                        ...selectedUser,
+                                        phoneNumber: e.target.value,
+                                    })
+                                }
+                            />
+                        </label>
+                        <label>
+                            Street:
+                            <input
+                                type="text"
+                                value={selectedUser.address.street}
+                                onChange={(e) =>
+                                    setSelectedUser({
+                                        ...selectedUser,
+                                        address: {
+                                            ...selectedUser.address,
+                                            street: e.target.value,
+                                        },
+                                    })
+                                }
+                            />
+                        </label>
+                        <label>
+                            City:
+                            <input
+                                type="text"
+                                value={selectedUser.address.city}
+                                onChange={(e) =>
+                                    setSelectedUser({
+                                        ...selectedUser,
+                                        address: {
+                                            ...selectedUser.address,
+                                            city: e.target.value,
+                                        },
+                                    })
+                                }
+                            />
+                        </label>
+                        <label>
+                            Country:
+                            <input
+                                type="text"
+                                value={selectedUser.address.country}
+                                onChange={(e) =>
+                                    setSelectedUser({
+                                        ...selectedUser,
+                                        address: {
+                                            ...selectedUser.address,
+                                            country: e.target.value,
+                                        },
+                                    })
+                                }
+                            />
+                        </label>
+                        <label>
+                            Postal Code:
+                            <input
+                                type="text"
+                                value={selectedUser.address.postalCode}
+                                onChange={(e) =>
+                                    setSelectedUser({
+                                        ...selectedUser,
+                                        address: {
+                                            ...selectedUser.address,
+                                            postalCode: e.target.value,
+                                        },
+                                    })
+                                }
+                            />
+                        </label>
+                        <AdminCheckbox user={selectedUser} />
+                        <button
+                            type="button"
+                            onClick={() => handleSaveProfile(selectedUser)}
+                        >
+                            Save
+                        </button>
+                    </form>
+                )}
+            </div>
         </div>
     );
 };

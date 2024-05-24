@@ -47,6 +47,9 @@ const ProductManager: React.FC = () => {
         null
     );
     const [categories, setCategories] = useState<string[]>([]);
+    const [sortOrder, setSortOrder] = useState<string>('asc');
+    type SortKey = 'createdAt' | 'updatedAt' | 'price' | 'name' | 'category';
+    const [sortType, setSortType] = useState<SortKey>('createdAt');
 
     const fetchProducts = async () => {
         const productCollection = collection(db, 'products');
@@ -55,7 +58,7 @@ const ProductManager: React.FC = () => {
             const data = doc.data();
             return { id: doc.id, ...data } as Product;
         });
-        setProducts(productList);
+        setProducts(productList.sort(sortProducts));
     };
 
     useEffect(() => {
@@ -129,6 +132,41 @@ const ProductManager: React.FC = () => {
         const productDocRef = doc(db, 'products', productId);
         await deleteDoc(productDocRef);
         fetchProducts();
+    };
+
+    // const sortProducts = (a: Product, b: Product) => {
+    //     const isReversed = sortOrder === 'asc' ? 1 : -1;
+    //     if (
+    //         typeof a[sortType] === 'string' &&
+    //         typeof b[sortType] === 'string'
+    //     ) {
+    //         return isReversed * a[sortType].localeCompare(b[sortType]);
+    //     } else if (
+    //         typeof a[sortType] === 'number' &&
+    //         typeof b[sortType] === 'number'
+    //     ) {
+    //         return (
+    //             isReversed *
+    //             a[sortType].toString().localeCompare(b[sortType].toString())
+    //         );
+    //     } else {
+    //         return 0;
+    //     }
+    // };
+    // const sortProducts = (a: Product, b: Product) => {
+    //     const isReversed = sortOrder === 'asc' ? 1 : -1;
+    //     const aValue = a[sortType].toString();
+    //     const bValue = b[sortType].toString();
+
+    //     return isReversed * aValue.localeCompare(bValue);
+    // };
+
+    const sortProducts = (a: Product, b: Product) => {
+        const isReversed = sortOrder === 'asc' ? 1 : -1;
+        const aValue = a[sortType].toString();
+        const bValue = b[sortType].toString();
+
+        return isReversed * aValue.localeCompare(bValue);
     };
 
     if (isLoading) return <p>Loading...</p>;
@@ -253,47 +291,89 @@ const ProductManager: React.FC = () => {
                     >
                         Create New Product
                     </button>
-                </div>
-                <div className={styles['product-list']}>
-                    {products.map((product) => (
-                        <div
-                            key={product.id}
-                            className={`${styles['product-item']} ${
-                                product.id === selectedProductId
-                                    ? styles['selected']
-                                    : ''
-                            }`}
-                            onClick={() => handleEdit(product)}
+                    <label>
+                        Sort Products:
+                        <select
+                            name="sortType"
+                            value={sortType}
+                            onChange={(e) =>
+                                setSortType(e.target.value as SortKey)
+                            }
                         >
-                            <img
-                                src={product.imageUrl}
-                                alt={product.name}
-                                className={styles['product-image']}
-                            />
-                            <p>{product.name}</p>
-                            <p>{product.description}</p>
-                            <p>Price: ${product.price.toFixed(2)}</p>
-                            <p>Quantity: {product.quantity}</p>
-                            <p>Category: {product.category}</p>
-                            <p>Product ID: {product.productId}</p>
-                            <p>
-                                Created At:{' '}
-                                {new Date(product.createdAt).toLocaleString()}
-                            </p>
-                            <p>
-                                Updated At:{' '}
-                                {new Date(product.updatedAt).toLocaleString()}
-                            </p>
-                            <button
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    handleDelete(product.id!);
-                                }}
+                            <option value="created">Created</option>
+                            <option value="updated">Updated</option>
+                            <option value="price">Price</option>
+                            <option value="name">Product Name</option>
+                            <option value="category">Category</option>
+                        </select>
+                        <select
+                            name="sortOrder"
+                            value={sortOrder}
+                            onChange={(e) => setSortOrder(e.target.value)}
+                        >
+                            <option value="asc">Ascending</option>
+                            <option value="desc">Descending</option>
+                        </select>
+                    </label>
+                </div>
+                <div className={styles['product-list-wrap']}>
+                    <div className={styles['product-list-header']}>
+                        <p></p>
+                        <p>Product Name</p>
+                        <p>Description</p>
+                        <p>Price</p>
+                        <p>Quantity</p>
+                        <p>Category</p>
+                        <p>Product ID</p>
+                        <p>Created At</p>
+                        <p>Updated At</p>
+                        <p></p>
+                    </div>
+                    <div className={styles['product-list']}>
+                        {products.map((product) => (
+                            <div
+                                key={product.id}
+                                className={`${styles['product-item']} ${
+                                    product.id === selectedProductId
+                                        ? styles['selected']
+                                        : ''
+                                }`}
+                                onClick={() => handleEdit(product)}
                             >
-                                Delete
-                            </button>
-                        </div>
-                    ))}
+                                <img
+                                    src={product.imageUrl}
+                                    alt={product.name}
+                                    className={styles['product-image']}
+                                />
+                                <p>{product.name}</p>
+                                <p>{product.description}</p>
+                                <p>${product.price.toFixed(2)}</p>
+                                <p>{product.quantity}</p>
+                                <p>{product.category}</p>
+                                <p>{product.productId}</p>
+                                <p>
+                                    {' '}
+                                    {new Date(
+                                        product.createdAt
+                                    ).toLocaleString()}
+                                </p>
+                                <p>
+                                    {' '}
+                                    {new Date(
+                                        product.updatedAt
+                                    ).toLocaleString()}
+                                </p>
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDelete(product.id!);
+                                    }}
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

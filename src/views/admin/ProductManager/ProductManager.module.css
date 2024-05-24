@@ -1,3 +1,7 @@
+:root {
+    --product-item-width: calc((95vw - 300px) / 10);
+}
+
 .product-manager {
     padding: 20px;
 }
@@ -44,10 +48,11 @@
     border: 1px solid #ccc;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     cursor: pointer;
     position: relative;
-    height: 300px;
+    height: 40px;
 }
 
 .product-item.selected {
@@ -60,14 +65,27 @@
 }
 
 .product-item > p {
+    width: var(--product-item-width);
     flex: 1;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-align: center;
+    font-size: 14px;
 }
 .product-image {
     width: 100px;
     height: 100px;
     object-fit: cover;
     margin-bottom: 10px;
+}
+
+.product-list-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.product-list-header > p {
+    text-align: center;
+    width: var(--product-item-width);
 }
