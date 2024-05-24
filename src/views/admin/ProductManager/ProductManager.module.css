@@ -4,21 +4,36 @@
 
 .manager-container {
     display: flex;
-    gap: 20px;
+    background: mediumpurple;
 }
 
 .form-container {
-    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 300px;
+    text-align: left;
+    background: burlywood;
+    padding: 10px;
+}
+
+.form-container > form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.form-container > form > label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
 }
 
 .product-list {
     flex: 2;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 2px;
     overflow-y: auto;
     height: 70vh;
 }
@@ -27,10 +42,11 @@
     padding: 10px;
     border: 1px solid #ccc;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     cursor: pointer;
     position: relative;
+    height: 300px;
 }
 
 .product-item.selected {
