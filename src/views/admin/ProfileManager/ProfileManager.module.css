@@ -28,9 +28,10 @@
     display: flex;
     flex-direction: column;
     text-align: left;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     border-radius: 9px;
     width: 30vw;
+    min-width: 140px;
 }
 
 .edit-profile-form > label {
@@ -48,7 +49,7 @@
 .profile-list {
     list-style-type: none;
     border-radius: 2px;
-    border: 2px solid grey;
+    /* border: 2px solid grey; */
     overflow: hidden;
 }
 
@@ -76,4 +77,24 @@
 
 .profile-list > li:nth-child(odd) {
     background: linear-gradient(90deg, grey, transparent 95%);
+}
+
+.profile-list > li:nth-child(even):hover {
+    background: linear-gradient(90deg, rgb(172, 108, 108), transparent 95%);
+}
+
+.profile-list > li:nth-child(odd):hover {
+    background: linear-gradient(90deg, rgb(128, 79, 79), transparent 95%);
+}
+
+.selected {
+    font-size: 24px;
+    background: linear-gradient(90deg, #5a5a5a, transparent 95%) !important;
+    color: red;
+}
+
+.disabled-form input {
+    background-color: #333;
+    color: #999;
+    cursor: not-allowed;
 }
