@@ -1,24 +1,18 @@
 import React from 'react';
-import styles from './CartItem.module.css';
+import styles from './Cart.module.css';
 import {
     updateCartItemQuantity,
     removeCartItem,
     getCartItems,
 } from '../../cartService/cartService';
+import { CartItem } from '../../interface/interface';
 
-interface CartItem {
-    productId: string;
-    productName: string;
-    quantity: number;
-    productPrice: number;
-}
-
-interface CartItemProps {
+interface CartProps {
     item: CartItem;
     updateCart: (items: CartItem[]) => void;
 }
 
-const CartItem: React.FC<CartItemProps> = ({ item, updateCart }) => {
+const Cart: React.FC<CartProps> = ({ item, updateCart }) => {
     const increaseQuantity = async () => {
         await updateCartItemQuantity(item.productId, item.quantity + 1);
         const updatedItems = await getCartItems();
@@ -37,16 +31,16 @@ const CartItem: React.FC<CartItemProps> = ({ item, updateCart }) => {
 
     return (
         <div className={styles['cart-item']}>
-            <h2>{item.productName}</h2>
-            <p>Price: ${item.productPrice.toFixed(2)}</p>
+            <h2>{item.name}</h2>
+            <p>Price: ${item.price.toFixed(2)}</p>
             <div className={styles['quantity-controls']}>
                 <button onClick={decreaseQuantity}>-</button>
                 <span>{item.quantity}</span>
                 <button onClick={increaseQuantity}>+</button>
             </div>
-            <p>Total: ${(item.productPrice * item.quantity).toFixed(2)}</p>
+            <p>Total: ${(item.price * item.quantity).toFixed(2)}</p>
         </div>
     );
 };
 
-export default CartItem;
+export default Cart;
