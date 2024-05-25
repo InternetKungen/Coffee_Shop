@@ -1,6 +1,6 @@
 //till för att migrera från /users/{userId}/profile/profile -> users/{userId}
 import React, { useEffect } from 'react';
-import { db } from '../../main';
+import { db } from '../../../main';
 import { doc, getDoc, setDoc, collection, getDocs } from 'firebase/firestore';
 
 interface UserProfile {
