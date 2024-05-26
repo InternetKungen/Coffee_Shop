@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styles from './Carousel.module.css';
 import images from '../../assets/Carousel-imgs/Carousel-imgs';
+import leftArrow from '../../assets/img/left-arrow.png';
+import rightArrow from '../../assets/img/right-arrow.png';
+
 
 const Carousel: React.FC = () => {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -19,22 +22,14 @@ const Carousel: React.FC = () => {
 
     return (
         <div className={styles.carousel}>
-            <button
-                onClick={prevSlide}
-                className={`${styles['carousel-btn']} ${styles['carousel-btn-prev']}`}
-            >
-                &lt;
+            <button onClick={prevSlide} className={`${styles['carousel-btn']} ${styles['carousel-btn-prev']}`}>
+                <img src={leftArrow} alt="" />
             </button>
-            <img
-                src={images[activeIndex]}
-                alt={`Slide ${activeIndex}`}
-                className={styles['carousel-img']}
-            />
-            <button
-                onClick={nextSlide}
-                className={`${styles['carousel-btn']} ${styles['carousel-btn-next']}`}
-            >
-                &gt;
+
+            <img src={images[activeIndex]} alt={`Slide ${activeIndex}`} className={styles['carousel-img']}/>
+
+            <button onClick={nextSlide} className={`${styles['carousel-btn']} ${styles['carousel-btn-next']}`}>
+                <img src={rightArrow} alt="" />
             </button>
         </div>
     );
