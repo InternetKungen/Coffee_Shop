@@ -90,6 +90,7 @@ import { auth, db } from '../../main';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import styles from './ProfileButton.module.css';
 import { doc, getDoc } from 'firebase/firestore';
+import profileImg from './../../assets/icons/user.png';
 
 const ProfileButton: React.FC = () => {
     const [user] = useAuthState(auth);
@@ -139,7 +140,10 @@ const ProfileButton: React.FC = () => {
 
     return (
         <div className={styles['profile-button']}>
-            <button onClick={toggleMenu}>{firstName || user?.email}</button>
+            <button onClick={toggleMenu}>
+                <img src={profileImg} alt="Profile Icon" />
+                {firstName || user?.email}
+            </button>
             {isMenuOpen && <ProfileMenu ref={menuRef} />}
         </div>
     );

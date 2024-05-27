@@ -5,6 +5,7 @@ import { collection, getDocs, doc, getDoc, setDoc } from 'firebase/firestore';
 import useAdminStatus from '../../../hooks/useAdminStatus';
 import AdminCheckbox from '../../../components/admin/AdminCheckbox/AdminCheckbox';
 import styles from './ProfileManager.module.css';
+import NotificationPopUp from '../../../components/NotificationPopUp/NotificationPopUp';
 
 interface UserProfile {
     uid: string;
@@ -41,6 +42,7 @@ const ProfileManager: React.FC = () => {
     const [users, setUsers] = useState<UserProfile[]>([]);
     const [selectedUser, setSelectedUser] = useState<UserProfile | null>(null);
     const [isLoadingUsers, setIsLoadingUsers] = useState(false);
+    const [notification, setNotification] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -90,7 +92,7 @@ const ProfileManager: React.FC = () => {
     const handleSaveProfile = async (user: UserProfile) => {
         const userRef = doc(db, 'users', user.uid);
         await setDoc(userRef, user);
-        alert('Profile updated successfully');
+        setNotification('Profile updated successfully');
     };
 
     // const handleClearSelection = () => {
@@ -301,6 +303,12 @@ const ProfileManager: React.FC = () => {
                         />
                     </label>
                     <AdminCheckbox user={selectedUser || defaultUserProfile} />
+                    {notification && (
+                        <NotificationPopUp
+                            message={notification}
+                            onClose={() => setNotification(null)}
+                        />
+                    )}
                     <button
                         type="button"
                         onClick={() =>

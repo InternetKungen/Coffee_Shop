@@ -8,7 +8,9 @@ const FavoritesButton: React.FC = () => {
     return (
         <section className={styles['favorites-button-container']}>
             <Link to="/favorites">
-                <img src={favoritesIcon} alt="favorites-icon" />
+                <button>
+                    <img src={favoritesIcon} alt="favorites-icon" />
+                </button>
             </Link>
         </section>
     );

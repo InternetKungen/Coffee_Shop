@@ -5,7 +5,30 @@
     justify-content: center; /* Lägg till denna rad för att centrera horisontellt också */
 }
 
+.favorites-button-container button {
+    position: relative;
+    top: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.favorites-button-container button:active {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
 .favorites-button-container img {
     height: 30px;
     display: block;
+}
+
+.favorites-button-container button:focus,
+.favorites-button-container button:focus-visible {
+    outline: none;
+    border: none;
 }
