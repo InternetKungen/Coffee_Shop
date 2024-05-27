@@ -1,7 +1,7 @@
 // AddToFavoritesButton.tsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { auth, db } from '../../main';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, deleteDoc, getDoc } from 'firebase/firestore';
 import { Product } from '../../interface/types';
 
 interface AddToFavoritesButtonProps {
@@ -11,6 +11,26 @@ interface AddToFavoritesButtonProps {
 const AddToFavoritesButton: React.FC<AddToFavoritesButtonProps> = ({
     product,
 }) => {
+    const [isFavorite, setIsFavorite] = useState<boolean>(false);
+
+    useEffect(() => {
+        const checkIfFavorite = async () => {
+            const user: any | null = auth.currentUser;
+            if (!user) return;
+
+            const userId = user.uid;
+            const productId = product.id;
+            const favoriteProductRef = doc(
+                db,
+                `users/${userId}/favorites/${productId}`
+            );
+            const docSnapshot = await getDoc(favoriteProductRef);
+            setIsFavorite(docSnapshot.exists());
+        };
+
+        checkIfFavorite();
+    }, [product.id]);
+
     const addToFavorites = async () => {
         const user: any | null = auth.currentUser;
         if (!user) {
@@ -34,10 +54,33 @@ const AddToFavoritesButton: React.FC<AddToFavoritesButtonProps> = ({
         };
 
         await setDoc(favoriteProductRef, favoriteProductData);
+        setIsFavorite(true);
         alert(`${product.name} has been added to your favorites!`);
     };
 
-    return <button onClick={addToFavorites}>Add to Favorites</button>;
+    const removeFromFavorites = async () => {
+        const user: any | null = auth.currentUser;
+        if (!user) {
+            alert('Please log in to remove favorites.');
+            return;
+        }
+        const userId = user.uid;
+        const productId = product.id;
+        const favoriteProductRef = doc(
+            db,
+            `users/${userId}/favorites/${productId}`
+        );
+
+        await deleteDoc(favoriteProductRef);
+        setIsFavorite(false);
+        alert(`${product.name} has been removed from your favorites!`);
+    };
+
+    return (
+        <button onClick={isFavorite ? removeFromFavorites : addToFavorites}>
+            {isFavorite ? 'Remove From Favorites' : 'Add To Favorites'}
+        </button>
+    );
 };
 
 export default AddToFavoritesButton;

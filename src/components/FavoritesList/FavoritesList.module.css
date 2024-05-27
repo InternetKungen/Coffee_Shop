@@ -1,0 +1,59 @@
+/* FavoritesList.module.css */
+
+/* Återanvändning av samma stilar som i ProductList.module.css */
+.favorites-list-page {
+    margin-top: 100px;
+}
+
+.favorites-list-div {
+    padding: 1rem;
+    display: flex;
+    /* grid-template-columns: repeat(auto-fit, minmax(340px, 10fr)); */
+    gap: 1rem;
+    margin: 0 auto;
+    max-width: 1600px; /* Optional: Set a max width for the container */
+}
+
+.favorites-list-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* This centers the content horizontally */
+    padding: 1rem; /* Optional: Add padding for better spacing */
+    border: 2px solid white;
+    width: 330px;
+    position: relative; /* Make the position relative for the item */
+}
+
+.favorites-list-item h2 {
+    margin: 0; /* Justerar rubrikens marginal */
+}
+
+.favorites-list-item-content {
+    flex-grow: 1; /* Fill the space above the button */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Ensure the content spans the full width */
+}
+
+.favorites-list-item button {
+    align-self: center;
+    margin-top: auto; /* Push the button to the bottom */
+}
+
+.product-image {
+    width: auto;
+    height: auto;
+    max-width: 320px;
+    min-width: 100px;
+    display: block;
+    margin-top: 10px;
+}
+
+/* Media query för större skärmar */
+@media (min-width: 768px) {
+    .favorites-list-div {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}

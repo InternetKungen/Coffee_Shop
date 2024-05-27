@@ -8,6 +8,7 @@ import SignUpButton from '../SignUpButton/SignUpButton';
 import ProfileButton from '../ProfileButton/ProfileButton';
 import styles from './Header.module.css';
 import Logo from '../Logo/Logo';
+import FavoritesButton from '../FavoritesButton/FavoritesButton';
 
 const Header: React.FC = () => {
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -27,7 +28,10 @@ const Header: React.FC = () => {
             <Logo />
             <section className={styles['header__button-container']}>
                 {isUserLoggedIn ? (
-                    <ProfileButton />
+                    <>
+                        <FavoritesButton />
+                        <ProfileButton />
+                    </>
                 ) : (
                     <>
                         <SignInButton />
