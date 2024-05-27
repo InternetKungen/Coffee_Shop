@@ -9,24 +9,11 @@ import { useNavigate } from 'react-router-dom';
 import { auth, db } from '../../main';
 import { doc, getDoc } from 'firebase/firestore';
 import styles from './Order.module.css';
-import { CartItem } from '../../interface/types';
+import { CartItem, UserProfile } from '../../interface/types';
 import { onAuthStateChanged } from 'firebase/auth';
 
-interface UserProfile {
-    firstName: string;
-    lastName: string;
-    email: string;
-    profilePicture: string;
-    phoneNumber: string;
-    address: {
-        street: string;
-        postalCode: string;
-        city: string;
-        country: string;
-    };
-}
-
 const Order: React.FC = () => {
+    // State variables to manage order details
     const [cartItems, setCartItems] = useState<CartItem[]>(getCartItems());
     const [shippingAddress, setShippingAddress] = useState({
         street: '',
@@ -36,24 +23,31 @@ const Order: React.FC = () => {
     });
     const [paymentMethod, setPaymentMethod] = useState('Credit Card');
     const [totalAmount, setTotalAmount] = useState(0);
-    const [loading, setLoading] = useState(true); // New loading state
+    const [loading, setLoading] = useState(true);
+    const [errors, setErrors] = useState<string[]>([]);
     const navigate = useNavigate();
 
+    // Effect hook to check user authentication status
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (!user) {
+                // Redirect user to sign-in page if not authenticated
                 navigate('/sign-in');
             } else {
-                setLoading(false); // Set loading to false when user is determined
+                // Mark loading as false when user is authenticated
+                setLoading(false);
             }
         });
 
+        // Cleanup function to unsubscribe from auth state changes
         return () => unsubscribe();
     }, [navigate]);
 
+    // Effect hook to calculate total amount when cart items or loading state changes
     useEffect(() => {
         if (!loading) {
             const calculateTotal = () => {
+                // Calculate total amount from cart items
                 const total = cartItems.reduce(
                     (acc, item) => acc + item.productPrice * item.quantity,
                     0
@@ -61,10 +55,12 @@ const Order: React.FC = () => {
                 setTotalAmount(total);
             };
 
+            // Call calculateTotal function
             calculateTotal();
         }
     }, [cartItems, loading]);
 
+    // Effect hook to fetch user profile and set shipping address
     useEffect(() => {
         if (!loading) {
             const fetchUserProfile = async () => {
@@ -79,6 +75,7 @@ const Order: React.FC = () => {
                 const docSnap = await getDoc(docRef);
 
                 if (docSnap.exists()) {
+                    // Set shipping address if user profile exists
                     const userProfile = docSnap.data() as UserProfile;
                     if (userProfile.address) {
                         setShippingAddress(userProfile.address);
@@ -86,16 +83,35 @@ const Order: React.FC = () => {
                 }
             };
 
+            // Call fetchUserProfile function
             fetchUserProfile();
         }
     }, [navigate, loading]);
 
+    // Function to handle address changes
     const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
+        // Update shipping address state
         setShippingAddress((prev) => ({ ...prev, [name]: value }));
     };
 
+    // Function to validate shipping address
+    const validateAddress = () => {
+        const newErrors = [];
+        if (!shippingAddress.street) newErrors.push('Street is required.');
+        if (!shippingAddress.postalCode)
+            newErrors.push('Postal Code is required.');
+        if (!shippingAddress.city) newErrors.push('City is required.');
+        if (!shippingAddress.country) newErrors.push('Country is required.');
+        // Update errors state
+        setErrors(newErrors);
+        return newErrors.length === 0;
+    };
+
+    // Function to handle order submission
     const handleSubmitOrder = async () => {
+        if (!validateAddress()) return;
+
         try {
             const user = auth.currentUser;
             if (!user) {
@@ -103,6 +119,7 @@ const Order: React.FC = () => {
                 return;
             }
 
+            // Create order with user details, shipping address, payment method, and cart items
             await createOrder({
                 userId: user.uid,
                 orderDate: new Date(),
@@ -112,23 +129,35 @@ const Order: React.FC = () => {
                 paymentMethod,
                 orderItems: cartItems,
             });
+            // Clear cart after successful order submission
             clearCart();
             setCartItems([]);
+            // Redirect user to order success page
             navigate('/order-success');
         } catch (error) {
             console.error('Error submitting order:', error);
         }
     };
 
+    // Render loading indicator while loading
     if (loading) {
-        return <div>Loading...</div>; // Show a loading message while checking auth state
+        return <div>Loading...</div>;
     }
 
+    // Render order form
     return (
         <div className={styles['order-page']}>
             <h1>Place Your Order</h1>
             <div className={styles['order-form']}>
                 <h2>Shipping Address</h2>
+                {errors.length > 0 && (
+                    <div className={styles['error-messages']}>
+                        {/* Render error messages */}
+                        {errors.map((error, index) => (
+                            <p key={index}>{error}</p>
+                        ))}
+                    </div>
+                )}
                 <label>
                     Street:
                     <input
@@ -166,6 +195,7 @@ const Order: React.FC = () => {
                     />
                 </label>
                 <h2>Payment Method</h2>
+                {/* Select payment method */}
                 <select
                     value={paymentMethod}
                     onChange={(e) => setPaymentMethod(e.target.value)}
@@ -176,6 +206,7 @@ const Order: React.FC = () => {
                 </select>
                 <h2>Order Summary</h2>
                 <p>Total Amount: ${totalAmount.toFixed(2)}</p>
+                {/* Button to submit order */}
                 <button onClick={handleSubmitOrder}>Submit Order</button>
             </div>
         </div>

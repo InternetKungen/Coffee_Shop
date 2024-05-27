@@ -22,6 +22,8 @@ import Cart from '../KundVagn/CartLocalStorage';
 import OrderPage from '../../views/pages/OrderPage';
 import OrderSuccessPage from '../../views/pages/OrderSuccessPage';
 
+import OrderHistoryPage from '../../views/pages/OrderHistoryPage';
+
 const Main: React.FC = () => {
     return (
         <main>
@@ -39,6 +41,7 @@ const Main: React.FC = () => {
                 {/* Other routes */}
                 <Route path="/order" element={<OrderPage />} />
                 <Route path="/order-success" element={<OrderSuccessPage />} />
+                <Route path="/settings/order-history" element={<OrderHistoryPage />} />
                 <Route
                     path="/settings/user-profile"
                     element={<UserProfile />}
