@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './FavoritesButton.module.css';
-import favoritesIcon from '../../assets/icons/heart.png';
+import favoritesIcon from '../../assets/img/heart.png';
 
 const FavoritesButton: React.FC = () => {
     return (
