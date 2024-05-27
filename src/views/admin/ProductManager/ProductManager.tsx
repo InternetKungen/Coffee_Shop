@@ -166,7 +166,7 @@ const ProductManager: React.FC = () => {
 
     return (
         <div className={styles['product-manager']}>
-            <h1>Product Manager</h1>
+            <h2>Product Manager</h2>
             <div className={styles['manager-container']}>
                 <div className={styles['form-container']}>
                     <form onSubmit={handleSubmit}>
@@ -331,11 +331,13 @@ const ProductManager: React.FC = () => {
                                 }`}
                                 onClick={() => handleEdit(product)}
                             >
-                                <img
-                                    src={product.imageUrl}
-                                    alt={product.name}
-                                    className={styles['product-image']}
-                                />
+                                <p>
+                                    <img
+                                        src={product.imageUrl}
+                                        alt={product.name}
+                                        className={styles['product-image']}
+                                    />
+                                </p>
                                 <p>{product.name}</p>
                                 <p>{product.description}</p>
                                 <p>${product.price.toFixed(2)}</p>
@@ -352,14 +354,16 @@ const ProductManager: React.FC = () => {
                                         product.updatedAt
                                     ).toLocaleString()}
                                 </p>
-                                <button
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        handleDelete(product.id!);
-                                    }}
-                                >
-                                    Delete
-                                </button>
+                                <p>
+                                    <button
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleDelete(product.id!);
+                                        }}
+                                    >
+                                        Delete
+                                    </button>
+                                </p>
                             </div>
                         ))}
                     </div>
