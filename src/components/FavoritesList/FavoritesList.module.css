@@ -1,0 +1,60 @@
+/* FavoritesList.module.css */
+
+.favorites-list-page {
+    margin-top: 100px;
+}
+
+.favorites-list-div {
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    grid-gap: 1rem;
+    margin: 0 auto;
+    max-width: 1600px;
+}
+
+.favorites-list-item-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex; /* Gör länken till en flex-container */
+}
+
+.favorites-list-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Fördela utrymmet jämnt */
+    padding: 1rem;
+    border: 2px solid white;
+    flex: 1; /* Se till att alla items är lika höga */
+    width: 100%; /* Se till att de fyller hela länken */
+    box-sizing: border-box; /* Inkludera padding och border i elementets totala storlek */
+    position: relative; /* För positioneringen av ikonen */
+}
+
+.favorites-list-item h2 {
+    margin: 0;
+}
+
+.favorite-icon-container {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.product-image {
+    width: auto;
+    height: auto;
+    max-width: 320px;
+    min-width: 100px;
+    display: block;
+    margin-top: 10px;
+}
+
+/* Media query för större skärmar */
+@media (min-width: 768px) {
+    .favorites-list-div {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}

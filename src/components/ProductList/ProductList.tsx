@@ -1,8 +1,8 @@
 // ProductList.tsx
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { db } from '../../main';
 import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../main';
 import styles from './ProductList.module.css';
 import {
     addItemToCart,
@@ -10,6 +10,7 @@ import {
     getCartItems,
 } from '../../cartService/cartServiceLocalStorage';
 import { Product, CartItem } from '../../interface/types';
+import AddToFavoritesButton from '../AddToFavoritesButton/AddToFavoritesButton';
 
 // ProductList function component
 const ProductList: React.FC = () => {
@@ -27,12 +28,13 @@ const ProductList: React.FC = () => {
             const productList = productSnapshot.docs.map((doc) => {
                 const data = doc.data();
                 return {
-                    id: doc.id, // Document ID
-                    name: data.name, // Product name
-                    price: Number(data.price), // Ensure price is a number
-                    description: data.description, // Product description
-                    imageUrl: data.imageUrl, // Product image
-                    quantity: Number(data.quantity), // product quantity
+                    id: doc.id,
+                    name: data.name,
+                    price: Number(data.price),
+                    description: data.description,
+                    imageUrl: data.imageUrl,
+                    quantity: Number(data.quantity),
+                    category: data.category,
                 } as Product;
             });
             // Update the state with the fetched product list
@@ -98,6 +100,9 @@ const ProductList: React.FC = () => {
                         className={styles['product-list-item']}
                         key={product.id}
                     >
+                        <div className={styles['favorite-icon-container']}>
+                            <AddToFavoritesButton product={product} />
+                        </div>
                         <h2>{product.name}</h2>
                         <img
                             src={`src/assets/product-img/${product.imageUrl}`}

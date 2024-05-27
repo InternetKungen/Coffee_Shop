@@ -1,88 +1,3 @@
-// import React, { useEffect, useState } from 'react';
-// import { useAuthState } from 'react-firebase-hooks/auth';
-// import { auth, db } from '../../main';
-// import ProfileMenu from '../ProfileMenu/ProfileMenu';
-// import styles from './ProfileButton.module.css';
-// import { doc, getDoc } from 'firebase/firestore';
-
-// const ProfileButton: React.FC = () => {
-//     const [user] = useAuthState(auth);
-//     const [firstName, setFirstName] = useState<string | null>(null);
-//     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-//     useEffect(() => {
-//         const fetchUserProfile = async () => {
-//             if (user) {
-//                 const docRef = doc(db, 'users', user.uid, 'profile', 'profile');
-//                 const docSnap = await getDoc(docRef);
-//                 if (docSnap.exists()) {
-//                     const userProfile = docSnap.data();
-//                     setFirstName(userProfile.firstName);
-//                 } else {
-//                     console.log('No such document!');
-//                 }
-//             }
-//         };
-
-//         fetchUserProfile();
-//     }, [user]);
-
-//     const toggleMenu = () => {
-//         setIsMenuOpen(!isMenuOpen);
-//     };
-
-//     return (
-//         <div className={styles.profileButton}>
-//             <button onClick={toggleMenu}>{firstName || user?.email}</button>
-//             {isMenuOpen && <ProfileMenu />}
-//         </div>
-//     );
-// };
-
-// export default ProfileButton;
-//#2----------
-// import React, { useEffect, useState } from 'react';
-// import { useAuthState } from 'react-firebase-hooks/auth';
-// import { auth, db } from '../../main';
-// import ProfileMenu from '../ProfileMenu/ProfileMenu';
-// import styles from './ProfileButton.module.css';
-// import { doc, getDoc } from 'firebase/firestore';
-
-// const ProfileButton: React.FC = () => {
-//     const [user] = useAuthState(auth);
-//     const [firstName, setFirstName] = useState<string | null>(null);
-//     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-//     useEffect(() => {
-//         const fetchUserProfile = async () => {
-//             if (user) {
-//                 const docRef = doc(db, 'users', user.uid);
-//                 const docSnap = await getDoc(docRef);
-//                 if (docSnap.exists()) {
-//                     const userProfile = docSnap.data();
-//                     setFirstName(userProfile.firstName);
-//                 } else {
-//                     console.log('No such document!');
-//                 }
-//             }
-//         };
-
-//         fetchUserProfile();
-//     }, [user]);
-
-//     const toggleMenu = () => {
-//         setIsMenuOpen(!isMenuOpen);
-//     };
-
-//     return (
-//         <div className={styles.profileButton}>
-//             <button onClick={toggleMenu}>{firstName || user?.email}</button>
-//             {isMenuOpen && <ProfileMenu />}
-//         </div>
-//     );
-// };
-
-// export default ProfileButton;
 // ProfileButton.tsx
 import React, { useEffect, useRef, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -90,6 +5,7 @@ import { auth, db } from '../../main';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import styles from './ProfileButton.module.css';
 import { doc, getDoc } from 'firebase/firestore';
+import profileImg from './../../assets/img/user.png';
 
 const ProfileButton: React.FC = () => {
     const [user] = useAuthState(auth);
@@ -139,7 +55,10 @@ const ProfileButton: React.FC = () => {
 
     return (
         <div className={styles['profile-button']}>
-            <button onClick={toggleMenu}>{firstName || user?.email}</button>
+            <button onClick={toggleMenu}>
+                <img src={profileImg} alt="Profile Icon" />
+                <span>{firstName || user?.email}</span>
+            </button>
             {isMenuOpen && <ProfileMenu ref={menuRef} />}
         </div>
     );

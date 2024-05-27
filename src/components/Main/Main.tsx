@@ -23,6 +23,7 @@ import OrderPage from '../../views/pages/OrderPage';
 import OrderSuccessPage from '../../views/pages/OrderSuccessPage';
 
 import OrderHistoryPage from '../../views/pages/OrderHistoryPage';
+import Favorites from '../../views/pages/Favorites';
 
 const Main: React.FC = () => {
     return (
@@ -41,7 +42,11 @@ const Main: React.FC = () => {
                 {/* Other routes */}
                 <Route path="/order" element={<OrderPage />} />
                 <Route path="/order-success" element={<OrderSuccessPage />} />
-                <Route path="/settings/order-history" element={<OrderHistoryPage />} />
+                <Route path="/favorites" element={<Favorites />} />
+                <Route
+                    path="/settings/order-history"
+                    element={<OrderHistoryPage />}
+                />
                 <Route
                     path="/settings/user-profile"
                     element={<UserProfile />}
