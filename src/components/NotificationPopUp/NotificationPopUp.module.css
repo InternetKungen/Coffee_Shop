@@ -1,0 +1,31 @@
+.notification {
+    position: fixed;
+    top: 85px;
+    right: 20px;
+    background: linear-gradient(90deg, #333 50%, #333333c2);
+    color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    animation: fadeInOut 2.8s ease 1;
+    opacity: 0;
+    border: 3px solid #e3e3e3;
+}
+
+@keyframes fadeInOut {
+    0% {
+        right: -500px;
+        opacity: 0;
+    }
+    5% {
+        right: 20px;
+        opacity: 0.9;
+    }
+    70% {
+        opacity: 0.9;
+    }
+    100% {
+        opacity: 0;
+    }
+}
