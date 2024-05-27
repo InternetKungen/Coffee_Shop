@@ -21,6 +21,8 @@ import ProductManager from '../../views/admin/ProductManager/ProductManager';
 import Cart from '../KundVagn/CartLocalStorage';
 import OrderPage from '../../views/pages/OrderPage';
 import OrderSuccessPage from '../../views/pages/OrderSuccessPage';
+
+import OrderHistoryPage from '../../views/pages/OrderHistoryPage';
 import Favorites from '../../views/pages/Favorites';
 
 const Main: React.FC = () => {
@@ -41,6 +43,10 @@ const Main: React.FC = () => {
                 <Route path="/order" element={<OrderPage />} />
                 <Route path="/order-success" element={<OrderSuccessPage />} />
                 <Route path="/favorites" element={<Favorites />} />
+                <Route
+                    path="/settings/order-history"
+                    element={<OrderHistoryPage />}
+                />
                 <Route
                     path="/settings/user-profile"
                     element={<UserProfile />}

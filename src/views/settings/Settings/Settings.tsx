@@ -9,6 +9,9 @@ const Settings: React.FC = () => {
             <Link to="/settings/user-profile">
                 <button>Profile Settings</button>
             </Link>
+            <Link to="/settings/order-history">
+                <button>Order History</button>
+            </Link>
             <Link to="/settings/change-password">
                 <button>Change Password</button>
             </Link>

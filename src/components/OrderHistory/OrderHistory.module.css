@@ -1,0 +1,42 @@
+/* OrderHistory.module.css */
+.order-history-page {
+    padding: 20px;
+    margin: auto;
+    max-width: 800px;
+    font-family: Arial, sans-serif;
+    margin-top: 50px;
+}
+
+.order-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.order-item h2 {
+    margin-top: 0;
+}
+
+.order-item ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.order-item li {
+    padding: 5px 0;
+}
+
+@media (max-width: 600px) {
+    .order-history-page {
+        padding: 10px;
+    }
+
+    .order-item {
+        padding: 10px;
+    }
+
+    .order-item h2 {
+        font-size: 1.2rem;
+    }
+}
