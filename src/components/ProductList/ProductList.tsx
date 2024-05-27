@@ -138,8 +138,8 @@
 // ProductList.tsx
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { auth, db } from '../../main';
-import { collection, getDocs, doc, setDoc } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../main';
 import styles from './ProductList.module.css';
 import {
     addItemToCart,
@@ -147,29 +147,7 @@ import {
     getCartItems,
 } from '../../cartService/cartServiceLocalStorage';
 import { Product, CartItem } from '../../interface/types';
-
-// Function to handle adding product to favorites
-const addToFavorites = async (product: Product) => {
-    const user: any | null = auth.currentUser;
-    const userId = user.uid;
-    const productId = product.id;
-    const favoriteProductRef = doc(
-        db,
-        `users/${userId}/favorites/${productId}`
-    );
-
-    const favoriteProductData = {
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        description: product.description,
-        imageUrl: product.imageUrl,
-        addedToList: new Date().toISOString(),
-    };
-
-    await setDoc(favoriteProductRef, favoriteProductData);
-    alert(`${product.name} has been added to your favorites!`);
-};
+import AddToFavoritesButton from '../AddToFavoritesButton/AddToFavoritesButton';
 
 // ProductList function
 const ProductList: React.FC = () => {
@@ -187,13 +165,13 @@ const ProductList: React.FC = () => {
             const productList = productSnapshot.docs.map((doc) => {
                 const data = doc.data();
                 return {
-                    id: doc.id, // Document ID
-                    name: data.name, // Product name
-                    price: Number(data.price), // Ensure price is a number
-                    description: data.description, // Product description
-                    imageUrl: data.imageUrl, // Product image
-                    quantity: Number(data.quantity), // product quantity
-                    category: data.category, // product category
+                    id: doc.id,
+                    name: data.name,
+                    price: Number(data.price),
+                    description: data.description,
+                    imageUrl: data.imageUrl,
+                    quantity: Number(data.quantity),
+                    category: data.category,
                 } as Product;
             });
             // Update the state with the fetched product list
@@ -262,9 +240,7 @@ const ProductList: React.FC = () => {
                                 >
                                     Add to Cart
                                 </button>
-                                <button onClick={() => addToFavorites(product)}>
-                                    Add to Favorites
-                                </button>
+                                <AddToFavoritesButton product={product} />
                                 <div>
                                     <button
                                         onClick={() =>
