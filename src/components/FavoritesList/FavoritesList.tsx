@@ -5,6 +5,7 @@ import { auth, db } from '../../main';
 import styles from './FavoritesList.module.css';
 import { Product } from '../../interface/types';
 import AddToFavoritesButton from '../AddToFavoritesButton/AddToFavoritesButton';
+import { Link } from 'react-router-dom';
 
 const FavoritesList: React.FC = () => {
     const [favorites, setFavorites] = useState<Product[]>([]);
@@ -39,22 +40,34 @@ const FavoritesList: React.FC = () => {
 
     return (
         <div className={styles['favorites-list-div']}>
-            {favorites.map((product) => (
-                <section
-                    className={styles['favorites-list-item']}
-                    key={product.id}
-                >
-                    <h2>{product.name}</h2>
-                    <img
-                        src={`src/assets/product-img/${product.imageUrl}`}
-                        alt={product.name}
-                        className={styles['product-image']}
-                    />
-                    <p>Price: ${product.price.toFixed(2)}</p>
-                    <p>{product.description}</p>
-                    <AddToFavoritesButton product={product} />
-                </section>
-            ))}
+            {favorites.length === 0 ? (
+                <p>You got no favorites!</p>
+            ) : (
+                favorites.map((product) => (
+                    <Link
+                        to={`/products/${product.id}`}
+                        key={product.id}
+                        className={styles['favorites-list-item-link']}
+                    >
+                        <section
+                            className={styles['favorites-list-item']}
+                            key={product.id}
+                        >
+                            <div className={styles['favorite-icon-container']}>
+                                <AddToFavoritesButton product={product} />
+                            </div>
+                            <h2>{product.name}</h2>
+                            <img
+                                src={`src/assets/product-img/${product.imageUrl}`}
+                                alt={product.name}
+                                className={styles['product-image']}
+                            />
+                            <p>Price: ${product.price.toFixed(2)}</p>
+                            <p>{product.description}</p>
+                        </section>
+                    </Link>
+                ))
+            )}
         </div>
     );
 };

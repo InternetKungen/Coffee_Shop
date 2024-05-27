@@ -1,0 +1,20 @@
+/* AddToFavoritesButton.module.css */
+
+.favorites-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.favorites-icon {
+    height: 30px; /* Justera storleken efter behov */
+    width: 30px; /* Justera storleken efter behov */
+}
+
+.favorites-button:hover {
+    transform: scale(1.1);
+}

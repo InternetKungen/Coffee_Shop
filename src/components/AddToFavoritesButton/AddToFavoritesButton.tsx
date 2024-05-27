@@ -1,8 +1,10 @@
-// AddToFavoritesButton.tsx
 import React, { useState, useEffect } from 'react';
 import { auth, db } from '../../main';
 import { doc, setDoc, deleteDoc, getDoc } from 'firebase/firestore';
 import { Product } from '../../interface/types';
+import favoritesIcon from '../../assets/icons/heart-light.png';
+import favoritesIconFilled from '../../assets/icons/heart-light-filled.png';
+import styles from './AddToFavorites.module.css';
 
 interface AddToFavoritesButtonProps {
     product: Product;
@@ -77,8 +79,15 @@ const AddToFavoritesButton: React.FC<AddToFavoritesButtonProps> = ({
     };
 
     return (
-        <button onClick={isFavorite ? removeFromFavorites : addToFavorites}>
-            {isFavorite ? 'Remove From Favorites' : 'Add To Favorites'}
+        <button
+            onClick={isFavorite ? removeFromFavorites : addToFavorites}
+            className={styles['favorites-button']}
+        >
+            <img
+                src={isFavorite ? favoritesIconFilled : favoritesIcon}
+                alt={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+                className={styles['favorites-icon']}
+            />
         </button>
     );
 };
