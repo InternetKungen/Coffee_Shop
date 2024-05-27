@@ -57,7 +57,7 @@ const ProfileButton: React.FC = () => {
         <div className={styles['profile-button']}>
             <button onClick={toggleMenu}>
                 <img src={profileImg} alt="Profile Icon" />
-                {firstName || user?.email}
+                <span>{firstName || user?.email}</span>
             </button>
             {isMenuOpen && <ProfileMenu ref={menuRef} />}
         </div>

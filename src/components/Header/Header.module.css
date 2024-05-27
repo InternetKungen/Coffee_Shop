@@ -49,8 +49,8 @@ header {
     }
     .header__button-container {
         margin-right: 10px;
-        transform: scale(0.6);
+        transform: scale(0.8);
         position: relative;
-        left: 40px;
+        left: 30px;
     }
 }

@@ -18,6 +18,10 @@
     bottom: 4px;
 }
 
+.profile-button button span {
+    display: inline;
+}
+
 .profile-button button:active {
     background: none;
     border: none;
@@ -38,4 +42,10 @@
     top: 7px;
     height: 28px;
     padding-right: 10px;
+}
+
+@media screen and (max-width: 576px) {
+    .profile-button button span {
+        display: none;
+    }
 }

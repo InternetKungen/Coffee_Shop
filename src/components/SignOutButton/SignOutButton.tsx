@@ -6,7 +6,7 @@ import styles from './SignOutButton.module.css';
 const SignOutButton: React.FC = () => {
     return (
         <section className={styles['sign-out-button-container']}>
-            <Link to="/sign-out">Sign out</Link>
+            <Link to="/sign-out">Sign Out</Link>
         </section>
     );
 };

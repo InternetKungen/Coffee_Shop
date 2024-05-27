@@ -1,4 +1,3 @@
-// AddToFavoritesButton.tsx
 import React, { useState, useEffect } from 'react';
 import { auth, db } from '../../main';
 import { doc, setDoc, deleteDoc, getDoc } from 'firebase/firestore';
@@ -40,6 +39,7 @@ const AddToFavoritesButton: React.FC<AddToFavoritesButtonProps> = ({
         event: React.MouseEvent<HTMLButtonElement>
     ) => {
         event.stopPropagation();
+        event.preventDefault();
         const user: any | null = auth.currentUser;
         if (!user) {
             setNotification('Please log in to add favorites.');
@@ -70,6 +70,7 @@ const AddToFavoritesButton: React.FC<AddToFavoritesButtonProps> = ({
         event: React.MouseEvent<HTMLButtonElement>
     ) => {
         event.stopPropagation();
+        event.preventDefault();
         const user: any | null = auth.currentUser;
         if (!user) {
             setNotification('Please log in to remove favorites.');

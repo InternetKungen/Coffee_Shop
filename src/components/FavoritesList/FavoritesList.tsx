@@ -52,6 +52,8 @@ const FavoritesList: React.FC = () => {
                         <section
                             className={styles['favorites-list-item']}
                             key={product.id}
+                            onClick={(e) => e.stopPropagation()}
+                            onKeyDown={(e) => e.stopPropagation()}
                         >
                             <div className={styles['favorite-icon-container']}>
                                 <AddToFavoritesButton product={product} />

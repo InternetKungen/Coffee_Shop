@@ -4,6 +4,7 @@ import { doc, setDoc, deleteDoc } from 'firebase/firestore';
 import { db } from '../../../main';
 import useIsUserAdmin from '../../../hooks/useIsUserAdmin';
 import styles from './AdminCheckbox.module.css';
+import NotificationPopUp from '../../NotificationPopUp/NotificationPopUp';
 
 interface AdminCheckboxProps {
     user: {
@@ -14,6 +15,7 @@ interface AdminCheckboxProps {
 const AdminCheckbox: React.FC<AdminCheckboxProps> = ({ user }) => {
     const { isUserAdmin, isLoading, error } = useIsUserAdmin(user.uid);
     const [isAdmin, setIsAdmin] = useState<boolean>(false);
+    const [notification, setNotification] = useState<string | null>(null);
 
     useEffect(() => {
         if (!isLoading && !error) {
@@ -26,14 +28,14 @@ const AdminCheckbox: React.FC<AdminCheckboxProps> = ({ user }) => {
         try {
             if (newAdminStatus) {
                 await setDoc(adminRef, { uid: user.uid });
-                alert('User added to admins successfully');
+                setNotification('User added to admins successfully');
             } else {
                 await deleteDoc(adminRef);
-                alert('User removed from admins successfully');
+                setNotification('User removed from admins successfully');
             }
         } catch (error: any) {
             console.error('Error updating admin status:', error);
-            alert('Error updating admin status: ' + error.message);
+            setNotification('Error updating admin status: ' + error.message);
         }
     };
 
@@ -54,6 +56,12 @@ const AdminCheckbox: React.FC<AdminCheckboxProps> = ({ user }) => {
     return (
         <label className={styles['admin-checkbox']}>
             Admin:
+            {notification && (
+                <NotificationPopUp
+                    message={notification}
+                    onClose={() => setNotification(null)}
+                />
+            )}
             <input type="checkbox" checked={isAdmin} onChange={handleChange} />
         </label>
     );
