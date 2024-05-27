@@ -166,7 +166,7 @@ const ProductManager: React.FC = () => {
 
     return (
         <div className={styles['product-manager']}>
-            <h1>Product Manager</h1>
+            <h2>Product Manager</h2>
             <div className={styles['manager-container']}>
                 <div className={styles['form-container']}>
                     <form onSubmit={handleSubmit}>
