@@ -18,6 +18,10 @@ import ProtectedRoute from '../ProtectedRoutes/ProtectedRoutes';
 import ProfileManager from '../../views/admin/ProfileManager/ProfileManager';
 import ProductManager from '../../views/admin/ProductManager/ProductManager';
 
+import Cart from '../KundVagn/CartLocalStorage';
+import OrderPage from '../../views/pages/OrderPage';
+import OrderSuccessPage from '../../views/pages/OrderSuccessPage';
+
 const Main: React.FC = () => {
     return (
         <main>
@@ -31,6 +35,10 @@ const Main: React.FC = () => {
                 <Route path="/products" element={<ProductListPage />} />
                 <Route path="/products/:id" element={<ProductPage />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/cart" element={<Cart />} />
+                {/* Other routes */}
+                <Route path="/order" element={<OrderPage />} />
+                <Route path="/order-success" element={<OrderSuccessPage />} />
                 <Route
                     path="/settings/user-profile"
                     element={<UserProfile />}
