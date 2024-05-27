@@ -8,20 +8,20 @@ const About: React.FC = () => {
         <div className={styles['about']}>
             <div className={styles['about-us']}>
                 <div className={styles['about-us-text']}>
-                    <h1>Välkommen!</h1>
+                    <h1>Welcome!</h1>
                     <p>
-                        Coffee Palace – din oas av smak och avkoppling mitt i
-                        stadens hjärta! Vi är ett café som brinner för att ge
-                        våra kunder en upplevelse utöver det vanliga, med
-                        noggrant utvalda kaffesorter och hembakade delikatesser.
+                        Coffee Palace – an oasis of taste and relaxation in the 
+                        heart of the city! We are a café that's passionate about giving
+                        our customers an experience out of the ordinary, with
+                        carefully selected varieties of coffee and home-baked delicacies.
                         <br /> <br />
-                        Hos oss kan du njuta av en avkopplande fika i en mysig
-                        och inspirerande miljö. Vårt sortiment inkluderar allt
-                        från klassiska espresso och cappuccino till mer unika
-                        specialiteter, tillsammans med ett brett utbud av
-                        smörgåsar, bakverk och andra godsaker, allt tillagat med
-                        kärlek och omsorg.
-                        <br /> <br />
+                        With us you can enjoy a relaxing coffee in a cozy
+                        and inspiring environment. Our range includes everything
+                        from classic espresso and cappuccino to more unique ones
+                        specialties, along with a wide range of
+                        sandwiches, pastries and other treats, all prepared with
+                        love and care.
+                        
                     </p>
                 </div>
 
