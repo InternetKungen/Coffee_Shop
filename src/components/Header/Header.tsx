@@ -9,6 +9,7 @@ import ProfileButton from '../ProfileButton/ProfileButton';
 import styles from './Header.module.css';
 import Logo from '../Logo/Logo';
 import FavoritesButton from '../FavoritesButton/FavoritesButton';
+import CartButtonHeader from '../CartButtonHeader/CartButtonHeader';
 
 const Header: React.FC = () => {
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -29,6 +30,7 @@ const Header: React.FC = () => {
             <section className={styles['header__button-container']}>
                 {isUserLoggedIn ? (
                     <>
+                        <CartButtonHeader />
                         <FavoritesButton />
                         <ProfileButton />
                     </>

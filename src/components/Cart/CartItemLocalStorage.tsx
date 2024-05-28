@@ -6,7 +6,7 @@ import {
     updateCartItemQuantity,
     removeCartItem,
     getCartItems,
-} from '../../cartService/cartServiceLocalStorage';
+} from '../../services/cartService/cartServiceLocalStorage';
 import { CartItem as CartItemType } from '../../interface/types';
 
 interface CartItemProps {
@@ -37,9 +37,8 @@ const CartItem: React.FC<CartItemProps> = ({ item, updateCart }) => {
 
     return (
         <div className={styles['cart-item']}>
-            {/* Container for cart item */}
-            {' '}
-            <h2>{item.productName}</h2> {/* Display product name */}
+            {/* Container for cart item */} <h2>{item.productName}</h2>{' '}
+            {/* Display product name */}
             {/* Display product price */}
             <p>Price: ${item.productPrice.toFixed(2)}</p>{' '}
             {/* Container for quantity controls */}
@@ -47,7 +46,6 @@ const CartItem: React.FC<CartItemProps> = ({ item, updateCart }) => {
                 {' '}
                 {/* Button to decrease quantity */}
                 <button onClick={decreaseQuantity}>-</button>{' '}
-
                 <span>{item.quantity}</span> {/* Display current quantity */}
                 {/* Button to increase quantity */}
                 <button onClick={increaseQuantity}>+</button>{' '}

@@ -12,7 +12,7 @@ import {
     addItemToCart,
     updateCartItemQuantity,
     getCartItems,
-} from '../../cartService/cartServiceLocalStorage';
+} from '../../services/cartService/cartServiceLocalStorage';
 import { Product, CartItem } from '../../interface/types';
 
 // Defining the ProductDetail functional component
@@ -54,10 +54,21 @@ const ProductDetail: React.FC = () => {
         return <p>Loading...</p>;
     }
 
+    const handleCartChange = () => {
+        const event = new CustomEvent('cartChange', {
+            detail: getCartItems().reduce(
+                (total, item) => total + item.quantity,
+                0
+            ),
+        });
+        window.dispatchEvent(event);
+    };
+
     // Function to handle adding a product to the cart
     const handleAddToCart = (product: Product) => {
         addItemToCart(product);
         setCartItems(getCartItems());
+        handleCartChange();
     };
 
     // Function to increase quantity of a product in the cart
@@ -71,6 +82,7 @@ const ProductDetail: React.FC = () => {
             addItemToCart(product);
         }
         setCartItems(getCartItems());
+        handleCartChange();
     };
 
     // Function to decrease quantity of a product in the cart
@@ -79,6 +91,7 @@ const ProductDetail: React.FC = () => {
         if (cartItem) {
             updateCartItemQuantity(productId, cartItem.quantity - 1);
             setCartItems(getCartItems());
+            handleCartChange();
         }
     };
 
