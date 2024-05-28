@@ -11,6 +11,7 @@ import {
 } from 'firebase/firestore';
 import useAdminStatus from '../../../hooks/useAdminStatus';
 import styles from './ProductManager.module.css';
+import TitleSection from '../../../components/TitleSection/TitleSection';
 
 interface Product {
     id?: string;
@@ -166,7 +167,7 @@ const ProductManager: React.FC = () => {
 
     return (
         <div className={styles['product-manager']}>
-            <h2>Product Manager</h2>
+            <TitleSection title="Product Manager" />
             <div className={styles['manager-container']}>
                 <div className={styles['form-container']}>
                     <form onSubmit={handleSubmit}>

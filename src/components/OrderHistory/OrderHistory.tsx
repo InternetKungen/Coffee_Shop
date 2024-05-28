@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './OrderHistory.module.css';
 import { Order } from '../../interface/types';
 import { onAuthStateChanged } from 'firebase/auth';
+import TitleSection from '../TitleSection/TitleSection';
 
 const OrderHistory: React.FC = () => {
     const [orders, setOrders] = useState<Order[]>([]);
@@ -45,7 +46,7 @@ const OrderHistory: React.FC = () => {
 
     return (
         <div className={styles['order-history-page']}>
-            <h1>Order History</h1>
+            <TitleSection title="Order History" />
             {orders.length === 0 ? (
                 <p>No orders found.</p>
             ) : (

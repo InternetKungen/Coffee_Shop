@@ -10,6 +10,7 @@ import {
 import CartItemComponent from './CartItemLocalStorage';
 import { CartItem } from '../../interface/types';
 import styles from './CartLocalStorage.module.css';
+import TitleSection from '../TitleSection/TitleSection';
 
 // Cart functional component
 const Cart: React.FC = () => {
@@ -35,7 +36,7 @@ const Cart: React.FC = () => {
     // Rendering JSX for the cart component
     return (
         <div className={styles['cart-page']}>
-            <h1>Shopping Cart</h1>
+            <TitleSection title="Shopping Cart" />
             {/* Rendering based on whether cart has items or not */}
             {cartItems.length > 0 ? (
                 // If cart has items, render cart items list

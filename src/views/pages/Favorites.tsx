@@ -1,11 +1,12 @@
 // Favorites.tsx
 import React from 'react';
 import FavoritesList from '../../components/FavoritesList/FavoritesList';
+import TitleSection from '../../components/TitleSection/TitleSection';
 
 const Favorites: React.FC = () => {
     return (
         <div>
-            <h2>Your Favorites</h2>
+            <TitleSection title="Your Favorites" />
             <FavoritesList />
         </div>
     );
