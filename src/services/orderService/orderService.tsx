@@ -1,7 +1,7 @@
 // orderService.ts
 
 // Importing the Firestore database instance and authentication module from the main file
-import { db, auth } from '../main';
+import { db, auth } from '../../main';
 
 // Importing necessary functions from Firestore library
 import {
@@ -14,7 +14,7 @@ import {
 } from 'firebase/firestore';
 
 // Importing the Order interface from types
-import { Order } from '../interface/types';
+import { Order } from '../../interface/types';
 
 // Function to create an order asynchronously
 export const createOrder = async (order: Order) => {

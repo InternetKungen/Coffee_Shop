@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import {
     getCartItems,
     clearCart,
-} from '../../cartService/cartServiceLocalStorage';
-import { createOrder } from '../../orderService/orderService';
+} from '../../services/cartService/cartServiceLocalStorage';
+import { createOrder } from '../../services/orderService/orderService';
 import { useNavigate } from 'react-router-dom';
 import { auth, db } from '../../main';
 import { doc, getDoc } from 'firebase/firestore';

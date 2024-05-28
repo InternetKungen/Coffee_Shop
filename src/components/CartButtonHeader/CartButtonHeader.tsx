@@ -23,7 +23,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './CartButtonHeader.module.css';
 import cartIcon from '../../assets/img/shopping-cart.png';
-import { getCartItems } from '../../cartService/cartServiceLocalStorage';
+import { getCartItems } from '../../services/cartService/cartServiceLocalStorage';
 
 const CartButtonHeader: React.FC = () => {
     const [cartItemCount, setCartItemCount] = useState(0);

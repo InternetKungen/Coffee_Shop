@@ -8,7 +8,7 @@ import {
     addItemToCart,
     updateCartItemQuantity,
     getCartItems,
-} from '../../cartService/cartServiceLocalStorage';
+} from '../../services/cartService/cartServiceLocalStorage';
 import { Product, CartItem } from '../../interface/types';
 import AddToFavoritesButton from '../AddToFavoritesButton/AddToFavoritesButton';
 import TitleSection from '../TitleSection/TitleSection';

@@ -1,7 +1,7 @@
-import { db } from '../.././src/main';
+import { db } from '../../main';
 import { doc, getDoc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
-import { Product, CartItem } from '../interface/interface';
-import { handleError } from '../utils/errorHandler';
+import { Product, CartItem } from '../../interface/interface';
+import { handleError } from '../../utils/errorHandler';
 
 export async function addItemToCart(productId: string) {
     try {

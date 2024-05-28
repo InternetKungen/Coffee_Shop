@@ -1,7 +1,7 @@
 // cartService.ts
 
 // Importing necessary interfaces
-import { CartItem, Product } from '../interface/types';
+import { CartItem, Product } from '../../interface/types';
 
 // Key for storing cart data in localStorage
 const CART_KEY = 'shoppingCart';

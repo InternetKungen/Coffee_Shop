@@ -12,7 +12,7 @@ import {
     addItemToCart,
     updateCartItemQuantity,
     getCartItems,
-} from '../../cartService/cartServiceLocalStorage';
+} from '../../services/cartService/cartServiceLocalStorage';
 import { Product, CartItem } from '../../interface/types';
 
 // Defining the ProductDetail functional component

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import {
     getCartItems, // Function to retrieve cart items from local storage
     clearCart, // Function to clear the cart in local storage
-} from '../../cartService/cartServiceLocalStorage';
+} from '../../services/cartService/cartServiceLocalStorage';
 import CartItemComponent from './CartItemLocalStorage';
 import { CartItem } from '../../interface/types';
 import styles from './Cart.module.css';
