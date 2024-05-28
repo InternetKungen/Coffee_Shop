@@ -30,6 +30,20 @@ body {
     place-items: center;
     min-width: 320px;
     min-height: 100vh;
+    max-width: 100wv;
+    overflow-x: hidden;
+}
+
+header,
+main,
+footer {
+    display: flex;
+}
+
+main {
+    margin-top: 80px;
+    min-height: calc(100vh - (80px + 174px));
+    justify-content: center;
 }
 
 h1 {
