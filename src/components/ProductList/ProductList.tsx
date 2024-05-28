@@ -11,6 +11,7 @@ import {
 } from '../../cartService/cartServiceLocalStorage';
 import { Product, CartItem } from '../../interface/types';
 import AddToFavoritesButton from '../AddToFavoritesButton/AddToFavoritesButton';
+import TitleSection from '../TitleSection/TitleSection';
 
 // ProductList function component
 const ProductList: React.FC = () => {
@@ -69,7 +70,6 @@ const ProductList: React.FC = () => {
                 setCartItems(getCartItems());
             }
         }
-
     };
 
     // Function to decrease the quantity of a product in the cart
@@ -87,12 +87,10 @@ const ProductList: React.FC = () => {
         return cartItem ? cartItem.quantity : 0;
     };
 
-
-
     // Rendering the Product List component
     return (
         <div className={styles['product-list-page']}>
-            <h1>Product List</h1>
+            <TitleSection title="Menu" />
             <div className={styles['products-list-div']}>
                 {/* Mapping over the products array to render each product */}
                 {products.map((product) => (

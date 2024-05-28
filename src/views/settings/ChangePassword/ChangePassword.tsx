@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { auth } from '../../../main';
 import { updatePassword } from 'firebase/auth';
 import styles from './ChangePassword.module.css';
+import TitleSection from '../../../components/TitleSection/TitleSection';
 
 const ChangePassword: React.FC = () => {
     const [newPassword, setNewPassword] = useState('');
@@ -36,7 +37,7 @@ const ChangePassword: React.FC = () => {
 
     return (
         <div className={styles['change-password-container']}>
-            <h2>Change Password</h2>
+            <TitleSection title="Change Password" />
             {error && <p className={styles['error-message']}>{error}</p>}
             {success && <p className={styles['success-message']}>{success}</p>}
             <label>

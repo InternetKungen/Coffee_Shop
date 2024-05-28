@@ -6,6 +6,7 @@ import useAdminStatus from '../../../hooks/useAdminStatus';
 import AdminCheckbox from '../../../components/admin/AdminCheckbox/AdminCheckbox';
 import styles from './ProfileManager.module.css';
 import NotificationPopUp from '../../../components/NotificationPopUp/NotificationPopUp';
+import TitleSection from '../../../components/TitleSection/TitleSection';
 
 interface UserProfile {
     uid: string;
@@ -111,7 +112,7 @@ const ProfileManager: React.FC = () => {
 
     return (
         <div className={styles['profile-manager-wrapper']}>
-            <h2>Profile Manager</h2>
+            <TitleSection title="Profile Manager" />
 
             <div className={styles['profile-manager']}>
                 <section className={styles['profile-list-container']}>
