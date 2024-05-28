@@ -110,6 +110,14 @@ const Order: React.FC = () => {
 
     // Function to handle order submission
     const handleSubmitOrder = async () => {
+
+        if (cartItems.length === 0) {
+            setErrors([
+                'Your cart is empty. Please add products to your cart before placing an order.',
+            ]);
+            return;
+        }
+        
         if (!validateAddress()) return;
 
         try {

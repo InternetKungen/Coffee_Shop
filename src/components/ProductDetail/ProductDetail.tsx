@@ -54,31 +54,52 @@ const ProductDetail: React.FC = () => {
         return <p>Loading...</p>;
     }
 
-    // Function to handle adding a product to the cart
+    // Function to add a product to the cart
     const handleAddToCart = (product: Product) => {
-        addItemToCart(product);
-        setCartItems(getCartItems());
+        const cartItem = cartItems.find(
+            (item) => item.productId === product.id
+        );
+        if (cartItem) {
+            if (product.quantity > cartItem.quantity) {
+                // Check if there's enough stock
+                updateCartItemQuantity(product.id, cartItem.quantity + 1); // Update quantity in local storage
+                setCartItems(getCartItems());
+            }
+        } else {
+            if (product.quantity > 0) {
+                // Check if there's enough stock
+                addItemToCart(product); // Add new item to local storage
+                setCartItems(getCartItems());
+            }
+        }
     };
 
-    // Function to increase quantity of a product in the cart
+    // Function to increase the quantity of a product in the cart
     const increaseQuantity = (product: Product) => {
         const cartItem = cartItems.find(
             (item) => item.productId === product.id
         );
         if (cartItem) {
-            updateCartItemQuantity(product.id, cartItem.quantity + 1);
+            if (product.quantity > cartItem.quantity) {
+                // Check if there's enough stock
+                updateCartItemQuantity(product.id, cartItem.quantity + 1); // Update quantity in local storage
+                setCartItems(getCartItems());
+            }
         } else {
-            addItemToCart(product);
+            if (product.quantity > 0) {
+                // Check if there's enough stock
+                addItemToCart(product); // Add new item to local storage
+                setCartItems(getCartItems());
+            }
         }
-        setCartItems(getCartItems());
     };
 
-    // Function to decrease quantity of a product in the cart
+    // Function to decrease the quantity of a product in the cart
     const decreaseQuantity = (productId: string) => {
         const cartItem = cartItems.find((item) => item.productId === productId);
         if (cartItem) {
-            updateCartItemQuantity(productId, cartItem.quantity - 1);
-            setCartItems(getCartItems());
+            updateCartItemQuantity(productId, cartItem.quantity - 1); // Update quantity in local storage
+            setCartItems(getCartItems()); // Update the cart items state
         }
     };
 
@@ -88,6 +109,13 @@ const ProductDetail: React.FC = () => {
         return cartItem ? cartItem.quantity : 0;
     };
 
+    // Function to handle image error
+    const handleImageError = (
+        event: React.SyntheticEvent<HTMLImageElement>
+    ) => {
+        event.currentTarget.src = 'src/assets/product-img/placeholder.jpg';
+    };
+
     // Rendering the product details section
     return (
         <section className={styles['product-detail']}>
@@ -95,11 +123,14 @@ const ProductDetail: React.FC = () => {
             <img
                 src={`src/assets/product-img/${product.imageUrl}`}
                 alt={product.name}
+                onError={handleImageError}
+                className={styles['product-image']}
             />
             <div>
                 {/* Displaying product details */}
                 <h1>{product.name}</h1>
                 <p>Price: ${product.price.toFixed(2)}</p>
+                <p>Stock Quantity: {product.quantity}</p>
                 <p>{product.description}</p>
                 {/* Conditional rendering based on product availability */}
                 {product.quantity > 0 ? (

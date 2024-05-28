@@ -11,6 +11,14 @@ import {
 } from '../../cartService/cartServiceLocalStorage';
 import { Product, CartItem } from '../../interface/types';
 
+// Utility function to truncate text
+const truncateText = (text: string, maxLength: number) => {
+    if (text.length <= maxLength) {
+        return text;
+    }
+    return text.substring(0, maxLength) + '...';
+};
+
 // ProductList function component
 const ProductList: React.FC = () => {
     // State to store the list of products and cart items
@@ -45,8 +53,22 @@ const ProductList: React.FC = () => {
 
     // Function to add a product to the cart
     const handleAddToCart = (product: Product) => {
-        addItemToCart(product); // Add the product to local storage
-        setCartItems(getCartItems()); // Update the cart items state
+        const cartItem = cartItems.find(
+            (item) => item.productId === product.id
+        );
+        if (cartItem) {
+            if (product.quantity > cartItem.quantity) {
+                // Check if there's enough stock
+                updateCartItemQuantity(product.id, cartItem.quantity + 1); // Update quantity in local storage
+                setCartItems(getCartItems());
+            }
+        } else {
+            if (product.quantity > 0) {
+                // Check if there's enough stock
+                addItemToCart(product); // Add new item to local storage
+                setCartItems(getCartItems());
+            }
+        }
     };
 
     // Function to increase the quantity of a product in the cart
@@ -67,7 +89,6 @@ const ProductList: React.FC = () => {
                 setCartItems(getCartItems());
             }
         }
-
     };
 
     // Function to decrease the quantity of a product in the cart
@@ -85,7 +106,12 @@ const ProductList: React.FC = () => {
         return cartItem ? cartItem.quantity : 0;
     };
 
-
+    // Function to handle image error
+    const handleImageError = (
+        event: React.SyntheticEvent<HTMLImageElement>
+    ) => {
+        event.currentTarget.src = 'src/assets/product-img/placeholder.jpg';
+    };
 
     // Rendering the Product List component
     return (
@@ -102,11 +128,13 @@ const ProductList: React.FC = () => {
                         <img
                             src={`src/assets/product-img/${product.imageUrl}`}
                             alt={product.name}
+                            onError={handleImageError}
                             className={styles['product-image']}
                         />
                         {/* Displaying product price with 2 decimal places */}
                         <p>Price: ${product.price.toFixed(2)}</p>
-                        <p>{product.description}</p>
+                        {/* Limited description */}
+                        <p>{truncateText(product.description, 120)}</p>{' '}
                         {/* Link to view individual product details */}
                         <Link to={`/products/${product.id}`}>
                             <button>View Product</button>

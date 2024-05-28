@@ -36,12 +36,13 @@
 } */
 
 .product-image {
-    width: auto;
+    width: 1000px;
     height: auto;
     max-width: 320px;
     min-width: 100px;
     display: block;
     margin-top: 10px;
+
 }
 
 /* Media query for larger screens */
