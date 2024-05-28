@@ -1,0 +1,15 @@
+aside {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    position: relative;
+}
+
+aside section {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    position: fixed;
+    top: 100px;
+    left: 20px;
+}

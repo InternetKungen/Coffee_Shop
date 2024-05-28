@@ -47,7 +47,8 @@
     flex-direction: column;
     gap: 2px;
     overflow-y: auto;
-    height: 70vh;
+    height: 800px;
+    padding-bottom: 10px;
 }
 
 .product-item {
@@ -60,7 +61,7 @@
     align-items: center;
     cursor: pointer;
     position: relative;
-    height: 40px;
+    min-height: 40px;
     overflow: hidden;
 }
 
@@ -114,6 +115,7 @@
     border-right: 1px solid #534949;
     padding-bottom: 0px;
     margin-bottom: 0px;
+    font-size: 1em;
 }
 
 .product-list-header > p:last-child {
