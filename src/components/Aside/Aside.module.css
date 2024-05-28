@@ -1,15 +1,28 @@
+@import url("./../../assets/css/shared-variables.css");
 aside {
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: var(--aside-width);
     position: relative;
+    padding: 10px;
 }
 
 aside section {
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: var(--aside-width);
     position: fixed;
     top: 100px;
     left: 20px;
+}
+
+aside > section > button {
+    width: 70%;
+    margin: 0;
+    height: 80px;
+    border-bottom: 1px solid #9b9b9b;
+    border-top: 1px solid #cecece;
+    border-right: 0;
+    border-radius: 10px 0 0 10px;
+    background: linear-gradient(90deg, #ffffff, #e0d28c83, transparent);
 }

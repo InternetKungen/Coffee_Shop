@@ -67,9 +67,11 @@ const NavMenu: React.FC = () => {
             <nav className={isOpen ? styles.open : ''} ref={navRef}>
                 {isOpen && (
                     <ul>
-                        <button>
-                            <img src={searchImg} alt="Search Button" />
-                        </button>
+                        <li>
+                            <button>
+                                <img src={searchImg} alt="Search Button" />
+                            </button>
+                        </li>
                         <li>
                             <Link to="/" onClick={toggleMenu}>
                                 Home

@@ -1,29 +1,50 @@
 /* ProductList.module.css */
-
+@import url("./../../assets/css/shared-variables.css");
 .product-list-page {
     /* display: inline; */
+    position: relative;
+    width: calc(100vw - var(--aside-width));
+    display: block;
 }
 
 .products-list-div {
     /* display: inline-flex; */
     /* margin-top: 800px; */
-    padding: 1rem;
+    /* padding: 1rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    grid-gap: 1rem;
+    grid-gap: 1rem; */
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
 
     /* Add padding/margin for larger screens */
     margin: 0 auto;
-    max-width: 1600px; /* Optional: Set a max width for the container */
+    max-width: calc(
+        100wv - 300px
+    ); /* Optional: Set a max width for the container */
 }
 
 .product-list-item {
     position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     padding: 1rem;
     border: 2px solid white;
+    flex: 1;
+    min-width: 300px;
+}
+
+.product-list-item > p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Max antal rader */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .product-image {
