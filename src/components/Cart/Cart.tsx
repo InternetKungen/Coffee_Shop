@@ -1,4 +1,4 @@
-// CartLocalStorage.tsx
+// WAS CartLocalStorage.tsx --> NOW Cart.tsx
 // This component is used on the shopping cart page where users can view and manage their cart items.
 
 import React, { useState } from 'react';
@@ -9,7 +9,7 @@ import {
 } from '../../cartService/cartServiceLocalStorage';
 import CartItemComponent from './CartItemLocalStorage';
 import { CartItem } from '../../interface/types';
-import styles from './CartLocalStorage.module.css';
+import styles from './Cart.module.css';
 import TitleSection from '../TitleSection/TitleSection';
 
 // Cart functional component

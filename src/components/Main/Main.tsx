@@ -18,7 +18,7 @@ import ProtectedRoute from '../ProtectedRoutes/ProtectedRoutes';
 import ProfileManager from '../../views/admin/ProfileManager/ProfileManager';
 import ProductManager from '../../views/admin/ProductManager/ProductManager';
 
-import Cart from '../KundVagn/CartLocalStorage';
+import Cart from '../Cart/Cart';
 import OrderPage from '../../views/pages/OrderPage';
 import OrderSuccessPage from '../../views/pages/OrderSuccessPage';
 

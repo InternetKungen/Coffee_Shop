@@ -199,6 +199,7 @@ const Order: React.FC = () => {
                 <select
                     value={paymentMethod}
                     onChange={(e) => setPaymentMethod(e.target.value)}
+                    aria-label="Payment Method"
                 >
                     <option value="Credit Card">Credit Card</option>
                     <option value="PayPal">PayPal</option>

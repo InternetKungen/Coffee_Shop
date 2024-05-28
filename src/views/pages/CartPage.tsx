@@ -1,6 +1,6 @@
 // CartPage.tsx
 import React from 'react';
-import Cart from '../../components/KundVagn/CartLocalStorage';
+import Cart from '../../components/Cart/Cart';
 
 const CartPage: React.FC = () => {
     return (

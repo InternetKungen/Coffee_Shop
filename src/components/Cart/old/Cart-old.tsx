@@ -4,8 +4,8 @@ import {
     updateCartItemQuantity,
     removeCartItem,
     getCartItems,
-} from '../../cartService/cartService';
-import { CartItem } from '../../interface/interface';
+} from '../../../cartService/cartService';
+import { CartItem } from '../../../interface/interface';
 
 interface CartProps {
     item: CartItem;
