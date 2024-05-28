@@ -17,15 +17,27 @@ const Cart: React.FC = () => {
     const [cartItems, setCartItems] = useState<CartItem[]>(getCartItems()); // State for storing cart items
     const navigate = useNavigate(); // Hook for navigating to other pages
 
+    const handleCartChange = () => {
+        const event = new CustomEvent('cartChange', {
+            detail: getCartItems().reduce(
+                (total, item) => total + item.quantity,
+                0
+            ),
+        });
+        window.dispatchEvent(event);
+    };
+
     // Function to update cart items from local storage
     const updateCart = () => {
         setCartItems(getCartItems());
+        handleCartChange();
     };
 
     // Function to handle clearing the cart
     const handleClearCart = () => {
         clearCart(); // Clearing cart items from local storage
         setCartItems([]); // Resetting cart items state to empty array
+        handleCartChange();
     };
 
     // Function to handle checkout button click, navigates to the order page

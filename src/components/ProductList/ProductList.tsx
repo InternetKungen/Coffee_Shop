@@ -1,4 +1,4 @@
-// ProductList.tsx
+//ProductList.tsx
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
@@ -44,12 +44,22 @@ const ProductList: React.FC = () => {
 
         // Call the fetchProducts function to fetch the data when component mounts
         fetchProducts();
-    }, []); // Empty dependency array ensures this runs only once when the component mounts
+    }, []);
 
-    // Function to add a product to the cart
+    const handleCartChange = () => {
+        const event = new CustomEvent('cartChange', {
+            detail: getCartItems().reduce(
+                (total, item) => total + item.quantity,
+                0
+            ),
+        });
+        window.dispatchEvent(event);
+    };
+
     const handleAddToCart = (product: Product) => {
-        addItemToCart(product); // Add the product to local storage
-        setCartItems(getCartItems()); // Update the cart items state
+        addItemToCart(product);
+        setCartItems(getCartItems());
+        handleCartChange();
     };
 
     // Function to increase the quantity of a product in the cart
@@ -59,15 +69,15 @@ const ProductList: React.FC = () => {
         );
         if (cartItem) {
             if (product.quantity > cartItem.quantity) {
-                // Check if there's enough stock
-                updateCartItemQuantity(product.id, cartItem.quantity + 1); // Update quantity in local storage
+                updateCartItemQuantity(product.id, cartItem.quantity + 1);
                 setCartItems(getCartItems());
+                handleCartChange();
             }
         } else {
             if (product.quantity > 0) {
-                // Check if there's enough stock
-                addItemToCart(product); // Add new item to local storage
+                addItemToCart(product);
                 setCartItems(getCartItems());
+                handleCartChange();
             }
         }
     };
@@ -76,8 +86,9 @@ const ProductList: React.FC = () => {
     const decreaseQuantity = (productId: string) => {
         const cartItem = cartItems.find((item) => item.productId === productId);
         if (cartItem) {
-            updateCartItemQuantity(productId, cartItem.quantity - 1); // Update quantity in local storage
-            setCartItems(getCartItems()); // Update the cart items state
+            updateCartItemQuantity(productId, cartItem.quantity - 1);
+            setCartItems(getCartItems());
+            handleCartChange();
         }
     };
 
