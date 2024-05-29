@@ -1,7 +1,17 @@
+//NavMenu.tsx
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './NavMenu.module.css';
 import searchImg from '../../assets/img/search-01.png';
+import allProductsIcon from './../../assets/img/all.png';
+import coffeeIcon from './../../assets/img/coffee.png';
+import foodIcon from './../../assets/img/food.png';
+import pastryIcon from './../../assets/img/pastry.png';
+import teaIcon from './../../assets/img/tea-cup.png';
+import hotDrinksIcon from './../../assets/img/hot-drinks.png';
+import coldDrinksIcon from './../../assets/img/cold-drinks.png';
+import downIcon from './../../assets/img/down.png';
+import upIcon from './../../assets/img/up.png';
 
 const NavMenu: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -55,7 +65,7 @@ const NavMenu: React.FC = () => {
                 ref={menuRef}
                 className={
                     isOpen
-                        ? styles['hamburger-menu'] + ' ' + styles.open
+                        ? `${styles['hamburger-menu']} ${styles.open}`
                         : styles['hamburger-menu']
                 }
                 onClick={toggleMenu}
@@ -83,11 +93,6 @@ const NavMenu: React.FC = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/products" onClick={toggleMenu}>
-                                Product List
-                            </Link>
-                        </li>
-                        <li>
                             <div className={styles['nav-menu-menu']}>
                                 <Link to="/menu" onClick={toggleMenu}>
                                     Menu
@@ -96,61 +101,66 @@ const NavMenu: React.FC = () => {
                                     className={styles['nav-menu-menu__button']}
                                     onClick={toggleSubMenu}
                                 >
-                                    {isSubMenuOpen ? '-' : '+'}
+                                    {isSubMenuOpen ? (
+                                        <img src={upIcon} alt="up-icon" />
+                                    ) : (
+                                        <img src={downIcon} alt="down-icon" />
+                                    )}
                                 </div>
                             </div>
-                            {isSubMenuOpen && (
-                                <ul
-                                    className={
-                                        styles['nav-menu-menu__sub-menu']
+                            <ul
+                                className={
+                                    isSubMenuOpen
+                                        ? `${styles['nav-menu-menu__sub-menu']} ${styles.open}`
+                                        : styles['nav-menu-menu__sub-menu']
+                                }
+                            >
+                                <li onClick={() => handleSortChange('')}>
+                                    <img
+                                        src={allProductsIcon}
+                                        alt="all-products-icon"
+                                    />
+                                    Show all products
+                                </li>
+                                <li onClick={() => handleSortChange('Coffee')}>
+                                    <img src={coffeeIcon} alt="coffee-icon" />
+                                    Coffee
+                                </li>
+                                <li onClick={() => handleSortChange('Food')}>
+                                    <img src={foodIcon} alt="food-icon" />
+                                    Food
+                                </li>
+                                <li onClick={() => handleSortChange('Pastry')}>
+                                    <img src={pastryIcon} alt="pastry-icon" />
+                                    Pastry
+                                </li>
+                                <li onClick={() => handleSortChange('Tea')}>
+                                    <img src={teaIcon} alt="tea-icon" />
+                                    Chai Tea
+                                </li>
+                                <li
+                                    onClick={() =>
+                                        handleSortChange('Hot Drinks')
                                     }
                                 >
-                                    <li onClick={() => handleSortChange('')}>
-                                        Show all products
-                                    </li>
-                                    <li
-                                        onClick={() =>
-                                            handleSortChange('Coffee')
-                                        }
-                                    >
-                                        Coffee
-                                    </li>
-                                    <li
-                                        onClick={() => handleSortChange('Food')}
-                                    >
-                                        Food
-                                    </li>
-                                    <li
-                                        onClick={() =>
-                                            handleSortChange('Pastry')
-                                        }
-                                    >
-                                        Pastry
-                                    </li>
-                                    <li onClick={() => handleSortChange('Tea')}>
-                                        Chai Tea
-                                    </li>
-                                    <li
-                                        onClick={() =>
-                                            handleSortChange('Hot Drinks')
-                                        }
-                                    >
-                                        Hot Drinks
-                                    </li>
-                                    <li
-                                        onClick={() =>
-                                            handleSortChange('Cold Drinks')
-                                        }
-                                    >
-                                        Cold Drinks
-                                    </li>
-                                </ul>
-                            )}
-                        </li>
-                        <li>
-                            <Link to="/cart" onClick={toggleMenu}>
-                                Cart
-                            </Link>
+                                    <img
+                                        src={hotDrinksIcon}
+                                        alt="hot-drinks-icon"
+                                    />
+                                    Hot Drinks
+                                </li>
+                                <li
+                                    onClick={() =>
+                                        handleSortChange('Cold Drinks')
+                                    }
+                                >
+                                    <img
+                                        src={coldDrinksIcon}
+                                        alt="cold-drinks-icon"
+                                    />
+                                    Cold Drinks
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 )}

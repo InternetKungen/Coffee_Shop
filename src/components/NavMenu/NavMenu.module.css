@@ -1,4 +1,4 @@
-@import url("../../assets/css/shared-variables.css");
+/* @import url("../../assets/css/shared-variables.css"); */
 
 .hamburger-menu {
     margin-left: 20px;
@@ -72,11 +72,47 @@ nav ul li a:hover {
     right: 20px;
 }
 
+.nav-menu-menu__button img {
+    height: 28px;
+    width: auto;
+}
+
 .nav-menu-menu__sub-menu {
     list-style-type: none;
-    padding-left: calc((var(--nav-menu-width) / 2));
+    /* padding-left: 20%; */
     text-align: left;
+    overflow: hidden;
+    transform-origin: top;
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+    opacity: 0;
+    position: absolute;
+    left: 23%;
+    margin-top: 10px;
+    padding-top: 0;
+    height: -moz-fit-content;
+    height: fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    color: #000;
 }
+
+.nav-menu-menu__sub-menu.open {
+    transform: scaleY(1);
+    max-height: 500px; /* Justera detta värde efter behov */
+    opacity: 1;
+}
+
+.nav-menu-menu__sub-menu li {
+    padding: 0.5rem 0;
+}
+
+.nav-menu-menu__sub-menu > li > img {
+    height: 25px;
+    width: auto;
+    margin-right: 10px;
+}
+
 .line {
     width: 93%;
     height: 3px;

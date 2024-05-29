@@ -76,6 +76,7 @@ aside > section > button > img {
         display: flex;
         flex-direction: row;
         width: 100%;
+        height: -moz-fit-content;
         height: fit-content;
         position: fixed;
         top: 50px;
