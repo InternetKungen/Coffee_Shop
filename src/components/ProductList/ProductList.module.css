@@ -34,9 +34,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    border: 2px solid white;
+    border: 2px solid #967559;
+    border-radius: 4px;
+    box-shadow: 0 0 10px #e0d28c2c;
     flex: 1;
     min-width: 300px;
+    background: linear-gradient(180deg, #2d2828, transparent);
 }
 
 .product-list-item > p {
@@ -54,6 +57,8 @@
     min-width: 100px;
     display: block;
     margin-top: 10px;
+    border-radius: 2px;
+    outline: 2px solid #2d2828;
 }
 
 .favorite-icon-container {

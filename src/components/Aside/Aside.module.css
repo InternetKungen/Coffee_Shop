@@ -13,16 +13,26 @@ aside section {
     width: var(--aside-width);
     position: fixed;
     top: 100px;
-    left: 20px;
+    left: 0px;
 }
 
 aside > section > button {
-    width: 70%;
+    width: 90%;
     margin: 0;
     height: 80px;
-    border-bottom: 1px solid #9b9b9b;
-    border-top: 1px solid #cecece;
-    border-right: 0;
-    border-radius: 10px 0 0 10px;
-    background: linear-gradient(90deg, #ffffff, #e0d28c83, transparent);
+    border-bottom: 1px solid #57483bc2;
+    border-top: 1px solid #967559;
+    border-left: 0;
+    border-radius: 0px 10px 10px 0px;
+    background: linear-gradient(90deg, transparent, #2d2828);
+    margin-bottom: 4px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+aside > section > button > img {
+    height: 26px;
+    width: auto;
 }
