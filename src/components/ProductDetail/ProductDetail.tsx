@@ -41,6 +41,7 @@ const ProductDetail: React.FC = () => {
                         description: productSnap.data().description,
                         imageUrl: productSnap.data().imageUrl,
                         quantity: Number(productSnap.data().quantity), // product quantity
+                        category: productSnap.data().category,
                     });
                 }
             }

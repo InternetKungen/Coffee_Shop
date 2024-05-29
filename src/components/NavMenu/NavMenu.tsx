@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './NavMenu.module.css';
 import searchImg from '../../assets/img/search-01.png';
 
@@ -8,6 +8,7 @@ const NavMenu: React.FC = () => {
     const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
     const navRef = useRef<HTMLDivElement>(null);
     const menuRef = useRef<HTMLDivElement>(null);
+    const navigate = useNavigate();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -42,6 +43,12 @@ const NavMenu: React.FC = () => {
         };
     }, []);
 
+    const handleSortChange = (order: string) => {
+        navigate(`/menu?sortOrder=${order}`);
+        setIsOpen(false);
+        setIsSubMenuOpen(false);
+    };
+
     return (
         <>
             <div
@@ -60,9 +67,11 @@ const NavMenu: React.FC = () => {
             <nav className={isOpen ? styles.open : ''} ref={navRef}>
                 {isOpen && (
                     <ul>
-                        <button>
-                            <img src={searchImg} alt="Search Button" />
-                        </button>
+                        <li>
+                            <button>
+                                <img src={searchImg} alt="Search Button" />
+                            </button>
+                        </li>
                         <li>
                             <Link to="/" onClick={toggleMenu}>
                                 Home
@@ -73,7 +82,6 @@ const NavMenu: React.FC = () => {
                                 About
                             </Link>
                         </li>
-                        {/* Add meny link to Products page ProductListPage.tsx */}
                         <li>
                             <Link to="/products" onClick={toggleMenu}>
                                 Product List
@@ -97,18 +105,50 @@ const NavMenu: React.FC = () => {
                                         styles['nav-menu-menu__sub-menu']
                                     }
                                 >
-                                    <li>Hela sortimentet</li>
-                                    <li>Kaffe</li>
-                                    <li>Mat</li>
-                                    <li>Fika</li>
-                                    <li>Te</li>
-                                    <li>Varma drycker</li>
-                                    <li>Kalla drycker</li>
+                                    <li onClick={() => handleSortChange('')}>
+                                        Show all products
+                                    </li>
+                                    <li
+                                        onClick={() =>
+                                            handleSortChange('Coffee')
+                                        }
+                                    >
+                                        Coffee
+                                    </li>
+                                    <li
+                                        onClick={() => handleSortChange('Food')}
+                                    >
+                                        Food
+                                    </li>
+                                    <li
+                                        onClick={() =>
+                                            handleSortChange('Pastry')
+                                        }
+                                    >
+                                        Pastry
+                                    </li>
+                                    <li onClick={() => handleSortChange('Tea')}>
+                                        Chai Tea
+                                    </li>
+                                    <li
+                                        onClick={() =>
+                                            handleSortChange('Hot Drinks')
+                                        }
+                                    >
+                                        Hot Drinks
+                                    </li>
+                                    <li
+                                        onClick={() =>
+                                            handleSortChange('Cold Drinks')
+                                        }
+                                    >
+                                        Cold Drinks
+                                    </li>
                                 </ul>
                             )}
                         </li>
                         <li>
-                            <Link to="/Cart" onClick={toggleMenu}>
+                            <Link to="/cart" onClick={toggleMenu}>
                                 Cart
                             </Link>
                         </li>

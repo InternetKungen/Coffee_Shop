@@ -1,0 +1,59 @@
+@import url("./../../assets/css/shared-variables.css");
+aside {
+    display: flex;
+    flex-direction: column;
+    width: var(--aside-width);
+    position: relative;
+    padding: 10px;
+}
+
+aside section {
+    display: flex;
+    flex-direction: column;
+    width: var(--aside-width);
+    position: fixed;
+    top: 100px;
+    left: 0px;
+    perspective: 4000px;
+    overflow: hidden;
+}
+
+aside > section > button {
+    width: 90%;
+    margin: 0;
+    height: 80px;
+    border-bottom: 1px solid #57483bc2;
+    border-top: 1px solid #967559;
+    border-left: 0;
+    border-radius: 0px 10px 10px 0px;
+    background: linear-gradient(90deg, transparent, #2d2828);
+    margin-bottom: 4px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.1s;
+    transform-origin: left center;
+}
+
+aside > section > button:hover {
+    background: linear-gradient(90deg, transparent, #3f3838);
+    border-top: 1px solid #f8f1cc;
+    border-right: 1px solid #948f79;
+    border-bottom: 1px solid #413f35;
+    border-left: none;
+    outline: none;
+}
+
+aside > section > button:active {
+    outline: none;
+    transform: rotateY(10deg);
+}
+
+aside > section > button:focus {
+    outline: none;
+}
+aside > section > button > img {
+    height: 26px;
+    width: auto;
+}

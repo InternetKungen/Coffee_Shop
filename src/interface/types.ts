@@ -16,6 +16,7 @@ export interface Product {
     description: string; // Description of the product
     imageUrl: string; // URL to the product image
     quantity: number; // Quantity available in stock
+    category: string;
 }
 
 // Interface for an order
