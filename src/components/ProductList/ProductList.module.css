@@ -34,7 +34,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    border: 2px solid #967559;
+    border: 1px solid #967559;
+    border-top: 2px solid #b68e6b;
+    border-bottom: 2px solid #5f4a38;
     border-radius: 4px;
     box-shadow: 0 0 10px #e0d28c2c;
     flex: 1;

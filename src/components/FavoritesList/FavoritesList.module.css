@@ -20,16 +20,20 @@
 }
 
 .favorites-list-item {
+    position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    justify-content: space-between; /* Fördela utrymmet jämnt */
     padding: 1rem;
-    border: 2px solid white;
-    flex: 1; /* Se till att alla items är lika höga */
-    width: 100%; /* Se till att de fyller hela länken */
-    box-sizing: border-box; /* Inkludera padding och border i elementets totala storlek */
-    position: relative; /* För positioneringen av ikonen */
+    border: 1px solid #967559;
+    border-top: 2px solid #b68e6b;
+    border-bottom: 2px solid #5f4a38;
+    border-radius: 4px;
+    box-shadow: 0 0 10px #e0d28c2c;
+    flex: 1;
+    min-width: 300px;
+    background: linear-gradient(180deg, #2d2828, transparent);
 }
 
 .favorites-list-item h2 {
