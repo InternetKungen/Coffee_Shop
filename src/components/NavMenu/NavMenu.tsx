@@ -120,7 +120,7 @@ const NavMenu: React.FC = () => {
                                         src={allProductsIcon}
                                         alt="all-products-icon"
                                     />
-                                    Show all products
+                                    Show All Products
                                 </li>
                                 <li onClick={() => handleSortChange('Coffee')}>
                                     <img src={coffeeIcon} alt="coffee-icon" />
