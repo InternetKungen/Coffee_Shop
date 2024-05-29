@@ -12,13 +12,19 @@ import styles from './CartLocalStorage.module.css';
 // Import getProductById at the top of your file
 import { getProductById } from './cartService'; // Adjust the path as necessary
 
+// The main Cart component
 const Cart: React.FC = () => {
+    // State to hold cart items
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
+    // Hook for navigation
     const navigate = useNavigate();
 
+    // useEffect to fetch cart items from local storage and product details on component mount
     useEffect(() => {
         const fetchCartItems = async () => {
+            // Get cart items from local storage
             const cartItems = getCartItems();
+            // Fetch product details for each cart item
             const fetchedItems: CartItem[] = await Promise.all(
                 cartItems.map(async (item) => {
                     const product = await getProductById(item.productId);
@@ -29,21 +35,25 @@ const Cart: React.FC = () => {
                     };
                 })
             );
+            // Update state with fetched items
             setCartItems(fetchedItems);
         };
 
         fetchCartItems();
     }, []);
 
+    // Handler to clear the cart
     const handleClearCart = () => {
         clearCart();
         setCartItems([]);
     };
 
+    // Handler to navigate to the checkout page
     const handleCheckout = () => {
         navigate('/order');
     };
 
+    // Handler to increase the quantity of a cart item
     const increaseQuantity = async (productId: string) => {
         const updatedItems = await Promise.all(
             cartItems.map(async (item) => {
@@ -61,6 +71,7 @@ const Cart: React.FC = () => {
         setCartItems(updatedItems);
     };
 
+    // Handler to decrease the quantity of a cart item
     const decreaseQuantity = async (productId: string) => {
         const updatedItems = (
             await Promise.all(
@@ -82,6 +93,7 @@ const Cart: React.FC = () => {
         setCartItems(updatedItems as CartItem[]);
     };
 
+    // Helper function to get the available quantity of a product
     const getProductQuantity = async (productId: string): Promise<number> => {
         try {
             const product = await getProductById(productId);
@@ -92,6 +104,7 @@ const Cart: React.FC = () => {
         }
     };
 
+    // Render the cart component
     return (
         <div className={styles['cart-page']}>
             <h1>Shopping Cart</h1>
