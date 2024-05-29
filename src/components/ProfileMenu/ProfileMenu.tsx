@@ -16,6 +16,9 @@ const ProfileMenu = forwardRef<HTMLDivElement>((props, ref) => {
         <div className={styles['profile-menu']} ref={ref}>
             <ul>
                 <li>
+                    <Link to="/cart">Cart</Link>
+                </li>
+                <li>
                     <Link to="/favorites">Favorites</Link>
                 </li>
                 <li>

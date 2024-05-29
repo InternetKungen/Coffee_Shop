@@ -83,11 +83,6 @@ const NavMenu: React.FC = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/products" onClick={toggleMenu}>
-                                Product List
-                            </Link>
-                        </li>
-                        <li>
                             <div className={styles['nav-menu-menu']}>
                                 <Link to="/menu" onClick={toggleMenu}>
                                     Menu
@@ -146,11 +141,6 @@ const NavMenu: React.FC = () => {
                                     </li>
                                 </ul>
                             )}
-                        </li>
-                        <li>
-                            <Link to="/cart" onClick={toggleMenu}>
-                                Cart
-                            </Link>
                         </li>
                     </ul>
                 )}
