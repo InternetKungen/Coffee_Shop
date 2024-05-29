@@ -1,5 +1,7 @@
 // types.ts
 
+import { Timestamp } from "firebase/firestore";
+
 // Interface for items in the cart
 export interface CartItem {
     productId: string; // Unique identifier for the product
@@ -36,6 +38,25 @@ export interface Order {
     orderItems: CartItem[]; // Array of items in the order (cart items)
 }
 
+// Interface for an order
+export interface OrderHistoryInterface {
+    id: string; // Unique identifier for the order
+    userId: string; // Unique identifier for the user placing the order
+    orderDate: Timestamp; // Original Firestore Timestamp
+    orderDateConverted: Date; // Converted Date
+    status: string; // Status of the order (e.g., "pending", "shipped", "delivered")
+    totalAmount: number; // Total amount of the order
+    shippingAddress: {
+        // Shipping address of the order
+        street: string; // Street address
+        postalCode: string; // Postal code
+        city: string; // City
+        country: string; // Country
+    };
+    paymentMethod: string; // Payment method used for the order
+    orderItems: CartItem[]; // Array of items in the order (cart items)
+}
+
 // Interface for user profile information
 export interface UserProfile {
     firstName: string; // First name of the user
@@ -50,4 +71,12 @@ export interface UserProfile {
         city: string; // City
         country: string; // Country
     };
+}
+
+// Interface for a product in cart
+export interface CartProduct {
+    id: string; // Unique identifier for the product
+    name: string; // Name of the product
+    price: number; // Price of the product
+    quantity: number; // Quantity available in stock
 }

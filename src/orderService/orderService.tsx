@@ -14,7 +14,7 @@ import {
 } from 'firebase/firestore';
 
 // Importing the Order interface from types
-import { Order } from '../interface/types';
+import { Order, CartItem } from '../interface/types';
 
 // Function to create an order asynchronously
 export const createOrder = async (order: Order) => {
@@ -37,10 +37,6 @@ export const createOrder = async (order: Order) => {
     const orderRef = await addDoc(collection(db, 'orders'), orderData);
 
     // Iterate over each order item and add them to the 'orderItems' subcollection under the order reference
-    for (const item of order.orderItems) {
-        await addDoc(collection(orderRef, 'orderItems'), item);
-    }
-
     for (const item of order.orderItems) {
         await addDoc(collection(orderRef, 'orderItems'), item);
 
@@ -67,4 +63,35 @@ export const createOrder = async (order: Order) => {
 
     // Return the ID of the newly created order
     return orderRef.id;
+};
+
+// Function to check stock availability for a list of cart items
+export const checkStock = async (cartItems: CartItem[]): Promise<string[]> => {
+    // Array to hold the names of products with insufficient stock
+    const insufficientStock: string[] = [];
+
+    // Loop through each item in the cart
+    for (const item of cartItems) {
+        // Get a reference to the product document in the 'products' collection
+        const productDocRef = doc(db, 'products', item.productId);
+        // Fetch the product document from the database
+        const productSnapshot = await getDoc(productDocRef);
+
+        // Check if the product document exists
+        if (productSnapshot.exists()) {
+            // Get the data from the product document
+            const productData = productSnapshot.data();
+            // Check if the available quantity is less than the quantity in the cart
+            if (productData.quantity < item.quantity) {
+                // Add the product name to the insufficient stock array
+                insufficientStock.push(item.productName);
+            }
+        } else {
+            // If the product document does not exist, consider it as insufficient stock
+            insufficientStock.push(item.productName);
+        }
+    }
+
+    // Return the list of products with insufficient stock
+    return insufficientStock;
 };
