@@ -33,13 +33,40 @@
 }
 
 .quantity-controls button {
-    padding: 5px 10px;
-    font-size: 16px;
+    /* padding: 5px 10px; */
+    font-size: 25px;
+    overflow: hidden;
+    text-align: center;
+    height: 50px;
+    width: 50px;
+    padding: 0 2px 4px 2px;
+    border-radius: 50%;
+    transform: scale(0.7);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-controls__buttons {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    bottom: 12px;
 }
 
 .quantity-controls span {
-    margin: 0 10px;
+    text-align: center;
     font-size: 16px;
+    position: relative;
+    top: 43px;
 }
 
 @media screen and (max-width: 600px) {

@@ -2,3 +2,36 @@
     display: flex;
     flex-direction: column;
 }
+
+.admin-panel button {
+    margin-bottom: 10px;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background: linear-gradient(134deg, #1a1a1a, #212121, #594f45, #1a1a1a);
+    cursor: pointer;
+    transition: any 0.45s;
+    border: 1px solid #967559;
+    border-top: 2px solid #b68e6b;
+    border-bottom: 2px solid #5f4a38;
+    border-radius: 4px;
+    box-shadow: 0 0 10px #e0d28c2c;
+    width: 300px;
+    transition: box-shadow 0.2s;
+}
+.admin-panel button:hover {
+    border: 1px solid #c79c77;
+    border-top: 2px solid #dfad82;
+    border-bottom: 2px solid #977659;
+    box-shadow: 0 0 20px #faeeb350;
+}
+.admin-panel button:focus,
+.admin-panel button:focus-visible {
+    outline: 0px;
+    border: 1px solid #6e6329;
+    border-top: 2px solid #e0d28c;
+    border-bottom: 2px solid #615b3d;
+    box-shadow: 0 0 30px #dfce7971;
+    background: linear-gradient(147deg, #1a1a1a, #212121, #292420, #1a1a1a);
+}

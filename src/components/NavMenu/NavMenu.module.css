@@ -69,12 +69,32 @@ nav ul li a:hover {
 
 .nav-menu-menu__button {
     position: absolute;
-    right: 20px;
+    left: 23%;
 }
 
 .nav-menu-menu__button img {
-    height: 28px;
+    position: relative;
+    top: 2px;
+    height: 25px;
     width: auto;
+}
+
+.nav-menu-menu__button:focus,
+.nav-menu-menu__button:active,
+.nav-menu-menu__button:focus-visible {
+    animation: buttonBobber 0.2s ease 1;
+}
+
+@keyframes buttonBobber {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.7);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .nav-menu-menu__sub-menu {
@@ -101,16 +121,27 @@ nav ul li a:hover {
     transform: scaleY(1);
     max-height: 500px; /* Justera detta värde efter behov */
     opacity: 1;
+    overflow: visible;
 }
 
 .nav-menu-menu__sub-menu li {
-    padding: 0.5rem 0;
+    padding: 0.3rem 0;
+    transition: transform 0.1s;
+}
+
+.nav-menu-menu__sub-menu li:hover {
+    flex-grow: 1;
+    transform: scale(1.1);
 }
 
 .nav-menu-menu__sub-menu > li > img {
     height: 25px;
     width: auto;
     margin-right: 10px;
+}
+
+.nav-menu-menu__sub-menu li:hover img {
+    transform: scale(1.3);
 }
 
 .line {

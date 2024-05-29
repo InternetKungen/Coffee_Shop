@@ -45,10 +45,13 @@ const CartItem: React.FC<CartItemProps> = ({ item, updateCart }) => {
             <div className={styles['quantity-controls']}>
                 {' '}
                 {/* Button to decrease quantity */}
-                <button onClick={decreaseQuantity}>-</button>{' '}
-                <span>{item.quantity}</span> {/* Display current quantity */}
-                {/* Button to increase quantity */}
-                <button onClick={increaseQuantity}>+</button>{' '}
+                <div className={styles['quantity-controls__buttons']}>
+                    <button onClick={decreaseQuantity}>-</button>{' '}
+                    <span>{item.quantity}</span>{' '}
+                    {/* Display current quantity */}
+                    {/* Button to increase quantity */}
+                    <button onClick={increaseQuantity}>+</button>{' '}
+                </div>
             </div>
             {/* Display total price */}
             <p>Total: ${(item.productPrice * item.quantity).toFixed(2)}</p>{' '}
