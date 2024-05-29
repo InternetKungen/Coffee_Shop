@@ -5,6 +5,7 @@ aside {
     width: var(--aside-width);
     position: relative;
     padding: 10px;
+    z-index: 1;
 }
 
 aside section {
@@ -19,7 +20,7 @@ aside section {
 }
 
 aside > section > button {
-    width: 90%;
+    width: 100%;
     margin: 0;
     height: 80px;
     border-bottom: 1px solid #57483bc2;
@@ -44,6 +45,9 @@ aside > section > button:hover {
     border-left: none;
     outline: none;
 }
+aside > section > button:hover img {
+    transform: scale(1.15);
+}
 
 aside > section > button:active {
     outline: none;
@@ -56,4 +60,54 @@ aside > section > button:focus {
 aside > section > button > img {
     height: 26px;
     width: auto;
+    transition: transform 0.1s;
+}
+
+@media screen and (max-width: 576px) {
+    aside {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        position: relative;
+        height: 0px;
+    }
+
+    aside section {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: fit-content;
+        position: fixed;
+        top: 50px;
+        left: 0px;
+        perspective: 4000px;
+        overflow: hidden;
+    }
+    aside > section > button {
+        display: flex;
+        flex-direction: column;
+        border-radius: 0px 0px 10px 10px;
+        font-size: 13px;
+        text-align: center;
+        width: calc(100vw / 7);
+        transform-origin: top center;
+        border-top: none;
+        border-right: 1px solid #706c5c;
+        border-bottom: 1px solid #57483b;
+        border-left: 1px solid #504d41;
+        background: linear-gradient(90deg, #242424, #2d2828);
+        margin: 0;
+    }
+    aside > section > button:active {
+        outline: none;
+        transform: rotateX(12deg);
+    }
+    aside > section > button:hover {
+        background: linear-gradient(90deg, #242424, #3f3838);
+        border-top: none;
+        border-right: 1px solid #948f79;
+        border-bottom: 1px solid #413f35;
+        border-left: 1px solid #948f79;
+        outline: none;
+    }
 }
