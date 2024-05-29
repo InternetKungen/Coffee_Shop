@@ -2,3 +2,10 @@
     display: flex;
     flex-direction: row;
 }
+
+@media screen and (max-width: 576px) {
+    .menu-container {
+        display: flex;
+        flex-direction: column;
+    }
+}
