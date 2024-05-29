@@ -25,5 +25,6 @@
 
 .checkout-button {
     padding: 1rem 2rem;
-    border: 2px solid white;
+    outline: 1px solid white;
+    margin-right: 10px;
 }

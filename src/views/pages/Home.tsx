@@ -9,11 +9,11 @@ const Home: React.FC = () => {
             <Slider />
             <div className={styles['overlay']}>
                 <h2>Coffee Palace</h2>
-                <h1>Flavors to Remember, <br /> Moments to Share</h1>
+                <h1>
+                    Flavors to Remember, <br /> Moments to Share
+                </h1>
                 <button className={styles['product-button']}>
-                    <Link to="/products" >
-                        Order Now
-                    </Link>
+                    <Link to="/menu">Order Now</Link>
                 </button>
             </div>
         </div>

@@ -1,6 +1,5 @@
-
 .about {
-    height: 100vh;
+    height: calc(100vh - (174px + 80px));
     width: 100%;
     display: flex;
     justify-content: center;
@@ -32,7 +31,8 @@
     line-height: 1.6em;
 }
 
-h1, p{
+h1,
+p {
     text-shadow: 2px 2px black;
 }
 
@@ -50,5 +50,14 @@ h1, p{
     .about-us-carousel {
         margin: 0 auto;
         width: 80vw;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .about {
+        margin-top: 0;
+        padding-top: 0;
+        position: relative;
+        min-height: calc(100vh - (394px + 50px));
     }
 }

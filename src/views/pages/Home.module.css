@@ -1,5 +1,6 @@
 .home-container {
     position: relative;
+    height: calc(100vh - (174px + 80px));
 }
 
 .overlay {
@@ -39,5 +40,14 @@
     .overlay {
         text-align: center;
         left: 50%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .home-container {
+        margin-top: 0;
+        padding-top: 0;
+        position: relative;
+        height: calc(100vh - (394px + 50px));
     }
 }
