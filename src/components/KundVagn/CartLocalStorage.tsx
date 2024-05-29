@@ -10,7 +10,7 @@ import {
 import { CartItem, CartProduct } from '../../interface/types';
 import styles from './CartLocalStorage.module.css';
 // Import getProductById at the top of your file
-import { getProductById } from './cartService'; // Adjust the path as necessary
+import { getProductById } from './cartPageService'; // Adjust the path as necessary
 
 // The main Cart component
 const Cart: React.FC = () => {
