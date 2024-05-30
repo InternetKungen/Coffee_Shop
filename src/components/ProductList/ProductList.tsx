@@ -1,4 +1,3 @@
-// // ProductList.tsx
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
@@ -11,6 +10,7 @@ import {
 } from '../../services/cartService/cartServiceLocalStorage';
 import { Product, CartItem } from '../../interface/types';
 import AddToFavoritesButton from '../AddToFavoritesButton/AddToFavoritesButton';
+import CartButton from '../CartButton/CartButton';
 
 interface ProductListProps {
     sortOrder: string;
@@ -28,6 +28,9 @@ const ProductList: React.FC<ProductListProps> = ({ sortOrder }) => {
     const [products, setProducts] = useState<Product[]>([]);
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
     const [cartItems, setCartItems] = useState<CartItem[]>(getCartItems());
+    const [searchQuery, setSearchQuery] = useState<string>('');
+    const [submittedSearchQuery, setSubmittedSearchQuery] =
+        useState<string>('');
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -52,14 +55,24 @@ const ProductList: React.FC<ProductListProps> = ({ sortOrder }) => {
     }, []);
 
     useEffect(() => {
+        let filtered = products;
+
         if (sortOrder) {
-            setFilteredProducts(
-                products.filter((product) => product.category === sortOrder)
+            filtered = filtered.filter(
+                (product) => product.category === sortOrder
             );
-        } else {
-            setFilteredProducts(products);
         }
-    }, [sortOrder, products]);
+
+        if (submittedSearchQuery) {
+            filtered = filtered.filter((product) =>
+                product.name
+                    .toLowerCase()
+                    .includes(submittedSearchQuery.toLowerCase())
+            );
+        }
+
+        setFilteredProducts(filtered);
+    }, [sortOrder, submittedSearchQuery, products]);
 
     const handleCartChange = () => {
         const event = new CustomEvent('cartChange', {
@@ -132,9 +145,43 @@ const ProductList: React.FC<ProductListProps> = ({ sortOrder }) => {
         event.currentTarget.src = 'src/assets/product-img/placeholder.jpg';
     };
 
+    // Function to handle search form submission
+    const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        setSubmittedSearchQuery(searchQuery);
+    };
+
+    // Function to handle reset button click
+    const handleReset = () => {
+        setSearchQuery('');
+        setSubmittedSearchQuery('');
+    };
+
     // Rendering the Product List component
     return (
         <div className={styles['product-list-page']}>
+            <form
+                onSubmit={handleSearchSubmit}
+                className={styles['search-form']}
+            >
+                <input
+                    type="text"
+                    placeholder="Search products..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className={styles['search-input']}
+                />
+                <button type="submit" className={styles['search-button']}>
+                    Search
+                </button>
+                <button
+                    type="button"
+                    onClick={handleReset}
+                    className={styles['reset-button']}
+                >
+                    Reset
+                </button>
+            </form>
             <div className={styles['products-list-div']}>
                 {filteredProducts.map((product) => (
                     <section
@@ -160,31 +207,7 @@ const ProductList: React.FC<ProductListProps> = ({ sortOrder }) => {
                         </Link>
                         {product.quantity > 0 ? (
                             <div>
-                                <button
-                                    className={styles['main-buttons']}
-                                    onClick={() => handleAddToCart(product)}
-                                >
-                                    Add to Cart
-                                </button>
-                                <div>
-                                    <button
-                                        className={styles['main-buttons']}
-                                        onClick={() =>
-                                            decreaseQuantity(product.id)
-                                        }
-                                    >
-                                        –
-                                    </button>
-                                    <span>{getCartQuantity(product.id)}</span>
-                                    <button
-                                        className={styles['main-buttons']}
-                                        onClick={() =>
-                                            increaseQuantity(product)
-                                        }
-                                    >
-                                        +
-                                    </button>
-                                </div>
+                                <CartButton product={product} />
                             </div>
                         ) : (
                             <p className={styles['out-of-stock']}>

@@ -44,6 +44,15 @@
     background: linear-gradient(180deg, #2d2828, transparent);
 }
 
+.product-list-item > h2 {
+    font-family: "Onest", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    /* text-transform: uppercase; */
+    padding: 0px !important;
+}
+
 .product-list-item > p {
     display: -webkit-box;
     -webkit-line-clamp: 3; /* Max antal rader */
@@ -98,4 +107,63 @@
         max-width: 100%;
         margin: 0 auto;
     }
+}
+
+
+/*** Search form ***/
+.search-form {
+    display: flex;
+    justify-content: center;
+
+    margin: 2rem 0rem;
+}
+
+.search-input,
+.search-button,
+.reset-button {
+    height: auto; /* Set the height for both input and button */
+    font-size: 16px;
+    border: 1px solid #ccc;
+}
+
+.search-input {
+    width: 200px;
+    /* padding: 10px; */
+    border-radius: 4px;
+    /* height: 10rem; */
+    padding: 1rem;
+}
+
+.search-button {
+    margin-left: 1rem;
+    padding: 0 20px; /* Remove vertical padding to match the input height */
+    /* border-left: none; */
+    border-radius: 8px;
+    background-color: #1a1a1a;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* height: 10rem; */
+    padding: 1rem 2rem;
+}
+
+.search-button:hover {
+    background-color: #3f3f3f;
+}
+
+.reset-button {
+    margin-left: 1rem;
+    padding: 0 20px; /* Remove vertical padding to match the input height */
+    /* border-left: none; */
+    border-radius: 8px;
+    background-color: #1a1a1a;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* height: 10rem; */
+    padding: 1rem;
+}
+
+.reset-button:hover {
+    background-color: #3f3f3f;
 }
