@@ -1,7 +1,7 @@
 // WAS CartLocalStorage.tsx --> NOW Cart.tsx
 // This component is used on the shopping cart page where users can view and manage their cart items.
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     getCartItems,
@@ -9,11 +9,11 @@ import {
     updateCartItemQuantity,
     removeCartItem,
 } from '../../services/cartService/cartServiceLocalStorage';
-import { CartItem, CartProduct } from '../../interface/types';
+import { CartItem } from '../../interface/types';
 import styles from './Cart.module.css';
 import TitleSection from '../TitleSection/TitleSection';
 // Import getProductById at the top of your file
-import { getProductById } from './cartPageService'; // Adjust the path as necessary
+import { getProductById } from '../../services/cartService/cartPageService'; // Adjust the path as necessary
 
 // The main Cart component
 const Cart: React.FC = () => {
@@ -30,15 +30,11 @@ const Cart: React.FC = () => {
         window.dispatchEvent(event);
     };
 
-    // Function to update cart items from local storage
-    const updateCart = () => {
-        setCartItems(getCartItems());
-        handleCartChange();
-    };
-    // State to hold cart items
-    const [cartItems, setCartItems] = useState<CartItem[]>([]);
-    // Hook for navigation
-    const navigate = useNavigate();
+    // // Function to update cart items from local storage
+    // const updateCart = () => {
+    //     setCartItems(getCartItems());
+    //     handleCartChange();
+    // };
 
     // useEffect to fetch cart items from local storage and product details on component mount
     useEffect(() => {
@@ -91,6 +87,7 @@ const Cart: React.FC = () => {
             })
         );
         setCartItems(updatedItems);
+        handleCartChange();
     };
 
     // Handler to decrease the quantity of a cart item
@@ -113,6 +110,7 @@ const Cart: React.FC = () => {
             )
         ).filter((item) => item !== null); // Filter out null values
         setCartItems(updatedItems as CartItem[]);
+        handleCartChange();
     };
 
     // Helper function to get the available quantity of a product
@@ -146,7 +144,7 @@ const Cart: React.FC = () => {
                                         decreaseQuantity(item.productId)
                                     }
                                 >
-                                    -
+                                    –
                                 </button>
                                 <span>{item.quantity}</span>
                                 <button
