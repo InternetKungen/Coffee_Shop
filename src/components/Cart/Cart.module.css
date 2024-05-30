@@ -5,6 +5,7 @@
     max-width: 800px; /* Limiting width for larger screens */
     margin: 0 auto;
     padding: 20px;
+    padding-top: 0px;
 }
 
 .cart-item {

@@ -1,6 +1,7 @@
 /* OrderHistory.module.css */
 .order-history-page {
     padding: 20px;
+    padding-top: 0px;
     margin: auto;
     max-width: 800px;
     font-family: Arial, sans-serif;
@@ -29,6 +30,7 @@
 @media (max-width: 600px) {
     .order-history-page {
         padding: 10px;
+        padding-top: 0px;
     }
 
     .order-item {
