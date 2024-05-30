@@ -1,10 +1,9 @@
-// Order.tsx
 import React, { useState, useEffect } from 'react';
 import {
     getCartItems,
     clearCart,
 } from '../../services/cartService/cartServiceLocalStorage';
-import { createOrder } from '../../services/orderService/orderService';
+import { createOrder, checkStock } from '../../services/orderService/orderService';
 import { useNavigate } from 'react-router-dom';
 import { auth, db } from '../../main';
 import { doc, getDoc } from 'firebase/firestore';
@@ -16,12 +15,12 @@ const Order: React.FC = () => {
     // State variables to manage order details
     const [cartItems, setCartItems] = useState<CartItem[]>(getCartItems());
     const [shippingAddress, setShippingAddress] = useState({
-        street: '',
-        postalCode: '',
-        city: '',
-        country: '',
+        street: "",
+        postalCode: "",
+        city: "",
+        country: "",
     });
-    const [paymentMethod, setPaymentMethod] = useState('Credit Card');
+    const [paymentMethod, setPaymentMethod] = useState("Credit Card");
     const [totalAmount, setTotalAmount] = useState(0);
     const [loading, setLoading] = useState(true);
     const [errors, setErrors] = useState<string[]>([]);
@@ -32,7 +31,7 @@ const Order: React.FC = () => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (!user) {
                 // Redirect user to sign-in page if not authenticated
-                navigate('/sign-in');
+                navigate("/sign-in");
             } else {
                 // Mark loading as false when user is authenticated
                 setLoading(false);
@@ -67,11 +66,11 @@ const Order: React.FC = () => {
                 const user = auth.currentUser;
 
                 if (!user) {
-                    navigate('/sign-in');
+                    navigate("/sign-in");
                     return;
                 }
 
-                const docRef = doc(db, 'users', user.uid);
+                const docRef = doc(db, "users", user.uid);
                 const docSnap = await getDoc(docRef);
 
                 if (docSnap.exists()) {
@@ -98,11 +97,11 @@ const Order: React.FC = () => {
     // Function to validate shipping address
     const validateAddress = () => {
         const newErrors = [];
-        if (!shippingAddress.street) newErrors.push('Street is required.');
+        if (!shippingAddress.street) newErrors.push("Street is required.");
         if (!shippingAddress.postalCode)
-            newErrors.push('Postal Code is required.');
-        if (!shippingAddress.city) newErrors.push('City is required.');
-        if (!shippingAddress.country) newErrors.push('Country is required.');
+            newErrors.push("Postal Code is required.");
+        if (!shippingAddress.city) newErrors.push("City is required.");
+        if (!shippingAddress.country) newErrors.push("Country is required.");
         // Update errors state
         setErrors(newErrors);
         return newErrors.length === 0;
@@ -110,10 +109,32 @@ const Order: React.FC = () => {
 
     // Function to handle order submission
     const handleSubmitOrder = async () => {
+        if (cartItems.length === 0) {
+            setErrors([
+                'Your cart is empty. Please add products to your cart before placing an order.',
+            ]);
+            return;
+        }
+
+        // Validate the address. If it is not valid, exit the function.
         if (!validateAddress()) return;
 
         try {
+            // Check the stock for the items in the cart asynchronously.
+            const insufficientStock = await checkStock(cartItems);
+            // If there are items with insufficient stock, set an error message and exit the function.
+            if (insufficientStock.length > 0) {
+                setErrors([
+                    `Insufficient stock for the following products: ${insufficientStock.join(
+                        ', '
+                    )}`,
+                ]);
+                return;
+            }
+
+            // Get the current authenticated user.
             const user = auth.currentUser;
+            // If there is no authenticated user, navigate to the sign-in page.
             if (!user) {
                 navigate('/sign-in');
                 return;
@@ -129,6 +150,7 @@ const Order: React.FC = () => {
                 paymentMethod,
                 orderItems: cartItems,
             });
+
             // Clear cart after successful order submission
             clearCart();
             setCartItems([]);
@@ -146,12 +168,12 @@ const Order: React.FC = () => {
 
     // Render order form
     return (
-        <div className={styles['order-page']}>
+        <div className={styles["order-page"]}>
             <h1>Place Your Order</h1>
-            <div className={styles['order-form']}>
+            <div className={styles["order-form"]}>
                 <h2>Shipping Address</h2>
                 {errors.length > 0 && (
-                    <div className={styles['error-messages']}>
+                    <div className={styles["error-messages"]}>
                         {/* Render error messages */}
                         {errors.map((error, index) => (
                             <p key={index}>{error}</p>

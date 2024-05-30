@@ -16,6 +16,14 @@ interface ProductListProps {
     sortOrder: string;
 }
 
+// Utility function to truncate text
+const truncateText = (text: string, maxLength: number) => {
+    if (text.length <= maxLength) {
+        return text;
+    }
+    return text.substring(0, maxLength) + '...';
+};
+
 const ProductList: React.FC<ProductListProps> = ({ sortOrder }) => {
     const [products, setProducts] = useState<Product[]>([]);
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
@@ -64,9 +72,24 @@ const ProductList: React.FC<ProductListProps> = ({ sortOrder }) => {
     };
 
     const handleAddToCart = (product: Product) => {
-        addItemToCart(product);
-        setCartItems(getCartItems());
-        handleCartChange();
+        const cartItem = cartItems.find(
+            (item) => item.productId === product.id
+        );
+        if (cartItem) {
+            if (product.quantity > cartItem.quantity) {
+                // Check if there's enough stock
+                updateCartItemQuantity(product.id, cartItem.quantity + 1); // Update quantity in local storage
+                setCartItems(getCartItems());
+                handleCartChange();
+            }
+        } else {
+            if (product.quantity > 0) {
+                // Check if there's enough stock
+                addItemToCart(product); // Add new item to local storage
+                setCartItems(getCartItems());
+                handleCartChange();
+            }
+        }
     };
 
     const increaseQuantity = (product: Product) => {
@@ -102,6 +125,14 @@ const ProductList: React.FC<ProductListProps> = ({ sortOrder }) => {
         return cartItem ? cartItem.quantity : 0;
     };
 
+    // Function to handle image error
+    const handleImageError = (
+        event: React.SyntheticEvent<HTMLImageElement>
+    ) => {
+        event.currentTarget.src = 'src/assets/product-img/placeholder.jpg';
+    };
+
+    // Rendering the Product List component
     return (
         <div className={styles['product-list-page']}>
             <div className={styles['products-list-div']}>
@@ -117,10 +148,13 @@ const ProductList: React.FC<ProductListProps> = ({ sortOrder }) => {
                         <img
                             src={`src/assets/product-img/${product.imageUrl}`}
                             alt={product.name}
+                            onError={handleImageError}
                             className={styles['product-image']}
                         />
                         <p>Price: ${product.price.toFixed(2)}</p>
-                        <p>{product.description}</p>
+                        {/* Limited description */}
+                        <p>{truncateText(product.description, 120)}</p>{' '}
+                        {/* Link to view individual product details */}
                         <Link to={`/products/${product.id}`}>
                             <button>View Product</button>
                         </Link>
