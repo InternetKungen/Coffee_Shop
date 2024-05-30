@@ -44,6 +44,15 @@
     background: linear-gradient(180deg, #2d2828, transparent);
 }
 
+.product-list-item > h2 {
+    font-family: "Onest", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    /* text-transform: uppercase; */
+    padding: 0px !important;
+}
+
 .product-list-item > p {
     display: -webkit-box;
     -webkit-line-clamp: 3; /* Max antal rader */

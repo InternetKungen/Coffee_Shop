@@ -10,6 +10,7 @@ import {
 } from '../../services/cartService/cartServiceLocalStorage';
 import { Product, CartItem } from '../../interface/types';
 import AddToFavoritesButton from '../AddToFavoritesButton/AddToFavoritesButton';
+import CartButton from '../CartButton/CartButton';
 
 interface ProductListProps {
     sortOrder: string;
@@ -206,31 +207,7 @@ const ProductList: React.FC<ProductListProps> = ({ sortOrder }) => {
                         </Link>
                         {product.quantity > 0 ? (
                             <div>
-                                <button
-                                    className={styles['main-buttons']}
-                                    onClick={() => handleAddToCart(product)}
-                                >
-                                    Add to Cart
-                                </button>
-                                <div>
-                                    <button
-                                        className={styles['main-buttons']}
-                                        onClick={() =>
-                                            decreaseQuantity(product.id)
-                                        }
-                                    >
-                                        –
-                                    </button>
-                                    <span>{getCartQuantity(product.id)}</span>
-                                    <button
-                                        className={styles['main-buttons']}
-                                        onClick={() =>
-                                            increaseQuantity(product)
-                                        }
-                                    >
-                                        +
-                                    </button>
-                                </div>
+                                <CartButton product={product} />
                             </div>
                         ) : (
                             <p className={styles['out-of-stock']}>
