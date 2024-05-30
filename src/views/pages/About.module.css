@@ -88,8 +88,14 @@ p {
     .about {
         margin: 0;
     }
+    .about-us-text {
+        width: 100%;
+    }
     .about-us-text p {
         font-size: 0.9rem;
-        line-height: 1.4em;
+        width: 100%;
+    }
+    .about-us-carousel {
+        width: 100%;
     }
 }
