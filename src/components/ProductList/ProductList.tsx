@@ -198,15 +198,17 @@ const ProductList: React.FC<ProductListProps> = ({ sortOrder }) => {
                             onError={handleImageError}
                             className={styles['product-image']}
                         />
-                        <p>Price: ${product.price.toFixed(2)}</p>
+                        <p>${product.price.toFixed(2)};-</p>
                         {/* Limited description */}
                         <p>{truncateText(product.description, 120)}</p>{' '}
                         {/* Link to view individual product details */}
                         <Link to={`/products/${product.id}`}>
-                            <button>View Product</button>
+                            <button className={styles['view-product-button']}>
+                                View Product
+                            </button>
                         </Link>
                         {product.quantity > 0 ? (
-                            <div>
+                            <div className={styles['cart-button']}>
                                 <CartButton product={product} />
                             </div>
                         ) : (
