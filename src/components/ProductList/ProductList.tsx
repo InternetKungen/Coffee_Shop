@@ -204,7 +204,7 @@ const ProductList: React.FC<ProductListProps> = ({ sortOrder }) => {
                         {/* Link to view individual product details */}
                         <Link to={`/products/${product.id}`}>
                             <button className={styles['view-product-button']}>
-                                View Product
+                                i
                             </button>
                         </Link>
                         {product.quantity > 0 ? (
