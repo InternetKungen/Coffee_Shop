@@ -63,6 +63,10 @@
     outline: 2px solid #2d2828;
 }
 
+.main-buttons {
+    margin: 1rem 0.5rem 0 0.5rem;
+}
+
 .favorite-icon-container {
     position: absolute;
     top: 20px;

@@ -25,6 +25,10 @@
     margin: 5px 0;
 }
 
+.main-buttons {
+    margin: 1rem 0.5rem 0 0.5rem;
+}
+
 @media (min-width: 600px) {
     .product-detail {
         flex-direction: row;

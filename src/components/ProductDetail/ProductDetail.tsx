@@ -152,20 +152,27 @@ const ProductDetail: React.FC = () => {
                 {product.quantity > 0 ? (
                     <div>
                         {/* Button to add product to cart */}
-                        <button onClick={() => handleAddToCart(product)}>
+                        <button
+                            onClick={() => handleAddToCart(product)}
+                            className={styles['main-buttons']}
+                        >
                             Add to Cart
                         </button>
                         <div>
                             {/* Button to decrease product quantity */}
                             <button
+                                className={styles['main-buttons']}
                                 onClick={() => decreaseQuantity(product.id)}
                             >
-                                -
+                                –
                             </button>
                             {/* Displaying product quantity in cart */}
                             <span>{getCartQuantity(product.id)}</span>
                             {/* Button to increase product quantity */}
-                            <button onClick={() => increaseQuantity(product)}>
+                            <button
+                                onClick={() => increaseQuantity(product)}
+                                className={styles['main-buttons']}
+                            >
                                 +
                             </button>
                         </div>

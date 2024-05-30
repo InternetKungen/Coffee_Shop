@@ -38,6 +38,13 @@ const FavoritesList: React.FC = () => {
         fetchFavorites();
     }, []);
 
+    // Function to handle image error
+    const handleImageError = (
+        event: React.SyntheticEvent<HTMLImageElement>
+    ) => {
+        event.currentTarget.src = 'src/assets/product-img/placeholder.jpg';
+    };
+
     return (
         <div className={styles['favorites-list-div']}>
             {favorites.length === 0 ? (
@@ -62,6 +69,7 @@ const FavoritesList: React.FC = () => {
                             <img
                                 src={`src/assets/product-img/${product.imageUrl}`}
                                 alt={product.name}
+                                onError={handleImageError}
                                 className={styles['product-image']}
                             />
                             <p>Price: ${product.price.toFixed(2)}</p>

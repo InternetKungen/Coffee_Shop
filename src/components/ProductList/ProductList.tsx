@@ -161,20 +161,23 @@ const ProductList: React.FC<ProductListProps> = ({ sortOrder }) => {
                         {product.quantity > 0 ? (
                             <div>
                                 <button
+                                    className={styles['main-buttons']}
                                     onClick={() => handleAddToCart(product)}
                                 >
                                     Add to Cart
                                 </button>
                                 <div>
                                     <button
+                                        className={styles['main-buttons']}
                                         onClick={() =>
                                             decreaseQuantity(product.id)
                                         }
                                     >
-                                        -
+                                        –
                                     </button>
                                     <span>{getCartQuantity(product.id)}</span>
                                     <button
+                                        className={styles['main-buttons']}
                                         onClick={() =>
                                             increaseQuantity(product)
                                         }
