@@ -6,6 +6,9 @@ import {
     updateCartItemQuantity,
     getCartItems,
 } from '../../services/cartService/cartServiceLocalStorage';
+import addToCartIcon from './../../assets/img/shopping-cart-add-white.png';
+import styles from './CartButton.module.css';
+import hollowCartIcon from './../../assets/img/shopping-cart-white.png';
 
 interface CartButtonProps {
     product: Product;
@@ -75,15 +78,35 @@ const CartButton: React.FC<CartButtonProps> = ({ product }) => {
 
     return (
         <>
-            {!isAdded ? (
-                <button onClick={handleAddToCart}>Add to Cart</button>
-            ) : (
-                <div>
-                    <button onClick={decreaseQuantity}>-</button>
-                    <span>{getCartQuantity()}</span>
-                    <button onClick={increaseQuantity}>+</button>
-                </div>
-            )}
+            <div className={styles['cart-button-container']}>
+                {!isAdded ? (
+                    <button onClick={handleAddToCart}>
+                        <p>Add to Cart</p>
+                        <img src={addToCartIcon} alt="add-to-cart-icon" />
+                    </button>
+                ) : (
+                    <div
+                        className={
+                            styles['cart-button-container__quantity-container']
+                        }
+                    >
+                        <img src={hollowCartIcon} alt="add-to-cart-icon" />
+                        <div
+                            className={
+                                styles['cart-button-container__quantity']
+                            }
+                        >
+                            <button onClick={decreaseQuantity}>
+                                <p>-</p>
+                            </button>
+                            <span>{getCartQuantity()}</span>
+                            <button onClick={increaseQuantity}>
+                                <p>+</p>
+                            </button>
+                        </div>
+                    </div>
+                )}
+            </div>
         </>
     );
 };
