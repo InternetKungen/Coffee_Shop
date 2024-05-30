@@ -8,6 +8,7 @@
     background-size: cover;
     background-position: center;
     padding: 10px;
+    min-height: calc(100vh - (80px + 174px));
 }
 
 .about-us {

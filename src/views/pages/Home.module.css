@@ -1,6 +1,7 @@
 .home-container {
     position: relative;
     height: calc(100vh - 80px);
+    min-height: calc(100vh - (80px + 174px));
     width: 100%;
 }
 
