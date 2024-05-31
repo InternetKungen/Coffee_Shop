@@ -266,52 +266,68 @@ interface UserProfile {
     };
 }
 
-export const SignUp = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [checkPassword, setCheckPassword] = useState('');
+const SignUp: React.FC = () => {
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [firstName, setFirstName] = useState<string>('');
+    const [lastName, setLastName] = useState<string>('');
+    const [checkPassword, setCheckPassword] = useState<string>('');
+    const [error, setError] = useState<string>(''); // error messages
+    const [success, setSuccess] = useState<string>(''); // success message
 
     const createUser = async () => {
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Skapa en referens till platsen i databasen
-                const docRef = doc(db, 'users', userCredential.user.uid);
+        // Checks that all input fields are filled
+        if (!email || !password || !checkPassword || !firstName || !lastName) {
+            setError('All fields are required');
+            return;
+        }
+        // Checks if passwords match
+        if (password !== checkPassword) {
+            setError('Passwords do not match');
+            return;
+        }
+        setError('');
+        setSuccess(''); // clear previous success message
 
-                // Skapa ett objekt med användarinformation
-                const userProfile: UserProfile = {
-                    uid: userCredential.user.uid,
-                    firstName: firstName,
-                    lastName: lastName,
-                    email: email,
-                    profilePicture: '',
-                    phoneNumber: '',
-                    address: {
-                        street: '',
-                        city: '',
-                        country: '',
-                        postalCode: '',
-                    },
-                };
+        try {
+            // Trying to create a new user with the provided email and password
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            // Create a reference to the location in the database where the user information will be stored
+            const docRef = doc(db, 'users', userCredential.user.uid);
 
-                // Skriv in användarinformation till databasen
-                setDoc(docRef, userProfile)
-                    .then(() => {
-                        console.log('Användarinformation sparad');
-                    })
-                    .catch((error) => {
-                        console.error(
-                            'Fel vid sparande av användarinformation:',
-                            error
-                        );
-                    });
+            // Creating an object with the user's information
+            const userProfile: UserProfile = {
+                uid: userCredential.user.uid,
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                profilePicture: '',
+                phoneNumber: '',
+                address: {
+                    street: '',
+                    city: '',
+                    country: '',
+                    postalCode: '',
+                },
+            };
 
-                console.log('inloggad');
-            })
-            .catch((error) => {
-                console.log(error.message);
-            });
+            // Write the user's information to the database
+            try {
+                await setDoc(docRef, userProfile);
+                console.log('User information saved successfully');
+                setSuccess('You have successfully registered and logged in!');
+            } catch (dbError) {
+                // If an error occurs while writing to the database, log the error and set an error message
+                console.error('Error saving user information:', dbError);
+                setError('Error saving user information');
+            }
+
+            console.log('User signed up successfully');
+        } catch (authError) {
+            // If an error occurs during user creation, log the error and set an error message
+            console.error('Error during user creation:', authError);
+            setError((authError as Error).message);
+        }
     };
 
     return (
@@ -326,7 +342,7 @@ export const SignUp = () => {
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                     ></input>
-                    <br></br>
+
                     <label htmlFor="lastName">Last name</label>
                     <input
                         id="lastName"
@@ -334,7 +350,7 @@ export const SignUp = () => {
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                     ></input>
-                    <br></br>
+
                     <label htmlFor="userEmail">E-mail</label>
                     <input
                         id="userEmail"
@@ -342,7 +358,7 @@ export const SignUp = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     ></input>
-                    <br></br>
+
                     <label htmlFor="userPassword">Password</label>
                     <input
                         id="userPassword"
@@ -358,8 +374,8 @@ export const SignUp = () => {
                         onChange={(e) => setCheckPassword(e.target.value)}
                     ></input>
                 </section>
-                <br></br>
-
+                {success && <p className={styles['success-message']}>{success}</p>}
+                {error && <p className={styles['error-message']}>{error}</p>}
                 <button onClick={createUser}>Sign Up</button>
             </section>
         </>
