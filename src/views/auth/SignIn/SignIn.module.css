@@ -1,5 +1,8 @@
+main {
+    height: calc(100vh - 80px);
+}
 .sign-in-container {
-    width: 80%;
+    width: 40%;
     background: lightgray;
     padding: 20px;
 }
@@ -13,4 +16,37 @@
 
 .sign-in-container__input-fields > label {
     text-align: left;
+    margin-bottom: 0.5rem;
+}
+
+.sign-in-container__input-fields > input {
+    height: 2.4rem;
+    padding: 0 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.sign-in-container > button {
+    margin: 1rem 0;
+}
+
+.error-message {
+    color: red;
+    font-size: 1rem;
+}
+
+.sign-in-container__info > p {
+    font-size: 0.8rem;
+    margin: 5px 0;
+}
+
+@media screen and (max-width: 992px) {
+    .sign-in-container {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .sign-in-container {
+        width: 80%;
+    }
 }

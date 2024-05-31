@@ -3,52 +3,72 @@ import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../main';
 import styles from './SignIn.module.css';
+import { Link, useNavigate } from 'react-router-dom';
 
-export const SignIn = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+const SignIn: React.FC = () => {
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [error, setError] = useState<string>(''); // error messages
+
+    const navigate = useNavigate(); // hook for navigation
 
     const signInUser = async () => {
+        // Checks that both input fields are filled
+        if (!email || !password) {
+            setError('Both fields are required');
+            return;
+        }
+        setError('');
+
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 console.log('inloggad');
+                navigate('/'); // redirects to the Home page after successful login
             })
             .catch((error) => {
-                console.log(error.message);
+                console.error('Error signing in:', (error as Error).message);
+                setError('Invalid email or password'); // error message on failure
             });
     };
 
+    // Function to handle key press events
+    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            signInUser();
+        }
+    };
+
     return (
-        <>
-            <section className={styles['sign-in-container']}>
-                <h2>Sign In</h2>
-                <section className={styles['sign-in-container__input-fields']}>
-                    <label htmlFor="userEmail">E-mail</label>
-                    <input
-                        id="userEmail"
-                        type="text"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    ></input>
-                    <br></br>
-                    <label htmlFor="userPassword">Password</label>
-                    <input
-                        id="userPassword"
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    ></input>
-                </section>
-                <br></br>
+        <section className={styles['sign-in-container']}>
+            <h2>Sign In</h2>
+            <section className={styles['sign-in-container__input-fields']}>
+                <label htmlFor="userEmail">E-mail</label>
+                <input
+                    id="userEmail"
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                ></input>
 
-                <button onClick={signInUser}>Sign In</button>
-
-                <section className={styles['sign-in-container__info']}>
-                    <p>Don't have an account? Create one here</p>
-                    <p>Forgot password? Press here</p>
-                </section>
+                <label htmlFor="userPassword">Password</label>
+                <input
+                    id="userPassword"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                ></input>
             </section>
-        </>
+            {error && <p className={styles['error-message']}>{error}</p>}{' '}
+            <button onClick={signInUser}>Sign In</button>
+            <section className={styles['sign-in-container__info']}>
+                <p>
+                    Don't have an account? <Link to="/sign-up">Create one here</Link>
+                </p>
+                <p>Forgot password? Press here</p>
+            </section>
+        </section>
     );
 };
 
