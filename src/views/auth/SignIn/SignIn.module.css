@@ -9,9 +9,6 @@
     max-width: 400px;
 }
 
-.sign-in-container > h2 {
-}
-
 .sign-in-container button {
     width: -moz-fit-content;
     width: fit-content;
