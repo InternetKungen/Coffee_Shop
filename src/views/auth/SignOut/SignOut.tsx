@@ -1,6 +1,7 @@
 // SignOut.tsx
 import { signOut } from 'firebase/auth';
 import { auth } from '../../../main';
+import styles from './SignOut.module.css';
 
 export const SignOut = () => {
     const signOutUser = async () => {
@@ -15,7 +16,9 @@ export const SignOut = () => {
 
     return (
         <>
-            <button onClick={signOutUser}>Sign out</button>
+            <button onClick={signOutUser} className={styles['sign-out-btn']}>
+                Sign out
+            </button>
         </>
     );
 };
