@@ -12,7 +12,8 @@ const SignIn: React.FC = () => {
 
     const navigate = useNavigate(); // hook for navigation
 
-    const signInUser = async () => {
+    const signInUser = async (e: any) => {
+        e.preventDefault(); // Prevent default form submission
         // Checks that both input fields are filled
         if (!email || !password) {
             setError('Both fields are required');
@@ -22,8 +23,8 @@ const SignIn: React.FC = () => {
 
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                console.log('inloggad');
-                navigate('/'); // redirects to the Home page after successful login
+                console.log('Logged in');
+                navigate('/menu'); // Redirect to /menu upon successful login
             })
             .catch((error) => {
                 console.error('Error signing in:', (error as Error).message);
@@ -34,7 +35,7 @@ const SignIn: React.FC = () => {
     // Function to handle key press events
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            signInUser();
+            signInUser(event);
         }
     };
 
@@ -64,7 +65,8 @@ const SignIn: React.FC = () => {
             <button onClick={signInUser}>Sign In</button>
             <section className={styles['sign-in-container__info']}>
                 <p>
-                    Don't have an account? <Link to="/sign-up">Create one here</Link>
+                    Don't have an account?{' '}
+                    <Link to="/sign-up">Create one here</Link>
                 </p>
                 <p>Forgot password? Press here</p>
             </section>

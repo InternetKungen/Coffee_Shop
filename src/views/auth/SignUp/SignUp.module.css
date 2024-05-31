@@ -3,10 +3,14 @@ main {
 }
 
 .sign-up-container {
-    width: 40%;
-    background: lightgray;
+    width: 80%;
+    background: linear-gradient(180deg, #ffffff, lightgray, #2d2828 99%);
     padding: 20px;
-    margin: 20px 0;
+    border: 1px solid #967559;
+    border-top: 0px solid #b68e6b;
+    border-bottom: 0px solid #5f4a38;
+    color: black;
+    max-width: 400px;
 }
 
 .sign-up-container__input-fields {

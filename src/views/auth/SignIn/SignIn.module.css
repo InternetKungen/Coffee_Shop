@@ -3,10 +3,20 @@ main {
 }
 
 .sign-in-container {
-    width: 40%;
-    background: lightgray;
+    width: 80%;
+    background: linear-gradient(180deg, #ffffff, lightgray, #2d2828 99%);
     padding: 20px;
-    margin: 20px 0;
+    border: 1px solid #967559;
+    border-top: 0px solid #b68e6b;
+    border-bottom: 0px solid #5f4a38;
+    color: black;
+    max-width: 400px;
+}
+
+.sign-in-container button {
+    width: -moz-fit-content;
+    width: fit-content;
+    align-self: center;
 }
 
 .sign-in-container__input-fields {
@@ -51,4 +61,28 @@ main {
     .sign-in-container {
         width: 80%;
     }
+}
+
+.sign-in-container__info > p {
+    text-align: left;
+    font-size: 17px;
+    margin: 0px;
+}
+
+.sign-in-container__info {
+    margin-top: 40px;
+    position: relative;
+    left: 20px;
+}
+
+.sign-in-container__info > p {
+    text-align: left;
+    font-size: 17px;
+    margin: 0px;
+}
+
+.sign-in-container__info {
+    margin-top: 40px;
+    position: relative;
+    left: 20px;
 }
