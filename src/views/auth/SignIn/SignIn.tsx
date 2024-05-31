@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../main';
 import styles from './SignIn.module.css';
+import TitleSection from '../../../components/TitleSection/TitleSection';
+import { Link } from 'react-router-dom';
 
 export const SignIn = () => {
     const [email, setEmail] = useState('');
@@ -45,7 +47,10 @@ export const SignIn = () => {
 
                 <section className={styles['sign-in-container__info']}>
                     <p>Don't have an account? Create one here</p>
-                    <p>Forgot password? Press here</p>
+                    <p>
+                        Forgot password?
+                        <Link to="/sign-up">Press here</Link>
+                    </p>
                 </section>
             </section>
         </>
