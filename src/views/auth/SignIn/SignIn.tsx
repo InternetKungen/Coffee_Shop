@@ -2,62 +2,73 @@
 import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../main';
-import { useNavigate } from 'react-router-dom';
 import styles from './SignIn.module.css';
-// import TitleSection from '../../../components/TitleSection/TitleSection';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-export const SignIn = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const navigate = useNavigate();
+const SignIn: React.FC = () => {
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [error, setError] = useState<string>(''); // error messages
+
+    const navigate = useNavigate(); // hook for navigation
 
     const signInUser = async (e: any) => {
         e.preventDefault(); // Prevent default form submission
+        // Checks that both input fields are filled
+        if (!email || !password) {
+            setError('Both fields are required');
+            return;
+        }
+        setError('');
+
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 console.log('Logged in');
                 navigate('/menu'); // Redirect to /menu upon successful login
             })
             .catch((error) => {
-                console.log(error.message);
+                console.error('Error signing in:', (error as Error).message);
+                setError('Invalid email or password'); // error message on failure
             });
+    };
+
+    // Function to handle key press events
+    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            signInUser(event);
+        }
     };
 
     return (
         <section className={styles['sign-in-container']}>
             <h2>Sign In</h2>
-            {/* <TitleSection title="Sign In" /> */}
-            <form
-                onSubmit={signInUser}
-                className={styles['sign-in-container__input-fields']}
-            >
+            <section className={styles['sign-in-container__input-fields']}>
                 <label htmlFor="userEmail">E-mail</label>
                 <input
                     id="userEmail"
                     type="text"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                />
-                <br />
+                    onKeyPress={handleKeyPress}
+                ></input>
+
                 <label htmlFor="userPassword">Password</label>
                 <input
                     id="userPassword"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                />
-                <br />
-                <button type="submit">Sign In</button>
-            </form>
+                    onKeyPress={handleKeyPress}
+                ></input>
+            </section>
+            {error && <p className={styles['error-message']}>{error}</p>}{' '}
+            <button onClick={signInUser}>Sign In</button>
             <section className={styles['sign-in-container__info']}>
                 <p>
                     Don't have an account?{' '}
                     <Link to="/sign-up">Create one here</Link>
                 </p>
-                <p>
-                    Forgot password? <Link to="/sign-up">Press here</Link>
-                </p>
+                <p>Forgot password? Press here</p>
             </section>
         </section>
     );

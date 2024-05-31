@@ -9,9 +9,9 @@ const SignOut: React.FC = () => {
 
     const signOutUser = async () => {
         try {
-            await signOut(auth); // sign out the user
+            await signOut(auth); // signs the user out
             console.log('signed out');
-            navigate('/'); // redirect to the Home page after successful sign out
+            navigate('/'); // redirects to the Home page after successful sign out
         } catch (error) {
             console.error('Error signing out:', (error as Error).message);
         }
