@@ -9,6 +9,9 @@ import {
 import addToCartIcon from './../../assets/img/shopping-cart-add-white.png';
 import styles from './CartButton.module.css';
 import hollowCartIcon from './../../assets/img/shopping-cart-white.png';
+import { useNavigate } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../main';
 
 interface CartButtonProps {
     product: Product;
@@ -17,6 +20,8 @@ interface CartButtonProps {
 const CartButton: React.FC<CartButtonProps> = ({ product }) => {
     const [cartItems, setCartItems] = useState(getCartItems());
     const [isAdded, setIsAdded] = useState(false);
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const productInCart = cartItems.find(
@@ -26,6 +31,14 @@ const CartButton: React.FC<CartButtonProps> = ({ product }) => {
             setIsAdded(true);
         }
     }, [cartItems, product.id]);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            setIsUserLoggedIn(!!user);
+        });
+
+        return () => unsubscribe();
+    }, []);
 
     const handleCartChange = () => {
         const event = new CustomEvent('cartChange', {
@@ -38,6 +51,11 @@ const CartButton: React.FC<CartButtonProps> = ({ product }) => {
     };
 
     const handleAddToCart = () => {
+        if (!isUserLoggedIn) {
+            navigate('/sign-in');
+            return;
+        }
+
         addItemToCart(product);
         setCartItems(getCartItems());
         handleCartChange();
