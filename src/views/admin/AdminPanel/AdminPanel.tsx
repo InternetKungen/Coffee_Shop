@@ -14,6 +14,9 @@ const AdminPanel: React.FC = () => {
             <Link to="/admin-panel/product-manager">
                 <button>Product Manager</button>
             </Link>
+            <Link to="/admin-panel/order-manager">
+                <button>Order Manager</button>
+            </Link>
         </div>
     );
 };
