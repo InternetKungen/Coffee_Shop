@@ -1,0 +1,96 @@
+.order-list > li {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    background: black;
+    cursor: pointer;
+    padding: 2px;
+    margin: 1px 0;
+}
+
+.order-list > li > p {
+    background: darkblue;
+    width: calc(100% / 3);
+    flex: 1;
+    text-align: right;
+    padding: 1px;
+    margin: 0;
+}
+
+.order-list-inner-container {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+}
+
+.order-list-titles {
+    display: flex;
+    flex-direction: row;
+}
+
+.order-list-titles > p {
+    width: calc(100% / 3);
+    text-align: right;
+    padding: 8px;
+    background: lightgray;
+    margin: 0;
+}
+
+.order-manager {
+    display: flex;
+    gap: 20px;
+}
+
+.order-details-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.user-info,
+.order-items {
+    margin: 10px 0;
+}
+
+.selected {
+    background-color: darkgray;
+}
+
+.order-manager {
+    display: flex;
+    flex-direction: column;
+}
+
+.order-manager__top-section,
+.order-manager__bottom-section {
+    display: flex;
+    flex-direction: row;
+}
+
+.order-details-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.sort-order-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.order-list-inner-container {
+    max-height: calc((100vh - (80px + 68px) / 2));
+    height: calc((100vh - (80px + 68px) / 2));
+    overflow: hidden;
+}
+
+.search-bar-order-list {
+    margin-bottom: 10px;
+}
+
+.search-bar-order-list input {
+    padding: 8px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
