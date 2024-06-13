@@ -3,7 +3,10 @@ import {
     getCartItems,
     clearCart,
 } from '../../services/cartService/cartServiceLocalStorage';
-import { createOrder, checkStock } from '../../services/orderService/orderService';
+import {
+    createOrder,
+    checkStock,
+} from '../../services/orderService/orderService';
 import { useNavigate } from 'react-router-dom';
 import { auth, db } from '../../main';
 import { doc, getDoc } from 'firebase/firestore';
@@ -15,15 +18,18 @@ const Order: React.FC = () => {
     // State variables to manage order details
     const [cartItems, setCartItems] = useState<CartItem[]>(getCartItems());
     const [shippingAddress, setShippingAddress] = useState({
-        street: "",
-        postalCode: "",
-        city: "",
-        country: "",
+        firstName: '',
+        lastName: '',
+        street: '',
+        postalCode: '',
+        city: '',
+        country: '',
     });
-    const [paymentMethod, setPaymentMethod] = useState("Credit Card");
+    const [paymentMethod, setPaymentMethod] = useState('Credit Card');
     const [totalAmount, setTotalAmount] = useState(0);
     const [loading, setLoading] = useState(true);
     const [errors, setErrors] = useState<string[]>([]);
+    const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
     const navigate = useNavigate();
 
     // Effect hook to check user authentication status
@@ -31,7 +37,7 @@ const Order: React.FC = () => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (!user) {
                 // Redirect user to sign-in page if not authenticated
-                navigate("/sign-in");
+                navigate('/sign-in');
             } else {
                 // Mark loading as false when user is authenticated
                 setLoading(false);
@@ -66,19 +72,27 @@ const Order: React.FC = () => {
                 const user = auth.currentUser;
 
                 if (!user) {
-                    navigate("/sign-in");
+                    navigate('/sign-in');
                     return;
                 }
 
-                const docRef = doc(db, "users", user.uid);
+                const docRef = doc(db, 'users', user.uid);
                 const docSnap = await getDoc(docRef);
 
                 if (docSnap.exists()) {
                     // Set shipping address if user profile exists
-                    const userProfile = docSnap.data() as UserProfile;
-                    if (userProfile.address) {
-                        setShippingAddress(userProfile.address);
-                    }
+                    const profileData = docSnap.data() as UserProfile;
+                    // setUserProfile(profileData);
+                    // if (profileData.address) {
+                    //     setShippingAddress(profileData.address);
+                    // }
+                    setUserProfile(profileData);
+                    setShippingAddress((prev) => ({
+                        ...prev,
+                        firstName: profileData.firstName,
+                        lastName: profileData.lastName,
+                        ...profileData.address,
+                    }));
                 }
             };
 
@@ -97,11 +111,11 @@ const Order: React.FC = () => {
     // Function to validate shipping address
     const validateAddress = () => {
         const newErrors = [];
-        if (!shippingAddress.street) newErrors.push("Street is required.");
+        if (!shippingAddress.street) newErrors.push('Street is required.');
         if (!shippingAddress.postalCode)
-            newErrors.push("Postal Code is required.");
-        if (!shippingAddress.city) newErrors.push("City is required.");
-        if (!shippingAddress.country) newErrors.push("Country is required.");
+            newErrors.push('Postal Code is required.');
+        if (!shippingAddress.city) newErrors.push('City is required.');
+        if (!shippingAddress.country) newErrors.push('Country is required.');
         // Update errors state
         setErrors(newErrors);
         return newErrors.length === 0;
@@ -135,7 +149,7 @@ const Order: React.FC = () => {
             // Get the current authenticated user.
             const user = auth.currentUser;
             // If there is no authenticated user, navigate to the sign-in page.
-            if (!user) {
+            if (!user || !userProfile) {
                 navigate('/sign-in');
                 return;
             }
@@ -143,6 +157,9 @@ const Order: React.FC = () => {
             // Create order with user details, shipping address, payment method, and cart items
             await createOrder({
                 userId: user.uid,
+                firstName: userProfile.firstName,
+                lastName: userProfile.lastName,
+                email: userProfile.email,
                 orderDate: new Date(),
                 status: 'pending',
                 totalAmount,
@@ -168,18 +185,36 @@ const Order: React.FC = () => {
 
     // Render order form
     return (
-        <div className={styles["order-page"]}>
+        <div className={styles['order-page']}>
             <h1>Place Your Order</h1>
-            <div className={styles["order-form"]}>
+            <div className={styles['order-form']}>
                 <h2>Shipping Address</h2>
                 {errors.length > 0 && (
-                    <div className={styles["error-messages"]}>
+                    <div className={styles['error-messages']}>
                         {/* Render error messages */}
                         {errors.map((error, index) => (
                             <p key={index}>{error}</p>
                         ))}
                     </div>
                 )}
+                <label>
+                    First Name:
+                    <input
+                        type="text"
+                        name="firstName"
+                        value={shippingAddress.firstName}
+                        onChange={handleAddressChange}
+                    />
+                </label>
+                <label>
+                    Last Name:
+                    <input
+                        type="text"
+                        name="lastName"
+                        value={shippingAddress.lastName}
+                        onChange={handleAddressChange}
+                    />
+                </label>
                 <label>
                     Street:
                     <input

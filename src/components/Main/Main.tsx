@@ -24,6 +24,7 @@ import OrderSuccessPage from '../../views/pages/OrderSuccessPage';
 
 import OrderHistoryPage from '../../views/pages/OrderHistoryPage';
 import Favorites from '../../views/pages/Favorites';
+import OrderManager from '../../views/admin/OrderManager/OrderManager';
 
 const Main: React.FC = () => {
     return (
@@ -76,6 +77,14 @@ const Main: React.FC = () => {
                     element={
                         <ProtectedRoute>
                             <ProductManager />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/admin-panel/order-manager"
+                    element={
+                        <ProtectedRoute>
+                            <OrderManager />
                         </ProtectedRoute>
                     }
                 />

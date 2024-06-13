@@ -1,0 +1,141 @@
+.order-list-container,
+.order-items {
+    width: 80%;
+}
+
+.order-list {
+    padding: 0;
+}
+
+.order-list > li {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    background: black;
+    cursor: pointer;
+    padding: 2px;
+    margin: 1px 0;
+}
+
+.order-list > li > p {
+    background: darkblue;
+    width: calc(100% / 4);
+    flex: 1;
+    text-align: left;
+    padding: 1px;
+    margin: 0;
+}
+.order-list-titles > p:last-of-type,
+.order-list > li > p:last-of-type {
+    padding-right: 25px;
+    text-align: center;
+}
+
+.order-list-inner-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.order-list-titles {
+    display: flex;
+    flex-direction: row;
+}
+
+.order-list-titles > p {
+    width: calc(100% / 4);
+    text-align: left;
+    padding: 8px;
+    background: lightgray;
+    margin: 0;
+}
+
+.order-details-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.user-info,
+.order-items {
+    margin: 0;
+}
+
+.selected {
+    background-color: darkgray;
+}
+
+.order-manager-wrapper {
+    width: 100%;
+}
+
+.order-manager {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid green;
+    width: 100%;
+}
+
+.order-manager__top-section,
+.order-manager__bottom-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.order-details-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.sort-order-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.order-list-inner-container,
+.order-details-container {
+    max-height: calc((100vh - (80px + 68px + 68px) / 2));
+    height: calc(((100vh - (80px + 68px + 68px)) / 2));
+    overflow: hidden;
+}
+
+.search-bar-order-list {
+    margin-bottom: 10px;
+}
+
+.search-bar-order-list input {
+    padding: 8px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.order-manager__top-section__left-section,
+.user-info {
+    width: 20%;
+    min-width: 200px;
+}
+
+.order-manager__top-section__left-section,
+.order-list-container,
+.user-info,
+.order-items {
+    border: 2px solid black;
+}
+
+/* Fullscreen */
+.fullscreen {
+    footer,
+    header,
+    .title-container {
+        display: none;
+    }
+    .order-list-inner-container,
+    .order-details-container {
+        max-height: calc((100vh / 2));
+        height: calc((100vh / 2));
+        overflow: hidden;
+    }
+}
