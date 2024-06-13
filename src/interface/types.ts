@@ -1,6 +1,6 @@
 // types.ts
 
-import { Timestamp } from "firebase/firestore";
+import { Timestamp } from 'firebase/firestore';
 
 // Interface for items in the cart
 export interface CartItem {
@@ -25,11 +25,16 @@ export interface Product {
 export interface Order {
     id?: string; // Unique identifier for the order (optional)
     userId: string; // Unique identifier for the user placing the order
+    firstName: string;
+    lastName: string;
+    email: string;
     orderDate: Date; // Date and time when the order was placed
     status: string; // Status of the order (e.g., "pending", "shipped", "delivered")
     totalAmount: number; // Total amount of the order
     shippingAddress: {
         // Shipping address of the order
+        firstName: string;
+        lastName: string;
         street: string; // Street address
         postalCode: string; // Postal code
         city: string; // City

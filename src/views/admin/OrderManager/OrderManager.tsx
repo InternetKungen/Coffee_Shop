@@ -268,6 +268,8 @@ interface Order {
     }>;
     paymentMethod: string;
     shippingAddress: {
+        firstName: string;
+        lastName: string;
         city: string;
         country: string;
         postalCode: string;
@@ -276,6 +278,7 @@ interface Order {
     status: string;
     totalAmount: number;
     userId: string;
+    email: string;
 }
 
 interface UserProfile {
@@ -307,14 +310,16 @@ const OrderManager: React.FC = () => {
             try {
                 const ordersCollection = collection(db, 'orders');
                 const ordersSnapshot = await getDocs(ordersCollection);
-                const ordersList: Order[] = ordersSnapshot.docs.map(
-                    (doc) =>
-                        ({
-                            orderId: doc.id,
-                            ...doc.data(),
-                            orderDate: doc.data().orderDate.toDate(),
-                        } as Order)
-                );
+                const ordersList: Order[] = ordersSnapshot.docs.map((doc) => {
+                    const data = doc.data();
+                    return {
+                        orderId: doc.id,
+                        ...data,
+                        orderDate: data.orderDate?.toDate
+                            ? data.orderDate.toDate()
+                            : new Date(),
+                    } as Order;
+                });
                 setOrders(ordersList);
                 setFilteredOrders(ordersList); // Set initial filtered orders to all orders
             } catch (error) {
@@ -401,14 +406,21 @@ const OrderManager: React.FC = () => {
                 .toLowerCase();
 
             // Convert shipping address to string for comparison
-            const shippingAddressStr =
-                `${order.shippingAddress.city} ${order.shippingAddress.country} ${order.shippingAddress.postalCode} ${order.shippingAddress.street}`.toLowerCase();
+            const shippingAddressStr = `
+                ${order.shippingAddress.firstName} 
+                ${order.shippingAddress.lastName}
+                ${order.shippingAddress.city} 
+                ${order.shippingAddress.country} 
+                ${order.shippingAddress.postalCode} 
+                ${order.shippingAddress.street}
+                `.toLowerCase();
 
             // Convert other fields to strings for comparison
             const paymentMethodStr = order.paymentMethod.toLowerCase();
             const statusStr = order.status.toLowerCase();
             const totalAmountStr = order.totalAmount.toString();
             const userIdStr = order.userId.toLowerCase();
+            const emailStr = order.email.toLowerCase();
 
             // Debugging information
             console.log({
@@ -432,7 +444,8 @@ const OrderManager: React.FC = () => {
                 shippingAddressStr.includes(searchTermLower) ||
                 statusStr.includes(searchTermLower) ||
                 totalAmountStr.includes(searchTermLower) ||
-                userIdStr.includes(searchTermLower)
+                userIdStr.includes(searchTermLower) ||
+                emailStr.includes(searchTermLower)
             );
         });
 
@@ -476,12 +489,13 @@ const OrderManager: React.FC = () => {
                     </section>
 
                     <section className={styles['order-list-container']}>
-                        <h3>Select Order From List:</h3>
+                        {/* <h3>Select Order From List:</h3> */}
                         <section
                             className={styles['order-list-inner-container']}
                         >
                             <section className={styles['order-list-titles']}>
                                 <p>Order ID</p>
+                                <p>Customer</p>
                                 <p>Order Status</p>
                                 <p>Total Amount</p>
                             </section>
@@ -501,6 +515,7 @@ const OrderManager: React.FC = () => {
                                             }
                                         >
                                             <p>{order.orderId}</p>
+                                            <p>{order.email}</p>
                                             <p>{order.status}</p>
                                             <p>${order.totalAmount}</p>
                                         </li>
