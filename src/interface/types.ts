@@ -28,6 +28,7 @@ export interface Order {
     firstName: string;
     lastName: string;
     email: string;
+    phoneNumber: string;
     orderDate: Date; // Date and time when the order was placed
     status: string; // Status of the order (e.g., "pending", "shipped", "delivered")
     totalAmount: number; // Total amount of the order
@@ -72,6 +73,8 @@ export interface UserProfile {
     phoneNumber: string; // Phone number of the user
     address: {
         // Address of the user
+        firstName: string;
+        lastName: string;
         street: string; // Street address
         postalCode: string; // Postal code
         city: string; // City

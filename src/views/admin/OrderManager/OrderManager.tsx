@@ -251,6 +251,8 @@
 
 // export default OrderManager;
 
+// #1 ---------------------------------------------------
+
 import React, { useEffect, useState } from 'react';
 import { db } from '../../../main';
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
@@ -279,6 +281,9 @@ interface Order {
     totalAmount: number;
     userId: string;
     email: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
 }
 
 interface UserProfile {
@@ -289,6 +294,8 @@ interface UserProfile {
     profilePicture: string;
     phoneNumber: string;
     address: {
+        firstName: string;
+        lastName: string;
         street: string;
         city: string;
         country: string;
@@ -300,7 +307,7 @@ const OrderManager: React.FC = () => {
     const [orders, setOrders] = useState<Order[]>([]);
     const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
     const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
-    const [selectedUser, setSelectedUser] = useState<UserProfile | null>(null);
+    const [selectedUser, setSelectedUser] = useState<UserProfile | null>(null); //använder Order - för att namn och adress kan skilja
     const [isLoadingOrders, setIsLoadingOrders] = useState(false);
     const [searchTerm, setSearchTerm] = useState<string>('');
 
@@ -407,11 +414,11 @@ const OrderManager: React.FC = () => {
 
             // Convert shipping address to string for comparison
             const shippingAddressStr = `
-                ${order.shippingAddress.firstName} 
+                ${order.shippingAddress.firstName}
                 ${order.shippingAddress.lastName}
-                ${order.shippingAddress.city} 
-                ${order.shippingAddress.country} 
-                ${order.shippingAddress.postalCode} 
+                ${order.shippingAddress.city}
+                ${order.shippingAddress.country}
+                ${order.shippingAddress.postalCode}
                 ${order.shippingAddress.street}
                 `.toLowerCase();
 
@@ -496,6 +503,7 @@ const OrderManager: React.FC = () => {
                             <section className={styles['order-list-titles']}>
                                 <p>Order ID</p>
                                 <p>Customer</p>
+                                <p>Order Date</p>
                                 <p>Order Status</p>
                                 <p>Total Amount</p>
                             </section>
@@ -516,6 +524,9 @@ const OrderManager: React.FC = () => {
                                         >
                                             <p>{order.orderId}</p>
                                             <p>{order.email}</p>
+                                            <p>
+                                                {order.orderDate.toLocaleDateString()}
+                                            </p>
                                             <p>{order.status}</p>
                                             <p>${order.totalAmount}</p>
                                         </li>
@@ -529,8 +540,8 @@ const OrderManager: React.FC = () => {
                 </section>
                 <section className={styles['order-manager__bottom-section']}>
                     <div className={styles['order-details-container']}>
-                        <section className={styles['user-info']}>
-                            <h3>User Information</h3>
+                        {/* <section className={styles['user-info']}>
+                            <h3>Profile Information</h3>
                             {selectedUser ? (
                                 <div>
                                     <p>
@@ -560,7 +571,92 @@ const OrderManager: React.FC = () => {
                                     Select an order to see user information.
                                 </div>
                             )}
+                        </section> */}
+                        {/* Håller på att lägga till för och efternamn i address */}
+                        <section className={styles['user-info']}>
+                            <h3>Profile Information</h3>
+                            {selectedOrder ? (
+                                <div>
+                                    <div className={styles['info-row']}>
+                                        <span className={styles['info-title']}>
+                                            Name:
+                                        </span>
+                                        <span
+                                            className={styles['info-content']}
+                                        >
+                                            {selectedOrder.firstName}{' '}
+                                            {selectedOrder.lastName}
+                                        </span>
+                                    </div>
+                                    <div className={styles['info-row']}>
+                                        <span className={styles['info-title']}>
+                                            Email:
+                                        </span>
+                                        <span
+                                            className={styles['info-content']}
+                                        >
+                                            {selectedOrder.email}
+                                        </span>
+                                    </div>
+                                    <div className={styles['info-row']}>
+                                        <span className={styles['info-title']}>
+                                            Phone:
+                                        </span>
+                                        <span
+                                            className={styles['info-content']}
+                                        >
+                                            {selectedOrder.phoneNumber}
+                                        </span>
+                                    </div>
+                                    <div className={styles['info-row']}>
+                                        <span className={styles['info-title']}>
+                                            Address:
+                                        </span>
+                                        <span
+                                            className={styles['info-content']}
+                                        >
+                                            {
+                                                selectedOrder.shippingAddress
+                                                    .firstName
+                                            }{' '}
+                                            {
+                                                selectedOrder.shippingAddress
+                                                    .lastName
+                                            }
+                                            <br></br>
+                                            {
+                                                selectedOrder.shippingAddress
+                                                    .street
+                                            }
+                                            <br></br>
+                                            {
+                                                selectedOrder.shippingAddress
+                                                    .postalCode
+                                            }
+                                            ,{' '}
+                                            {selectedOrder.shippingAddress.city}
+                                            <br></br>
+                                            {
+                                                selectedOrder.shippingAddress
+                                                    .country
+                                            }
+                                        </span>
+                                    </div>
+                                    <button
+                                        onClick={() => {
+                                            alert('Open in ProfileManager');
+                                        }}
+                                    >
+                                        Open in ProfileManager
+                                    </button>
+                                </div>
+                            ) : (
+                                <div>
+                                    Select an order to see user information.
+                                </div>
+                            )}
                         </section>
+
                         <section className={styles['order-items']}>
                             <h3>Order Items</h3>
                             {selectedOrder ? (
