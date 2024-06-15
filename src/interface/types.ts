@@ -72,6 +72,8 @@ export interface UserProfile {
     phoneNumber: string; // Phone number of the user
     address: {
         // Address of the user
+        firstName: string;
+        lastName: string;
         street: string; // Street address
         postalCode: string; // Postal code
         city: string; // City

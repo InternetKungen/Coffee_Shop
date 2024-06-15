@@ -82,17 +82,17 @@ const Order: React.FC = () => {
                 if (docSnap.exists()) {
                     // Set shipping address if user profile exists
                     const profileData = docSnap.data() as UserProfile;
-                    // setUserProfile(profileData);
-                    // if (profileData.address) {
-                    //     setShippingAddress(profileData.address);
-                    // }
                     setUserProfile(profileData);
-                    setShippingAddress((prev) => ({
-                        ...prev,
-                        firstName: profileData.firstName,
-                        lastName: profileData.lastName,
-                        ...profileData.address,
-                    }));
+                    if (profileData.address) {
+                        setShippingAddress(profileData.address);
+                    }
+                    // setUserProfile(profileData);
+                    // setShippingAddress((prev) => ({
+                    //     ...prev,
+                    //     firstName: profileData.firstName,
+                    //     lastName: profileData.lastName,
+                    //     ...profileData.address,
+                    // }));
                 }
             };
 

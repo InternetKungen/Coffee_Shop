@@ -259,6 +259,8 @@ interface UserProfile {
     profilePicture: string;
     phoneNumber: string;
     address: {
+        firstName: string;
+        lastName: string;
         street: string;
         city: string;
         country: string;
@@ -291,7 +293,11 @@ const SignUp: React.FC = () => {
 
         try {
             // Trying to create a new user with the provided email and password
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
             // Create a reference to the location in the database where the user information will be stored
             const docRef = doc(db, 'users', userCredential.user.uid);
 
@@ -304,6 +310,8 @@ const SignUp: React.FC = () => {
                 profilePicture: '',
                 phoneNumber: '',
                 address: {
+                    firstName: firstName,
+                    lastName: lastName,
                     street: '',
                     city: '',
                     country: '',
@@ -374,7 +382,9 @@ const SignUp: React.FC = () => {
                         onChange={(e) => setCheckPassword(e.target.value)}
                     ></input>
                 </section>
-                {success && <p className={styles['success-message']}>{success}</p>}
+                {success && (
+                    <p className={styles['success-message']}>{success}</p>
+                )}
                 {error && <p className={styles['error-message']}>{error}</p>}
                 <button onClick={createUser}>Sign Up</button>
             </section>

@@ -32,6 +32,12 @@
     text-align: center;
 }
 
+.order-list-titles > p:first-of-type,
+.order-list > li > p:first-of-type {
+    padding-left: 25px;
+    text-align: left;
+}
+
 .order-list-inner-container {
     display: flex;
     flex-direction: column;
@@ -123,6 +129,20 @@
 .user-info,
 .order-items {
     border: 2px solid black;
+}
+
+.info-row {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+.info-title {
+    flex-basis: 20%;
+    font-weight: bold;
+}
+
+.info-content {
+    flex-basis: 80%;
 }
 
 /* Fullscreen */

@@ -12,6 +12,8 @@ export interface UserProfile {
     profilePicture: string;
     phoneNumber: string;
     address: {
+        firstName: string;
+        lastName: string;
         street: string;
         city: string;
         country: string;
@@ -27,6 +29,8 @@ export const UserProfile = () => {
         profilePicture: '',
         phoneNumber: '',
         address: {
+            firstName: '',
+            lastName: '',
             street: '',
             city: '',
             country: '',
@@ -141,6 +145,25 @@ export const UserProfile = () => {
                             name="phoneNumber"
                             value={profile.phoneNumber}
                             onChange={handleChange}
+                        />
+                    </label>
+                    <h2>Delivery Address</h2>
+                    <label>
+                        First Name:
+                        <input
+                            type="text"
+                            name="firstName"
+                            value={profile.address.firstName}
+                            onChange={handleAddressChange}
+                        />
+                    </label>
+                    <label>
+                        Last Name:
+                        <input
+                            type="text"
+                            name="lastName"
+                            value={profile.address.lastName}
+                            onChange={handleAddressChange}
                         />
                     </label>
                     <label>
