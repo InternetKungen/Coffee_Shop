@@ -281,6 +281,9 @@ interface Order {
     totalAmount: number;
     userId: string;
     email: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
 }
 
 interface UserProfile {
@@ -304,7 +307,7 @@ const OrderManager: React.FC = () => {
     const [orders, setOrders] = useState<Order[]>([]);
     const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
     const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
-    const [selectedUser, setSelectedUser] = useState<UserProfile | null>(null);
+    const [selectedUser, setSelectedUser] = useState<UserProfile | null>(null); //använder Order - för att namn och adress kan skilja
     const [isLoadingOrders, setIsLoadingOrders] = useState(false);
     const [searchTerm, setSearchTerm] = useState<string>('');
 
@@ -411,11 +414,11 @@ const OrderManager: React.FC = () => {
 
             // Convert shipping address to string for comparison
             const shippingAddressStr = `
-                ${order.shippingAddress.firstName} 
+                ${order.shippingAddress.firstName}
                 ${order.shippingAddress.lastName}
-                ${order.shippingAddress.city} 
-                ${order.shippingAddress.country} 
-                ${order.shippingAddress.postalCode} 
+                ${order.shippingAddress.city}
+                ${order.shippingAddress.country}
+                ${order.shippingAddress.postalCode}
                 ${order.shippingAddress.street}
                 `.toLowerCase();
 
@@ -572,7 +575,7 @@ const OrderManager: React.FC = () => {
                         {/* Håller på att lägga till för och efternamn i address */}
                         <section className={styles['user-info']}>
                             <h3>Profile Information</h3>
-                            {selectedUser ? (
+                            {selectedOrder ? (
                                 <div>
                                     <div className={styles['info-row']}>
                                         <span className={styles['info-title']}>
@@ -581,8 +584,8 @@ const OrderManager: React.FC = () => {
                                         <span
                                             className={styles['info-content']}
                                         >
-                                            {selectedUser.firstName}{' '}
-                                            {selectedUser.lastName}
+                                            {selectedOrder.firstName}{' '}
+                                            {selectedOrder.lastName}
                                         </span>
                                     </div>
                                     <div className={styles['info-row']}>
@@ -592,7 +595,7 @@ const OrderManager: React.FC = () => {
                                         <span
                                             className={styles['info-content']}
                                         >
-                                            {selectedUser.email}
+                                            {selectedOrder.email}
                                         </span>
                                     </div>
                                     <div className={styles['info-row']}>
@@ -602,7 +605,7 @@ const OrderManager: React.FC = () => {
                                         <span
                                             className={styles['info-content']}
                                         >
-                                            {selectedUser.phoneNumber}
+                                            {selectedOrder.phoneNumber}
                                         </span>
                                     </div>
                                     <div className={styles['info-row']}>
@@ -612,16 +615,31 @@ const OrderManager: React.FC = () => {
                                         <span
                                             className={styles['info-content']}
                                         >
-                                            {selectedUser.address.firstName}{' '}
-                                            {selectedUser.address.lastName}
-                                            <br></br>
-                                            {selectedUser.address.street}
+                                            {
+                                                selectedOrder.shippingAddress
+                                                    .firstName
+                                            }{' '}
+                                            {
+                                                selectedOrder.shippingAddress
+                                                    .lastName
+                                            }
                                             <br></br>
                                             {
-                                                selectedUser.address.postalCode
-                                            }, {selectedUser.address.city}
+                                                selectedOrder.shippingAddress
+                                                    .street
+                                            }
                                             <br></br>
-                                            {selectedUser.address.country}
+                                            {
+                                                selectedOrder.shippingAddress
+                                                    .postalCode
+                                            }
+                                            ,{' '}
+                                            {selectedOrder.shippingAddress.city}
+                                            <br></br>
+                                            {
+                                                selectedOrder.shippingAddress
+                                                    .country
+                                            }
                                         </span>
                                     </div>
                                     <button

@@ -28,6 +28,7 @@ export interface Order {
     firstName: string;
     lastName: string;
     email: string;
+    phoneNumber: string;
     orderDate: Date; // Date and time when the order was placed
     status: string; // Status of the order (e.g., "pending", "shipped", "delivered")
     totalAmount: number; // Total amount of the order

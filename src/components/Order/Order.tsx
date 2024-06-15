@@ -111,6 +111,7 @@ const Order: React.FC = () => {
     // Function to validate shipping address
     const validateAddress = () => {
         const newErrors = [];
+        if (!shippingAddress.firstName) newErrors.push('A name is required.');
         if (!shippingAddress.street) newErrors.push('Street is required.');
         if (!shippingAddress.postalCode)
             newErrors.push('Postal Code is required.');
@@ -159,6 +160,7 @@ const Order: React.FC = () => {
                 userId: user.uid,
                 firstName: userProfile.firstName,
                 lastName: userProfile.lastName,
+                phoneNumber: userProfile.phoneNumber,
                 email: userProfile.email,
                 orderDate: new Date(),
                 status: 'pending',
