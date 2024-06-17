@@ -540,39 +540,6 @@ const OrderManager: React.FC = () => {
                 </section>
                 <section className={styles['order-manager__bottom-section']}>
                     <div className={styles['order-details-container']}>
-                        {/* <section className={styles['user-info']}>
-                            <h3>Profile Information</h3>
-                            {selectedUser ? (
-                                <div>
-                                    <p>
-                                        Name: {selectedUser.firstName}{' '}
-                                        {selectedUser.lastName}
-                                    </p>
-                                    <p>Email: {selectedUser.email}</p>
-                                    <p>Phone: {selectedUser.phoneNumber}</p>
-                                    <p>
-                                        Address: {selectedUser.address.street},{' '}
-                                        {selectedUser.address.city},{' '}
-                                        {selectedUser.address.country},{' '}
-                                        {selectedUser.address.postalCode}
-                                    </p>
-                                    <button
-                                        onClick={() => {
-                                            // Logic to open in ProfileManager
-                                            // This is a placeholder for navigation logic
-                                            alert('Open in ProfileManager');
-                                        }}
-                                    >
-                                        Open in ProfileManager
-                                    </button>
-                                </div>
-                            ) : (
-                                <div>
-                                    Select an order to see user information.
-                                </div>
-                            )}
-                        </section> */}
-                        {/* Håller på att lägga till för och efternamn i address */}
                         <section className={styles['user-info']}>
                             <h3>Profile Information</h3>
                             {selectedOrder ? (

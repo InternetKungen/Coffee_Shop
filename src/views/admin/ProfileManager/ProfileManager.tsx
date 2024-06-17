@@ -16,6 +16,8 @@ interface UserProfile {
     profilePicture: string;
     phoneNumber: string;
     address: {
+        firstName: string;
+        lastName: string;
         street: string;
         city: string;
         country: string;
@@ -31,6 +33,8 @@ const defaultUserProfile: UserProfile = {
     profilePicture: '',
     phoneNumber: '',
     address: {
+        firstName: '',
+        lastName: '',
         street: '',
         city: '',
         country: '',
@@ -214,6 +218,49 @@ const ProfileManager: React.FC = () => {
                                 setSelectedUser({
                                     ...selectedUser!,
                                     phoneNumber: e.target.value,
+                                } as UserProfile)
+                            }
+                            disabled={isDefaultProfile}
+                        />
+                    </label>
+                    <h2>Default Delivery Address:</h2>
+                    <label>
+                        First Name:
+                        <input
+                            type="text"
+                            value={
+                                selectedUser
+                                    ? selectedUser.address.firstName
+                                    : defaultUserProfile.address.firstName
+                            }
+                            onChange={(e) =>
+                                setSelectedUser({
+                                    ...selectedUser!,
+                                    address: {
+                                        ...selectedUser!.address,
+                                        firstName: e.target.value,
+                                    },
+                                } as UserProfile)
+                            }
+                            disabled={isDefaultProfile}
+                        />
+                    </label>
+                    <label>
+                        Last Name:
+                        <input
+                            type="text"
+                            value={
+                                selectedUser
+                                    ? selectedUser.address.lastName
+                                    : defaultUserProfile.address.lastName
+                            }
+                            onChange={(e) =>
+                                setSelectedUser({
+                                    ...selectedUser!,
+                                    address: {
+                                        ...selectedUser!.address,
+                                        lastName: e.target.value,
+                                    },
                                 } as UserProfile)
                             }
                             disabled={isDefaultProfile}
