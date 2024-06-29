@@ -125,9 +125,9 @@ const ProfileManager: React.FC = () => {
         return <div>Loading user profile...</div>;
     }
 
-    if (!selectedUser) {
-        return <div>No user profile found.</div>;
-    }
+    // if (!selectedUser) {
+    //     return <div>No user profile found.</div>;
+    // }
 
     const handleSaveProfile = async (user: UserProfile) => {
         const userRef = doc(db, 'users', user.uid);
