@@ -65,6 +65,14 @@ const Main: React.FC = () => {
                     }
                 />
                 <Route
+                    path="/admin-panel/profile-manager/:userId"
+                    element={
+                        <ProtectedRoute>
+                            <ProfileManager />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
                     path="/admin-panel/profile-manager"
                     element={
                         <ProtectedRoute>

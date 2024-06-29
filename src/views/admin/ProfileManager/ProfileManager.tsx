@@ -7,6 +7,7 @@ import AdminCheckbox from '../../../components/admin/AdminCheckbox/AdminCheckbox
 import styles from './ProfileManager.module.css';
 import NotificationPopUp from '../../../components/NotificationPopUp/NotificationPopUp';
 import TitleSection from '../../../components/TitleSection/TitleSection';
+import { useParams } from 'react-router-dom';
 
 interface UserProfile {
     uid: string;
@@ -16,6 +17,8 @@ interface UserProfile {
     profilePicture: string;
     phoneNumber: string;
     address: {
+        firstName: string;
+        lastName: string;
         street: string;
         city: string;
         country: string;
@@ -31,6 +34,8 @@ const defaultUserProfile: UserProfile = {
     profilePicture: '',
     phoneNumber: '',
     address: {
+        firstName: '',
+        lastName: '',
         street: '',
         city: '',
         country: '',
@@ -89,6 +94,40 @@ const ProfileManager: React.FC = () => {
             console.log('Admin status is loading...');
         }
     }, [isAdmin, isLoading]);
+
+    const { userId } = useParams<{ userId: string }>();
+    // const [selectedUser, setSelectedUser] = useState<UserProfile | null>(null);
+    const [isLoadingAgain, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            setIsLoading(true);
+            try {
+                const userRef = doc(db, 'users', userId!);
+                const userSnap = await getDoc(userRef);
+                if (userSnap.exists()) {
+                    setSelectedUser(userSnap.data() as UserProfile);
+                } else {
+                    console.log('No such user!');
+                }
+            } catch (error) {
+                console.error('Error fetching user profile:', error);
+            }
+            setIsLoading(false);
+        };
+
+        if (userId) {
+            fetchUserProfile();
+        }
+    }, [userId]);
+
+    if (isLoadingAgain) {
+        return <div>Loading user profile...</div>;
+    }
+
+    // if (!selectedUser) {
+    //     return <div>No user profile found.</div>;
+    // }
 
     const handleSaveProfile = async (user: UserProfile) => {
         const userRef = doc(db, 'users', user.uid);
@@ -214,6 +253,49 @@ const ProfileManager: React.FC = () => {
                                 setSelectedUser({
                                     ...selectedUser!,
                                     phoneNumber: e.target.value,
+                                } as UserProfile)
+                            }
+                            disabled={isDefaultProfile}
+                        />
+                    </label>
+                    <h2>Default Delivery Address:</h2>
+                    <label>
+                        First Name:
+                        <input
+                            type="text"
+                            value={
+                                selectedUser
+                                    ? selectedUser.address.firstName
+                                    : defaultUserProfile.address.firstName
+                            }
+                            onChange={(e) =>
+                                setSelectedUser({
+                                    ...selectedUser!,
+                                    address: {
+                                        ...selectedUser!.address,
+                                        firstName: e.target.value,
+                                    },
+                                } as UserProfile)
+                            }
+                            disabled={isDefaultProfile}
+                        />
+                    </label>
+                    <label>
+                        Last Name:
+                        <input
+                            type="text"
+                            value={
+                                selectedUser
+                                    ? selectedUser.address.lastName
+                                    : defaultUserProfile.address.lastName
+                            }
+                            onChange={(e) =>
+                                setSelectedUser({
+                                    ...selectedUser!,
+                                    address: {
+                                        ...selectedUser!.address,
+                                        lastName: e.target.value,
+                                    },
                                 } as UserProfile)
                             }
                             disabled={isDefaultProfile}
