@@ -81,6 +81,7 @@
     flex-direction: column;
     border: 2px solid green;
     width: 100%;
+    min-height: 520px;
 }
 
 .order-manager__top-section,
