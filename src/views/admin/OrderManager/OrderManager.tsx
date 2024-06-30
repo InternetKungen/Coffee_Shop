@@ -667,6 +667,7 @@ import { db } from '../../../main';
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 import styles from './OrderManager.module.css';
 import TitleSection from '../../../components/TitleSection/TitleSection';
+import { updateDoc } from 'firebase/firestore';
 
 interface Order {
     orderId: string;
@@ -846,6 +847,39 @@ const OrderManager: React.FC = () => {
     if (isLoadingOrders) {
         return <div>Loading orders...</div>;
     }
+
+    const updateOrderStatus = async (orderId: string, status: string) => {
+        try {
+            const orderRef = doc(db, 'orders', orderId);
+            await updateDoc(orderRef, { status });
+            // Refresh the orders list after updating the status
+            const updatedOrders = orders.map((order) =>
+                order.orderId === orderId ? { ...order, status } : order
+            );
+            setOrders(updatedOrders);
+            setFilteredOrders(updatedOrders);
+        } catch (error) {
+            console.error('Error updating order status:', error);
+        }
+    };
+
+    const setOrderStatusReady = () => {
+        if (selectedOrder) {
+            updateOrderStatus(selectedOrder.orderId, 'Ready');
+        }
+    };
+
+    const setOrderStatusDelivering = () => {
+        if (selectedOrder) {
+            updateOrderStatus(selectedOrder.orderId, 'Delivering');
+        }
+    };
+
+    const setOrderStatusComplete = () => {
+        if (selectedOrder) {
+            updateOrderStatus(selectedOrder.orderId, 'Complete');
+        }
+    };
 
     return (
         <div className={styles['order-manager-wrapper']}>
@@ -1044,6 +1078,17 @@ const OrderManager: React.FC = () => {
                                     </button>
                                 </>
                             )}
+                        </section>
+
+                        <section className={styles['order-status']}>
+                            <h3>Order Status</h3>
+                            <button onClick={setOrderStatusReady}>Ready</button>
+                            <button onClick={setOrderStatusDelivering}>
+                                Delivering
+                            </button>
+                            <button onClick={setOrderStatusComplete}>
+                                Complete
+                            </button>
                         </section>
                     </div>
                 </section>
