@@ -146,6 +146,11 @@
     flex-basis: 80%;
 }
 
+.order-status {
+    display: flex;
+    flex-direction: column;
+}
+
 /* Fullscreen */
 .fullscreen {
     footer,
