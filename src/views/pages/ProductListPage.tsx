@@ -7,7 +7,7 @@ const ProductListPage: React.FC = () => {
     return (
         <div>
             {/* <h2>Product List Page</h2> */}
-            <ProductList />
+            <ProductList sortOrder="defaultOrder" />
         </div>
     );
 };

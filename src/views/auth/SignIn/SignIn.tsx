@@ -22,7 +22,7 @@ const SignIn: React.FC = () => {
         setError('');
 
         signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
+            .then(() => {
                 console.log('Logged in');
                 navigate('/menu'); // Redirect to /menu upon successful login
             })

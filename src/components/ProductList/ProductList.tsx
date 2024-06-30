@@ -3,12 +3,10 @@ import { Link } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../main';
 import styles from './ProductList.module.css';
-import {
-    addItemToCart,
-    updateCartItemQuantity,
-    getCartItems,
-} from '../../services/cartService/cartServiceLocalStorage';
-import { Product, CartItem } from '../../interface/types';
+// import {
+//     getCartItems,
+// } from '../../services/cartService/cartServiceLocalStorage';
+import { Product } from '../../interface/types';
 import AddToFavoritesButton from '../AddToFavoritesButton/AddToFavoritesButton';
 import CartButton from '../CartButton/CartButton';
 
@@ -27,7 +25,7 @@ const truncateText = (text: string, maxLength: number) => {
 const ProductList: React.FC<ProductListProps> = ({ sortOrder }) => {
     const [products, setProducts] = useState<Product[]>([]);
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-    const [cartItems, setCartItems] = useState<CartItem[]>(getCartItems());
+    // const [cartItems, setCartItems] = useState<CartItem[]>(getCartItems());
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [submittedSearchQuery, setSubmittedSearchQuery] =
         useState<string>('');
@@ -74,69 +72,72 @@ const ProductList: React.FC<ProductListProps> = ({ sortOrder }) => {
         setFilteredProducts(filtered);
     }, [sortOrder, submittedSearchQuery, products]);
 
-    const handleCartChange = () => {
-        const event = new CustomEvent('cartChange', {
-            detail: getCartItems().reduce(
-                (total, item) => total + item.quantity,
-                0
-            ),
-        });
-        window.dispatchEvent(event);
-    };
+    // const handleCartChange = () => {
+    //     const event = new CustomEvent('cartChange', {
+    //         detail: getCartItems().reduce(
+    //             (total, item) => total + item.quantity,
+    //             0
+    //         ),
+    //     });
+    //     window.dispatchEvent(event);
+    // };
 
-    const handleAddToCart = (product: Product) => {
-        const cartItem = cartItems.find(
-            (item) => item.productId === product.id
-        );
-        if (cartItem) {
-            if (product.quantity > cartItem.quantity) {
-                // Check if there's enough stock
-                updateCartItemQuantity(product.id, cartItem.quantity + 1); // Update quantity in local storage
-                setCartItems(getCartItems());
-                handleCartChange();
-            }
-        } else {
-            if (product.quantity > 0) {
-                // Check if there's enough stock
-                addItemToCart(product); // Add new item to local storage
-                setCartItems(getCartItems());
-                handleCartChange();
-            }
-        }
-    };
+    //Detta hanteras av CartButton.tsx nu! ----------------
+    // const handleAddToCart = (product: Product) => {
+    //     const cartItem = cartItems.find(
+    //         (item) => item.productId === product.id
+    //     );
+    //     if (cartItem) {
+    //         if (product.quantity > cartItem.quantity) {
+    //             // Check if there's enough stock
+    //             updateCartItemQuantity(product.id, cartItem.quantity + 1); // Update quantity in local storage
+    //             setCartItems(getCartItems());
+    //             handleCartChange();
+    //         }
+    //     } else {
+    //         if (product.quantity > 0) {
+    //             // Check if there's enough stock
+    //             addItemToCart(product); // Add new item to local storage
+    //             setCartItems(getCartItems());
+    //             handleCartChange();
+    //         }
+    //     }
+    // };
 
-    const increaseQuantity = (product: Product) => {
-        const cartItem = cartItems.find(
-            (item) => item.productId === product.id
-        );
-        if (cartItem) {
-            if (product.quantity > cartItem.quantity) {
-                updateCartItemQuantity(product.id, cartItem.quantity + 1);
-                setCartItems(getCartItems());
-                handleCartChange();
-            }
-        } else {
-            if (product.quantity > 0) {
-                addItemToCart(product);
-                setCartItems(getCartItems());
-                handleCartChange();
-            }
-        }
-    };
+    // const increaseQuantity = (product: Product) => {
+    //     const cartItem = cartItems.find(
+    //         (item) => item.productId === product.id
+    //     );
+    //     if (cartItem) {
+    //         if (product.quantity > cartItem.quantity) {
+    //             updateCartItemQuantity(product.id, cartItem.quantity + 1);
+    //             setCartItems(getCartItems());
+    //             handleCartChange();
+    //         }
+    //     } else {
+    //         if (product.quantity > 0) {
+    //             addItemToCart(product);
+    //             setCartItems(getCartItems());
+    //             handleCartChange();
+    //         }
+    //     }
+    // };
 
-    const decreaseQuantity = (productId: string) => {
-        const cartItem = cartItems.find((item) => item.productId === productId);
-        if (cartItem) {
-            updateCartItemQuantity(productId, cartItem.quantity - 1);
-            setCartItems(getCartItems());
-            handleCartChange();
-        }
-    };
+    // const decreaseQuantity = (productId: string) => {
+    //     const cartItem = cartItems.find((item) => item.productId === productId);
+    //     if (cartItem) {
+    //         updateCartItemQuantity(productId, cartItem.quantity - 1);
+    //         setCartItems(getCartItems());
+    //         handleCartChange();
+    //     }
+    // };
 
-    const getCartQuantity = (productId: string): number => {
-        const cartItem = cartItems.find((item) => item.productId === productId);
-        return cartItem ? cartItem.quantity : 0;
-    };
+    // const getCartQuantity = (productId: string): number => {
+    //     const cartItem = cartItems.find((item) => item.productId === productId);
+    //     return cartItem ? cartItem.quantity : 0;
+    // };
+
+    //---------------------------------------------------------
 
     // Function to handle image error
     const handleImageError = (

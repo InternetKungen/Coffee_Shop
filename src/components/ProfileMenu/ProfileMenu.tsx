@@ -1,5 +1,5 @@
 // ProfileMenu.tsx
-import React, { forwardRef, Ref } from 'react';
+import { forwardRef } from 'react';
 import SignOutButton from '../SignOutButton/SignOutButton';
 import styles from './ProfileMenu.module.css';
 import { Link } from 'react-router-dom';
@@ -13,7 +13,7 @@ const ProfileMenu = forwardRef<HTMLDivElement>((props, ref) => {
     }
 
     return (
-        <div className={styles['profile-menu']} ref={ref}>
+        <div className={styles['profile-menu']} ref={ref} {...props}>
             <ul>
                 <li>
                     <Link to="/cart">Cart</Link>

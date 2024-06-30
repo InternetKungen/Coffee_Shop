@@ -1,6 +1,6 @@
 import { db } from '../../main';
 import { doc, getDoc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
-import { Product, CartItem } from '../../interface/interface';
+import { Product, CartItem } from '../../interface/types';
 import { handleError } from '../../utils/errorHandler';
 
 export async function addItemToCart(productId: string) {
@@ -12,8 +12,8 @@ export async function addItemToCart(productId: string) {
             const productData = productSnap.data() as Product;
             const cartItem: CartItem = {
                 productId: productId,
-                name: productData.name,
-                price: productData.price,
+                productName: productData.name,
+                productPrice: productData.price,
                 quantity: 1,
             };
 

@@ -664,7 +664,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../../main';
-import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
+import { collection, getDocs, doc } from 'firebase/firestore';
 import styles from './OrderManager.module.css';
 import TitleSection from '../../../components/TitleSection/TitleSection';
 import { updateDoc } from 'firebase/firestore';
@@ -696,28 +696,28 @@ interface Order {
     phoneNumber: string;
 }
 
-interface UserProfile {
-    uid: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    profilePicture: string;
-    phoneNumber: string;
-    address: {
-        firstName: string;
-        lastName: string;
-        street: string;
-        city: string;
-        country: string;
-        postalCode: string;
-    };
-}
+// interface UserProfile {
+//     uid: string;
+//     firstName: string;
+//     lastName: string;
+//     email: string;
+//     profilePicture: string;
+//     phoneNumber: string;
+//     address: {
+//         firstName: string;
+//         lastName: string;
+//         street: string;
+//         city: string;
+//         country: string;
+//         postalCode: string;
+//     };
+// }
 
 const OrderManager: React.FC = () => {
     const [orders, setOrders] = useState<Order[]>([]);
     const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
     const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
-    const [selectedUser, setSelectedUser] = useState<UserProfile | null>(null);
+    // const [selectedUser, setSelectedUser] = useState<UserProfile | null>(null);
     const [isLoadingOrders, setIsLoadingOrders] = useState(false);
     const [searchTerm, setSearchTerm] = useState<string>('');
     const navigate = useNavigate();
@@ -749,23 +749,23 @@ const OrderManager: React.FC = () => {
         fetchOrders();
     }, []);
 
-    useEffect(() => {
-        if (selectedOrder) {
-            const fetchUserProfile = async () => {
-                try {
-                    const userRef = doc(db, 'users', selectedOrder.userId);
-                    const userSnap = await getDoc(userRef);
-                    if (userSnap.exists()) {
-                        setSelectedUser(userSnap.data() as UserProfile);
-                    }
-                } catch (error) {
-                    console.error('Error fetching user profile:', error);
-                }
-            };
+    // useEffect(() => {
+    //     if (selectedOrder) {
+    //         const fetchUserProfile = async () => {
+    //             try {
+    //                 const userRef = doc(db, 'users', selectedOrder.userId);
+    //                 const userSnap = await getDoc(userRef);
+    //                 if (userSnap.exists()) {
+    //                     setSelectedUser(userSnap.data() as UserProfile);
+    //                 }
+    //             } catch (error) {
+    //                 console.error('Error fetching user profile:', error);
+    //             }
+    //         };
 
-            fetchUserProfile();
-        }
-    }, [selectedOrder]);
+    //         fetchUserProfile();
+    //     }
+    // }, [selectedOrder]);
 
     const handleSortOrders = (key: keyof Order) => {
         const sortedOrders = [...filteredOrders].sort((a, b) => {

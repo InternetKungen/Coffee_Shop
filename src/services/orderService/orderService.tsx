@@ -14,7 +14,7 @@ import {
 } from 'firebase/firestore';
 
 // Importing the Order interface from types
-import { Order } from '../../interface/types';
+import { Order, CartItem } from '../../interface/types';
 
 // Function to create an order asynchronously
 export const createOrder = async (order: Order) => {
