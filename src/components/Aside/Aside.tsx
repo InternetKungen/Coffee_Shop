@@ -1,6 +1,6 @@
 // Aside.tsx
 import React from 'react';
-import './Aside.module.css';
+import styles from './Aside.module.css';
 import coffeeIcon from './../../assets/img/coffee-white.png';
 import allProductsIcon from './../../assets/img/all-white.png';
 import foodIcon from './../../assets/img/food-white.png';
@@ -20,31 +20,59 @@ const Aside: React.FC<AsideProps> = ({ onSortChange }) => {
                 {/* <h2>Products</h2> */}
                 <button onClick={() => onSortChange('')}>
                     All Products
-                    <img src={allProductsIcon} alt="all-products-icon" />
+                    <img
+                        className={styles['icon']}
+                        src={allProductsIcon}
+                        alt="all-products-icon"
+                    />
                 </button>
                 <button onClick={() => onSortChange('Coffee')}>
                     Coffee
-                    <img src={coffeeIcon} alt="coffee-icon" />
+                    <img
+                        className={styles['icon']}
+                        src={coffeeIcon}
+                        alt="coffee-icon"
+                    />
                 </button>
                 <button onClick={() => onSortChange('Food')}>
                     Food
-                    <img src={foodIcon} alt="food-icon" />
+                    <img
+                        className={styles['icon']}
+                        src={foodIcon}
+                        alt="food-icon"
+                    />
                 </button>
                 <button onClick={() => onSortChange('Pastry')}>
                     Pastry
-                    <img src={pastryIcon} alt="pastry-icon" />
+                    <img
+                        className={styles['icon']}
+                        src={pastryIcon}
+                        alt="pastry-icon"
+                    />
                 </button>
                 <button onClick={() => onSortChange('Tea')}>
                     Tea
-                    <img src={teaIcon} alt="tea-icon" />
+                    <img
+                        className={styles['icon']}
+                        src={teaIcon}
+                        alt="tea-icon"
+                    />
                 </button>
                 <button onClick={() => onSortChange('Hot Drinks')}>
                     Hot Drinks
-                    <img src={hotDrinksIcon} alt="hot-drinks-icon" />
+                    <img
+                        className={styles['icon']}
+                        src={hotDrinksIcon}
+                        alt="hot-drinks-icon"
+                    />
                 </button>
                 <button onClick={() => onSortChange('Cold Drinks')}>
                     Cold Drinks
-                    <img src={coldDrinksIcon} alt="cold-drinks-icon" />
+                    <img
+                        className={styles['icon']}
+                        src={coldDrinksIcon}
+                        alt="cold-drinks-icon"
+                    />
                 </button>
             </section>
         </aside>

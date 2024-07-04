@@ -26,3 +26,7 @@ dist-ssr
 
 #/src/config
 /src/config
+
+#firebase cache
+.firebase/*
+.firebase

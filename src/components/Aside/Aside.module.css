@@ -57,7 +57,8 @@ aside > section > button:active {
 aside > section > button:focus {
     outline: none;
 }
-aside > section > button > img {
+
+.icon {
     height: 26px;
     width: auto;
     transition: transform 0.1s;
