@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { db } from '../../main';
 import { doc, getDoc } from 'firebase/firestore';
 import styles from './ProductDetail.module.css';
+import placeholderImg from '../../assets/product-img/placeholder.jpg';
 
 // Importing functions from cartService and interface types
 import {
@@ -64,7 +65,6 @@ const ProductDetail: React.FC = () => {
         });
         window.dispatchEvent(event);
     };
-
 
     // Function to add a product to the cart
     const handleAddToCart = (product: Product) => {
@@ -129,7 +129,7 @@ const ProductDetail: React.FC = () => {
     const handleImageError = (
         event: React.SyntheticEvent<HTMLImageElement>
     ) => {
-        event.currentTarget.src = 'src/assets/product-img/placeholder.jpg';
+        event.currentTarget.src = placeholderImg;
     };
 
     // Rendering the product details section
