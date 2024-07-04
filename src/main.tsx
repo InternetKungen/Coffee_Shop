@@ -30,6 +30,7 @@ import './index.css';
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
+import { getStorage } from 'firebase/storage';
 
 // Firebase configuration import
 import { firebaseConfig } from './config/firebaseConfig';
@@ -38,6 +39,7 @@ import { firebaseConfig } from './config/firebaseConfig';
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+const storage = getStorage(app);
 
 // Create a root element for the React application
 const rootElement = document.getElementById('root');
@@ -54,4 +56,4 @@ root.render(
 );
 
 // Export the database and authentication instances
-export { db, auth };
+export { db, auth, storage };
