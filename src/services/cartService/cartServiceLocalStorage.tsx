@@ -76,4 +76,8 @@ export function removeCartItem(productId: string) {
 export function clearCart() {
     // Removing the cart data from localStorage
     localStorage.removeItem(CART_KEY);
+
+    // Utlöser en 'cartChange'-händelse med det nya antalet varor (0)
+    const event = new CustomEvent('cartChange', { detail: 0 });
+    window.dispatchEvent(event);
 }
