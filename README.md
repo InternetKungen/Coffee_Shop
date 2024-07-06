@@ -1,35 +1,66 @@
-# JavaScript 3 grupprojekt
+# Coffee Shop
 
+Coffee Shop är en e-handelsplattform riktad till caféer. Projektet är byggt med Vite, React och TypeScript, och använder Firebase-tjänster för databas, hosting, autentisering och lagring.
 
-## Uppgift
-Länk till uppgift: https://docs.google.com/document/d/1IcJmsJiSrr3xBTGQN8oOW7mhD-YRp_jY-6EwoaFDd0k/edit
+## Funktioner
 
-Typ av webbplats: E-Handel
+- **Inbyggd CMS - Admin Panel**
+  - **Product Manager**: Hantera produkter, lägg till nya, redigera befintliga och ta bort produkter.
+  - **Order Manager**: Överblicka och hantera kundbeställningar.
+  - **Profile Manager**: Hantera användarprofiler och deras behörigheter.
 
-Uppgifter tills avstämningen den 15 Maj kl 9:30
+## Teknologier
 
-1. Skapa och prioritera användarberättelser
-2. Slutföra en skiss
-3. Skapa och dela ett GitHub-projekt med hela gruppen :heavy_check_mark:
-4. Strategi för användning av GitHub
+- **Vite**: Byggverktyg och utvecklingsserver.
+- **React**: JavaScript-bibliotek för att bygga användargränssnitt.
+- **TypeScript**: Programmeringsspråk som bygger på JavaScript och lägger till statisk typkontroll.
+- **Firebase**:
+  - **Authentication**: Hanterar användarinloggningar och autentisering.
+  - **Firestore**: Databastjänst för att lagra och synkronisera data.
+  - **Hosting**: Webbhosting för att distribuera projektet.
+  - **Storage**: Lagring av bilder och andra filer.
 
+## Installation
 
-## GitHub
+Följ dessa steg för att installera och köra projektet lokalt:
 
-- Skapa ny branch för nya funktioner/delar.
-- Pusha inte till direkt main.
-- Om en branch pushas, men inte ska användas (ex. visas som exempel eller idéer). Notera det i branch commit eller branchname.
-- Håll den lokala branchen up-to-date med den relevanta branchen på GitHub. Ex. om den lokala branchen ska mergas med Main så uppdatera den lokala branchen från Main innan den pushas till GitHub.
-- Tänk inte på att pusha för mycket. Pusha hellre för mycket än för lite.
+1. Klona detta repository:
+   ```sh
+   git clone https://github.com/InternetKungen/coffee-shop.git
+   ```
+2. Navigera till projektets mapp:
+  ```sh
+  cd coffee-shop
+  ```
 
+3. Installera nödvändiga paket:
+  ```sh
+  npm install
+  ```
 
-## Länkar
+4. Skapa en Firebase-projekt och konfigurera dina Firebase-nycklar i src/config/firebaseConfig.ts:
 
-Figma/Figjam: https://www.figma.com/files/team/1369987377469737993
+src/config/firebaseConfig.ts
 
-Firebase: https://console.firebase.google.com/u/0/project/test-5b76d/overview
+## Starta utvecklingsservern:
 
+```sh
+npm run dev
+```
 
-## VSCode Tips
-För att manuellt genomföra en formatering av det aktiva dokumentet. Tryck Shift+Alt+F.
-Om man vill att den automatiskt ska formatera koden så kan man ändra inställningarna i kategorin "Formatting" som "Format on paste", "Format on type", etcetera.
+## Distribution
+För att distribuera projektet, kör följande kommando:
+
+```sh
+npm run build
+```
+
+Detta kommer att skapa en produktionsklar byggmapp som kan laddas upp till Firebase Hosting.
+
+## Bidrag
+Bidrag är välkomna! Skapa en pull request eller öppna en issue för att rapportera buggar eller föreslå förbättringar.
+
+## Licens
+~
+
+Byggt med ❤️ och ☕
