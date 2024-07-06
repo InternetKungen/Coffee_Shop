@@ -87,6 +87,15 @@
     right: 3%;
 }
 
+.product-image-wrapper {
+    overflow: hidden;
+    max-width: 320px;
+    min-width: calc(100% + 2rem);
+    min-height: 100px;
+    height: 300px;
+    margin-top: 10px;
+}
+
 .product-image {
     /* width: 1000px; */
     /* height: auto; */
@@ -97,14 +106,14 @@
     padding: 0px;
     margin: 0px;
     display: block;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     border-radius: 2px;
     /* outline: 2px solid #2d2828; */
     object-fit: cover;
-    transition: transform 0.2s ease-out, box-shadow 1s ease,
-        border-radius 0.2s ease;
+    /* transition: transform 1.8s ease-in-out, box-shadow 1s ease; */
+
     overflow: hidden;
-    transform-origin: top center;
+    transform-origin: center;
 }
 
 .out-of-stock {
@@ -153,11 +162,16 @@
     right: 20px;
 }
 
+.product-list-item .product-image {
+    transition: transform 0.1s, box-shadow 0.1s; /* Ingen övergång när musen inte är över */
+}
+
 .product-list-item:hover .product-image {
-    transform: scale(1.03);
-    transform-origin: top center;
+    transition: transform 8.8s ease-in-out, box-shadow 0.8s ease-in-out; /* Lägg till övergång på hover */
+    transition-delay: 0.3s, 0.3s;
+    transform: scale(1.13);
+    transform-origin: center;
     box-shadow: 0px 0px 30px #594f45;
-    border-radius: 0px 0px 24px 24px;
 }
 
 .product-list-item h2 {
@@ -168,7 +182,7 @@
 /* Media query for larger screens */
 @media (min-width: 693px) {
     .products-list-div {
-        padding-left: 2rem;
+        padding-left: 0rem;
         padding-right: 2rem;
     }
 }
@@ -221,6 +235,13 @@
         transform: rotate(-3deg);
     }
 
+    .product-image-wrapper {
+        max-width: 140px;
+        min-width: 44%;
+        min-height: 140px;
+        height: 300px;
+    }
+
     .product-image {
         max-width: 140px;
         min-width: 44%;
@@ -260,11 +281,16 @@
         left: 50%;
     }
 
+    .product-list-item .product-image {
+        transition: transform 0.1s, box-shadow 0.1s; /* Ingen övergång när musen inte är över */
+    }
+
     .product-list-item:hover .product-image {
+        transition: transform 8.8s ease-in-out, box-shadow 0.8s ease-in-out; /* Lägg till övergång på hover */
+        transition-delay: 0.3s, 0.3s;
         transform: scale(1.03);
         transform-origin: left center;
         box-shadow: 0px 0px 30px #594f45;
-        border-radius: 0px 34px 34px 0px;
     }
     .view-product-button {
         opacity: 0.9;
@@ -327,6 +353,14 @@
         transform: rotate(-3deg);
     }
 
+    .product-image-wrapper {
+        overflow: hidden;
+        max-width: 200px;
+        min-width: 44%;
+        min-height: 140px;
+        height: 300px;
+    }
+
     .product-image {
         max-width: 200px;
         min-width: 44%;
@@ -366,12 +400,18 @@
         left: 46%;
     }
 
-    .product-list-item:hover .product-image {
-        transform: scale(1.03);
-        transform-origin: left center;
-        box-shadow: 0px 0px 30px #594f45;
-        border-radius: 0px 34px 34px 0px;
+    .product-list-item .product-image {
+        transition: transform 0.1s, box-shadow 0.1s; /* Ingen övergång när musen inte är över */
     }
+
+    .product-list-item:hover .product-image {
+        transition: transform 8.8s ease-in-out, box-shadow 0.8s ease-in-out; /* Lägg till övergång på hover */
+        transition-delay: 0.3s, 0.3s;
+        transform: scale(1.03);
+        transform-origin: center;
+        box-shadow: 0px 0px 30px #594f45;
+    }
+
     .view-product-button {
         opacity: 0.9;
     }
@@ -387,7 +427,6 @@
 .search-form {
     display: flex;
     justify-content: center;
-
     margin: 2rem 0rem;
 }
 
