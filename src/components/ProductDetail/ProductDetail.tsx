@@ -137,7 +137,7 @@ const ProductDetail: React.FC = () => {
         <section className={styles['product-detail']}>
             {/* Displaying product image */}
             <img
-                src={`src/assets/product-img/${product.imageUrl}`}
+                src={product.imageUrl}
                 alt={product.name}
                 onError={handleImageError}
                 className={styles['product-image']}

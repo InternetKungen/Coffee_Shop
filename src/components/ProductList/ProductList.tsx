@@ -282,12 +282,14 @@ const ProductList: React.FC<ProductListProps> = ({ sortOrder }) => {
                             <AddToFavoritesButton product={product} />
                         </div>
                         <h2>{product.name}</h2>
-                        <img
-                            src={product.imageUrl}
-                            alt={product.name}
-                            onError={handleImageError}
-                            className={styles['product-image']}
-                        />
+                        <div className={styles['product-image-wrapper']}>
+                            <img
+                                src={product.imageUrl}
+                                alt={product.name}
+                                onError={handleImageError}
+                                className={styles['product-image']}
+                            />
+                        </div>
                         <p>${product.price.toFixed(2)};-</p>
                         {/* Limited description */}
                         <p>{truncateText(product.description, 120)}</p>{' '}

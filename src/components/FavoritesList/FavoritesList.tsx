@@ -6,6 +6,7 @@ import styles from './FavoritesList.module.css';
 import { Product } from '../../interface/types';
 import AddToFavoritesButton from '../AddToFavoritesButton/AddToFavoritesButton';
 import { Link } from 'react-router-dom';
+import placeholderImg from '../../assets/product-img/placeholder.jpg';
 
 const FavoritesList: React.FC = () => {
     const [favorites, setFavorites] = useState<Product[]>([]);
@@ -42,7 +43,7 @@ const FavoritesList: React.FC = () => {
     const handleImageError = (
         event: React.SyntheticEvent<HTMLImageElement>
     ) => {
-        event.currentTarget.src = 'src/assets/product-img/placeholder.jpg';
+        event.currentTarget.src = placeholderImg;
     };
 
     return (
@@ -67,7 +68,7 @@ const FavoritesList: React.FC = () => {
                             </div>
                             <h2>{product.name}</h2>
                             <img
-                                src={`src/assets/product-img/${product.imageUrl}`}
+                                src={product.imageUrl}
                                 alt={product.name}
                                 onError={handleImageError}
                                 className={styles['product-image']}
