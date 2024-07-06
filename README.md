@@ -26,7 +26,7 @@ Följ dessa steg för att installera och köra projektet lokalt:
 
 1. Klona detta repository:
    ```sh
-   git clone https://github.com/InternetKungen/coffee-shop.git
+   git clone https://github.com/InternetKungen/Coffee_Shop.git
    ```
 2. Navigera till projektets mapp:
   ```sh
